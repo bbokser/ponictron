@@ -1,0 +1,195 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NE555DR
+D Single Precision Timer
+K
+F http://www.ti.com/lit/ds/symlink/ne555.pdf
+$ENDCMP
+#
+$CMP PTS647SM70SMTR2LFS
+D Tactile Switches 50mA 12VDC, 1.8N 7.0mm H, G leads
+K
+F https://www.ckswitches.com/media/2567/pts647.pdf
+$ENDCMP
+#
+$CMP TSOP38238
+D IR Remote Receiver 38KHz 45m
+K
+F 
+$ENDCMP
+#
+$CMP PEC11R-4215F-S0024
+D Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical 15mm SHAFT w/SWITCH
+K
+F https://www.bourns.com/docs/product-datasheets/pec11r.pdf?sfvrsn=bb617cbf_12
+$ENDCMP
+#
+$CMP RKB2SJK250SMTR_LFS
+D Tactile Switches J Bend SMT Term 250gf Force
+K
+F https://www.ckswitches.com/media/3130/ck_rk_datasheet.pdf
+$ENDCMP
+#
+$CMP DS01-254-L-01BE
+D DIP Switches / SIP Switches DIP Switch, SPST, 2.54 pitch, raised actuator, flat bottom, long pin, 1 position, Blue
+K
+F https://www.cuidevices.com/product/resource/ds01-254.pdf
+$ENDCMP
+#
+$CMP DS3231S#T&R
+D MAXIM INTEGRATED PRODUCTS - DS3231S#T&R - RTC IC, Date Time Format (Day/Date/Month/Year hh:mm:ss), I2C, 2.3 V to 5.5 V supply, SOIC-16
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-18/DSA-345166.pdf
+$ENDCMP
+#
+$CMP SHT40-BD1B-R2
+D SENSIRION - SHT40-BD1B-R2 - Humidity and Temperature Sensor, Digital, 0% to 100% RH, I2C, DFN-EP-4, -40C to 125C
+K
+F https://sensirion.com/media/documents/33FD6951/63E1087C/Datasheet_SHT4x_1.pdf
+$ENDCMP
+#
+$CMP SFV24R-4STBE1HLF
+D 24 Position FPC Connector Contacts, Top 0.020" (0.50mm) Surface Mount, Right Angle  Click Image to Enlarge Skip to the beginning of the images gallery OVERVIEW DESCRIPTION 0.50mm Flex Connector, SFV-R Series, 24 Position, Top Side Contact, Side Entry Surface Mount ZIF Connector, Halogen Free, Lead Free with Cable-Lock, Gold Flash
+K
+F https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/10116954.pdf
+$ENDCMP
+#
+$CMP 23K256-I_SN
+D 256K,32K X 8 2.7V Ser SRAM,23K256-I/SN
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/22100F.pdf
+$ENDCMP
+#
+$CMP IRLML2060TRPBF
+D IRLML2060TRPBF N-Channel MOSFET, 1.2 A, 60 V HEXFET, 3-Pin SOT-23 Infineon
+K
+F https://www.infineon.com/dgdl/irlml2060pbf.pdf?fileId=5546d462533600a401535664b7fb25ee
+$ENDCMP
+#
+$CMP MBR0530-TP
+D Small Signal Schottky Diodes
+K
+F https://mccsemi.com/pdf/Products/MBR0520-MBR0580(SOD123).pdf
+$ENDCMP
+#
+$CMP NR4018T100M
+D Taiyo Yuden Shielded Wire-wound SMD Inductor with a Ferrite Core, 10 H +/-20% Wire-Wound 840mA Idc
+K
+F https://ds.yuden.co.jp/TYCOMPAS/ut/download?pn=NRH2412T4R7MNGH++&fileType=CA
+$ENDCMP
+#
+$CMP AS1115-BSST
+D AS1115 LED Driver IC 64LED matrix driver with 16keys
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-SFU1/DSASFU10002655.pdf
+$ENDCMP
+#
+$CMP Si1308EDL-T1-GE3
+D MOSFET N-Ch 30V 1.5A TrenchFET SC70 Vishay Si1308EDL-T1-GE3 N-channel MOSFET Transistor, 1.5 A, 30 V, 3-Pin SC-70
+K
+F https://componentsearchengine.com/Datasheets/1/SI1308EDL-T1-GE3.pdf
+$ENDCMP
+#
+$CMP CM322522-680KL
+D Fixed Inductors 68uH 10% Wirewound
+K
+F https://www.bourns.com/docs/product-datasheets/cm322522.pdf?sfvrsn=2061c9e1_9
+$ENDCMP
+#
+$CMP 2464
+D Manufacturer:	Keystone Electronics Product Category:	Cylindrical Battery Contacts, Clips, Holders & Springs RoHS:	 Details Product:	Battery Holders Battery Cell Size:	AA Number of Batteries:	3 Battery Material:	Steel Mounting Style:	PCB Brand:	Keystone Electronics Contact Plating:	Nickel Packaging:	Bulk Product Type:	Cylindrical Battery Contacts, Clips, Holders & Springs 1 Subcategory:	Battery Unit Weight:	0.359794 oz
+K
+F https://4donline.ihs.com/images/VipMasterIC/IC/KEYC/KEYCS01036/KEYCS02795-1.pdf?hkey=6D3A4C79FDBF58556ACFDE234799DDF0
+$ENDCMP
+#
+$CMP PEC11S-929K-S0015
+D PEC11S Series - 12 mm SMD Incremental Encoder.
+K
+F https://componentsearchengine.com/Datasheets/1/PEC11S-929K-S0015.pdf
+$ENDCMP
+#
+$CMP MAX31328NELB+
+D Package: 5mm x 5mm 10-Pin LGA
+K
+F https://www.analog.com/MAX31328/datasheet
+$ENDCMP
+#
+$CMP CMI-1295IC-0385T
+D Piezo Buzzers & Audio Indicators buzzer, 12 mm x 9.5 mm deep, M, 3 V, 85 dB, Through Hole, Integrated Circuit Audio Indicator
+K
+F https://www.arrow.com/en/products/cmi-1295ic-0385t/cui-devices
+$ENDCMP
+#
+$CMP 2SC5585TL
+D Bipolar Transistors - BJT NPN 12V 0.5A SOT-416
+K
+F https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/2sc5585tl-e.pdf
+$ENDCMP
+#
+$CMP 975
+D Headers & Wire Housings WIRE TO BOARD THM CONN, 3 TERM, VERT
+K
+F https://componentsearchengine.com/Datasheets/1/975.pdf
+$ENDCMP
+#
+$CMP CSS-I4B20-SMT-TR
+D Piezo Buzzers & Audio Indicators 8.5 mm, 3.6 V, 85 dB, Surface Mount (SMT), Magnetic Audio Transducer Buzzer
+K
+F https://www.cuidevices.com/product/resource/css-i4b20-smt-tr.pdf
+$ENDCMP
+#
+$CMP nRF24L01P
+D Single Chip 2.4GHz Transceiver
+K
+F 
+$ENDCMP
+#
+$CMP WP710A10LID
+D Kingbright WP710A10LID, WP710A10L Series Red LED, 617 nm, 3mm (T-1) Diffused, Dome Lens Through Hole Package
+K
+F https://www.kingbrightusa.com/images/catalog/SPEC/WP710A10LID.pdf
+$ENDCMP
+#
+$CMP FH19C-24S-0.5SH_10_
+D CONN FFC BOTTOM 24POS 0.50MM R/A
+K
+F https://componentsearchengine.com/Datasheets/2/FH19C-24S-0.5SH(10).pdf
+$ENDCMP
+#
+$CMP FFC2B35-24-T
+D FFC & FPC Connectors .5mm SideEntry Flat Flex Cbl Conn 24P Sn
+K
+F https://gct.co/connector/ffc2b35
+$ENDCMP
+#
+$CMP SM04B-SRSS-TB_LF__SN__P_
+D Connector Header Surface Mount, Right Angle 4 position 0.039" (1.00mm)
+K
+F https://www.jst-mfg.com/product/pdf/eng/eSH.pdf
+$ENDCMP
+#
+$CMP M20-7920642R
+D 2.54mm (0.1") Pitch DIL Horizontal SMT Socket Assembly, selective gold + tin (Tape & Reel packing), 6+6 contacts
+K
+F https://cdn.harwin.com/pdfs/M20-792R.pdf
+$ENDCMP
+#
+$CMP TS04-66-95-BK-100-SMT
+D 6 x 6 mm, 9.5 mm Actuator Height, 100 gf, Black, Surface Mount, SPST, Tactile Switch
+K
+F https://www.sameskydevices.com/product/resource/supplyframepdf/ts04.pdf
+$ENDCMP
+#
+$CMP TL3301BF260QJ
+D TACT, 50mA, 12VDC SPST-NO, Off-(On) Surface Mount
+K
+F https://componentsearchengine.com/Datasheets/1/TL3301BF260QJ.pdf
+$ENDCMP
+#
+$CMP WP424IDT
+D Kingbright WP424IDT, WP424 Series Red LED, 617 nm, 3mm (T-1), Round Lens Through Hole Package
+K
+F http://www.kingbrightusa.com/images/catalog/SPEC/WP424IDT.pdf
+$ENDCMP
+#
+#End Doc Library
