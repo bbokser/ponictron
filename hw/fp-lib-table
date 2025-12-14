@@ -6,4 +6,8 @@
   (lib (name "TDCR1060M")(type "KiCad")(uri "${KIPRJMOD}/libraries/TDCR1060M/footprints.pretty")(options "")(descr ""))
   (lib (name "RX480E")(type "KiCad")(uri "${KIPRJMOD}/libraries/RX480E/RX480E.pretty")(options "")(descr ""))
   (lib (name "2SA2018TL")(type "KiCad")(uri "${KIPRJMOD}/libraries/2SA2018TL/2SA2018TL.pretty")(options "")(descr ""))
+  (lib (name "MCP4725A1T_E_CH")(type "KiCad")(uri "${KIPRJMOD}/libraries/MCP4725A1T_E_CH/footprints.pretty")(options "")(descr ""))
+  (lib (name "LM358M")(type "KiCad")(uri "${KIPRJMOD}/libraries/LM358M/footprints.pretty")(options "")(descr ""))
+  (lib (name "TPS61040")(type "KiCad")(uri "${KIPRJMOD}/libraries/TPS61040DBVR/footprints.pretty")(options "")(descr ""))
+  (lib (name "FC68148S")(type "KiCad")(uri "${KIPRJMOD}/libraries/FC68148S/footprints.pretty")(options "")(descr ""))
 )
