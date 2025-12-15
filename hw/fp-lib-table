@@ -10,4 +10,6 @@
   (lib (name "LM358M")(type "KiCad")(uri "${KIPRJMOD}/libraries/LM358M/footprints.pretty")(options "")(descr ""))
   (lib (name "TPS61040")(type "KiCad")(uri "${KIPRJMOD}/libraries/TPS61040DBVR/footprints.pretty")(options "")(descr ""))
   (lib (name "FC68148S")(type "KiCad")(uri "${KIPRJMOD}/libraries/FC68148S/footprints.pretty")(options "")(descr ""))
+  (lib (name "DMP4015SSSQ-13")(type "KiCad")(uri "${KIPRJMOD}/libraries/DMP4015SSSQ-13/DMP4015SSSQ-13.pretty")(options "")(descr ""))
+  (lib (name "RJCSE538001")(type "KiCad")(uri "${KIPRJMOD}/libraries/RJCSE538001")(options "")(descr ""))
 )
