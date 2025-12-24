@@ -5467,6 +5467,287 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "SLW-865144-2A-N-SMT-TR:SLW-865144-2A-N-SMT-TR"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "S"
+				(at -2.54 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Value" "SLW-865144-2A-N-SMT-TR"
+				(at -2.54 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left top)
+				)
+			)
+			(property "Footprint" "SLW-865144-2A-N-SMT-TR:SW_SLW-865144-2A-N-SMT-TR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "DigiKey_Part_Number" "2223-SLW-865144-2A-N-SMT-TRCT-ND"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/SLW-865144-2A-N-SMT-TR/Same+Sky/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "Switch Slide ON ON SPDT Raised Slide 0.3A 50VDC 10000Cycles Gull Wing SMD"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "Package"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/SLW-865144-2A-N-SMT-TR/Same+Sky/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "STANDARD" "Manufacturer Recommendations"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PARTREV" "1.01"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MF" "Same Sky"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "SLW-865144-2A-N-SMT-TR"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MANUFACTURER" "Same Sky"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "SLW-865144-2A-N-SMT-TR_0_0"
+				(polyline
+					(pts
+						(xy -2.54 0) (xy -5.08 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 0) (xy 2.794 2.1336)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 2.54)
+					(radius 0.3302)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 -2.54)
+					(radius 0.3302)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 2.921 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 -2.54) (xy 2.921 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "SamacSys_Parts:2SC5585TL"
 			(pin_names
 				(hide yes)
@@ -7726,6 +8007,16 @@
 		)
 		(uuid "0e580358-e8f6-4041-a115-2dcf0721dde2")
 	)
+	(text "TODO: Switch to compat conn?"
+		(exclude_from_sim no)
+		(at 200.66 249.428 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "164e3abc-cb93-476c-91c2-9d391aa0e7e5")
+	)
 	(text "Fans"
 		(exclude_from_sim no)
 		(at 162.56 242.824 0)
@@ -7777,17 +8068,6 @@
 			)
 		)
 		(uuid "5e3fe55e-1390-4663-a91a-75379a79eec4")
-	)
-	(text "TODO: Add rocker switch for display\n"
-		(exclude_from_sim no)
-		(at 36.322 188.722 0)
-		(effects
-			(font
-				(size 5.08 5.08)
-			)
-			(justify left)
-		)
-		(uuid "766b6055-1366-4a4f-a28b-a59c4ebc0f1c")
 	)
 	(text "Buzzer"
 		(exclude_from_sim no)
@@ -7881,6 +8161,16 @@
 		)
 		(uuid "d2508844-9d24-4494-9764-bce4fd402ae5")
 	)
+	(text "Display activate"
+		(exclude_from_sim no)
+		(at 167.132 100.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "d850bb6f-3823-4a48-8c3d-ce53b2226633")
+	)
 	(text "Pico Power"
 		(exclude_from_sim no)
 		(at 390.144 151.13 0)
@@ -7891,6 +8181,16 @@
 			(justify left)
 		)
 		(uuid "ddde2b19-20f7-4636-b48d-8f559c73ed49")
+	)
+	(text "Adafruit 4694"
+		(exclude_from_sim no)
+		(at 287.782 307.086 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ef2280c6-1544-4b4a-80aa-61c545054a57")
 	)
 	(junction
 		(at 491.49 323.85)
@@ -7977,6 +8277,12 @@
 		(uuid "591b8643-ad4b-480e-9c88-3d40d7f6007b")
 	)
 	(junction
+		(at 228.6 354.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "780f8903-b698-4dea-930e-46f775330033")
+	)
+	(junction
 		(at 223.52 57.15)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7987,6 +8293,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7fcb545b-d52a-4721-9d28-284ea4b26beb")
+	)
+	(junction
+		(at 345.44 321.31)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "830c22d0-5e16-476d-bfc4-5a00bb4a9ec1")
 	)
 	(junction
 		(at 317.5 52.07)
@@ -8055,7 +8367,7 @@
 		(uuid "b1ad03d6-fb8d-4fa9-93b4-b24cfdeb1463")
 	)
 	(junction
-		(at 213.36 354.33)
+		(at 191.77 354.33)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "bb9a837f-4f59-4135-8450-d3b09b019cd5")
@@ -8079,10 +8391,22 @@
 		(uuid "c25d9336-3603-4668-b9c3-3aa101cf2285")
 	)
 	(junction
+		(at 345.44 311.15)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c2f3004f-84cd-4fe2-99db-191f1f6ba8f6")
+	)
+	(junction
 		(at 50.8 300.99)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d6dbe56b-0286-4662-8293-8181fc7389c2")
+	)
+	(junction
+		(at 240.03 354.33)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e233169b-ac39-41ac-9307-8c8e913e0a80")
 	)
 	(junction
 		(at 308.61 52.07)
@@ -8097,7 +8421,7 @@
 		(uuid "e8ac9a32-42e0-42fd-8c25-dbd184b0144d")
 	)
 	(junction
-		(at 201.93 354.33)
+		(at 180.34 354.33)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "eb1a91ad-26a7-4d4e-b208-78184925e369")
@@ -8113,6 +8437,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee4031c0-3395-4b0c-ba48-2ab3cab47c00")
+	)
+	(junction
+		(at 345.44 316.23)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fd9053a7-9c94-4d73-b66c-f32342967cb9")
 	)
 	(wire
 		(pts
@@ -8176,7 +8506,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 345.44) (xy 210.82 347.98)
+			(xy 189.23 345.44) (xy 189.23 347.98)
 		)
 		(stroke
 			(width 0)
@@ -8236,7 +8566,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 347.98) (xy 201.93 347.98)
+			(xy 189.23 347.98) (xy 180.34 347.98)
 		)
 		(stroke
 			(width 0)
@@ -8313,6 +8643,16 @@
 			(type default)
 		)
 		(uuid "170d6e5f-789b-4dea-be04-f5c5c8745a41")
+	)
+	(wire
+		(pts
+			(xy 175.26 109.22) (xy 175.26 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1895ff01-9ed9-49c1-82d9-b878c6b69739")
 	)
 	(wire
 		(pts
@@ -8466,6 +8806,16 @@
 	)
 	(wire
 		(pts
+			(xy 237.49 345.44) (xy 237.49 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "334061b4-0d54-42a5-ad5e-c987ba55b262")
+	)
+	(wire
+		(pts
 			(xy 469.9 77.47) (xy 469.9 90.17)
 		)
 		(stroke
@@ -8486,6 +8836,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 354.33) (xy 242.57 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "351177ea-14a9-47da-80a4-da281cfb24e3")
+	)
+	(wire
+		(pts
 			(xy 462.28 90.17) (xy 464.82 90.17)
 		)
 		(stroke
@@ -8496,6 +8856,26 @@
 	)
 	(wire
 		(pts
+			(xy 238.76 354.33) (xy 240.03 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3880694e-c613-4425-a8ae-61b13083e72b")
+	)
+	(wire
+		(pts
+			(xy 226.06 345.44) (xy 234.95 345.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "38af1908-7b73-432b-8aff-246da52d1187")
+	)
+	(wire
+		(pts
 			(xy 467.36 116.84) (xy 469.9 116.84)
 		)
 		(stroke
@@ -8503,6 +8883,16 @@
 			(type default)
 		)
 		(uuid "3ba6eefb-0b23-4cb7-a207-df127b1a8006")
+	)
+	(wire
+		(pts
+			(xy 168.91 109.22) (xy 175.26 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ccbb9cd-7b65-4a19-9e08-87df3ce6fc41")
 	)
 	(wire
 		(pts
@@ -8656,6 +9046,16 @@
 	)
 	(wire
 		(pts
+			(xy 228.6 347.98) (xy 228.6 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "497c5779-1cb3-4831-ba5a-cb02ebab42c7")
+	)
+	(wire
+		(pts
 			(xy 74.93 132.08) (xy 78.74 132.08)
 		)
 		(stroke
@@ -8786,7 +9186,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 354.33) (xy 215.9 354.33)
+			(xy 191.77 354.33) (xy 194.31 354.33)
 		)
 		(stroke
 			(width 0)
@@ -8846,7 +9246,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 347.98) (xy 201.93 354.33)
+			(xy 180.34 347.98) (xy 180.34 354.33)
 		)
 		(stroke
 			(width 0)
@@ -8926,7 +9326,7 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 354.33) (xy 213.36 354.33)
+			(xy 190.5 354.33) (xy 191.77 354.33)
 		)
 		(stroke
 			(width 0)
@@ -8973,6 +9373,16 @@
 			(type default)
 		)
 		(uuid "6943d117-f847-4f07-89ff-6337d22ae467")
+	)
+	(wire
+		(pts
+			(xy 345.44 316.23) (xy 345.44 321.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bdf9431-b273-4f9f-951b-14cb7fd9a2ee")
 	)
 	(wire
 		(pts
@@ -9256,7 +9666,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 354.33) (xy 204.47 354.33)
+			(xy 180.34 354.33) (xy 182.88 354.33)
 		)
 		(stroke
 			(width 0)
@@ -9376,6 +9786,16 @@
 	)
 	(wire
 		(pts
+			(xy 240.03 345.44) (xy 240.03 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b9dbb26-ee78-4eb3-9049-902a0a57bdfb")
+	)
+	(wire
+		(pts
 			(xy 455.93 323.85) (xy 455.93 325.12)
 		)
 		(stroke
@@ -9456,6 +9876,16 @@
 	)
 	(wire
 		(pts
+			(xy 228.6 354.33) (xy 231.14 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5be793d-3fc8-410b-bf89-38e5bb8ece8b")
+	)
+	(wire
+		(pts
 			(xy 472.44 116.84) (xy 482.6 116.84)
 		)
 		(stroke
@@ -9463,6 +9893,16 @@
 			(type default)
 		)
 		(uuid "a5d47826-a66a-4037-8748-e1516204429b")
+	)
+	(wire
+		(pts
+			(xy 345.44 311.15) (xy 345.44 316.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a80cde2b-5a89-4b03-a2e4-da7a63a648e1")
 	)
 	(wire
 		(pts
@@ -9496,7 +9936,7 @@
 	)
 	(wire
 		(pts
-			(xy 199.39 345.44) (xy 208.28 345.44)
+			(xy 177.8 345.44) (xy 186.69 345.44)
 		)
 		(stroke
 			(width 0)
@@ -9553,6 +9993,16 @@
 			(type default)
 		)
 		(uuid "b0df13d1-bf59-475e-bc15-c898bedc2fc5")
+	)
+	(wire
+		(pts
+			(xy 228.6 354.33) (xy 223.52 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b30506ee-32c2-4694-8bb3-b8b5bcd074f0")
 	)
 	(wire
 		(pts
@@ -9816,7 +10266,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 345.44) (xy 213.36 354.33)
+			(xy 191.77 345.44) (xy 191.77 354.33)
 		)
 		(stroke
 			(width 0)
@@ -9946,6 +10396,16 @@
 	)
 	(wire
 		(pts
+			(xy 345.44 321.31) (xy 345.44 325.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0893083-1594-429f-a3ea-855e7e68bf7f")
+	)
+	(wire
+		(pts
 			(xy 321.31 69.85) (xy 321.31 74.93)
 		)
 		(stroke
@@ -9986,7 +10446,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 111.76) (xy 146.05 111.76)
+			(xy 143.51 111.76) (xy 153.67 111.76)
 		)
 		(stroke
 			(width 0)
@@ -10076,6 +10536,16 @@
 	)
 	(wire
 		(pts
+			(xy 237.49 347.98) (xy 228.6 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd3864ed-2d34-46f3-950b-8de6bc1655cc")
+	)
+	(wire
+		(pts
 			(xy 316.23 325.12) (xy 316.23 332.74)
 		)
 		(stroke
@@ -10156,6 +10626,16 @@
 	)
 	(wire
 		(pts
+			(xy 345.44 306.07) (xy 345.44 311.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8fa13e9-1b80-41a0-9c8f-8dbeb9277f4b")
+	)
+	(wire
+		(pts
 			(xy 356.87 64.77) (xy 356.87 67.31)
 		)
 		(stroke
@@ -10176,7 +10656,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 354.33) (xy 196.85 354.33)
+			(xy 180.34 354.33) (xy 175.26 354.33)
 		)
 		(stroke
 			(width 0)
@@ -10514,6 +10994,16 @@
 		)
 		(uuid "3f28663f-312a-44c3-bbcf-6ba32952510a")
 	)
+	(label "PROBE2"
+		(at 242.57 354.33 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4927a3c1-c1fd-4488-a3bd-d8bf0296665f")
+	)
 	(label "SDA"
 		(at 308.61 128.27 0)
 		(effects
@@ -10534,7 +11024,7 @@
 		)
 		(uuid "5211309b-b7c0-4813-b883-86d5c1c504f9")
 	)
-	(label "GP14"
+	(label "MISO"
 		(at 246.38 208.28 0)
 		(effects
 			(font
@@ -10553,26 +11043,6 @@
 			(justify left bottom)
 		)
 		(uuid "550ce305-095e-4477-8c0a-a1b4972ca3c7")
-	)
-	(label "GP14"
-		(at 90.17 129.54 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "58c293c5-925b-4bdb-a2cb-8a972da08275")
-	)
-	(label "FAN1"
-		(at 146.05 111.76 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5c53ce85-6a17-468f-ae96-6c249885e070")
 	)
 	(label "MOSI"
 		(at 316.23 337.82 0)
@@ -10594,7 +11064,7 @@
 		)
 		(uuid "7260cd22-4a9f-498d-9a69-f06def475320")
 	)
-	(label "TACH1"
+	(label "TACH2"
 		(at 90.17 132.08 0)
 		(effects
 			(font
@@ -10684,6 +11154,16 @@
 		)
 		(uuid "8f7d3f60-1093-4149-84bb-94aec64dd2fd")
 	)
+	(label "TACH1"
+		(at 90.17 129.54 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "91313bf9-6242-4bcf-93d0-82d9bae778cb")
+	)
 	(label "SCL"
 		(at 119.38 349.25 0)
 		(effects
@@ -10694,7 +11174,7 @@
 		)
 		(uuid "91fd228f-d296-483e-a3ca-003c628d02aa")
 	)
-	(label "TACH2"
+	(label "PROBE1"
 		(at 90.17 134.62 0)
 		(effects
 			(font
@@ -10754,7 +11234,7 @@
 		)
 		(uuid "a5419860-09de-4976-bf12-d03c4f56615f")
 	)
-	(label "GP9"
+	(label "MOSI"
 		(at 246.38 205.74 0)
 		(effects
 			(font
@@ -10763,16 +11243,6 @@
 			(justify left bottom)
 		)
 		(uuid "a8fccdc4-8106-475b-a213-9b7a3fc6df72")
-	)
-	(label "GP9"
-		(at 90.17 127 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a99a102c-e7d6-4456-a8dc-2b9d30bf51e9")
 	)
 	(label "Buzzer"
 		(at 90.17 109.22 0)
@@ -10784,7 +11254,7 @@
 		)
 		(uuid "ac7c0405-8cf8-435a-aa23-eb3e0b08bdd2")
 	)
-	(label "PROBE"
+	(label "PROBE2"
 		(at 90.17 137.16 0)
 		(effects
 			(font
@@ -10814,8 +11284,8 @@
 		)
 		(uuid "bc43af0a-9426-445c-8f44-d0e940786cb9")
 	)
-	(label "PROBE"
-		(at 215.9 354.33 0)
+	(label "PROBE1"
+		(at 194.31 354.33 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10834,7 +11304,7 @@
 		)
 		(uuid "c72ae9b4-2882-4478-8acb-858c2a9b1254")
 	)
-	(label "GP8"
+	(label "SCK"
 		(at 246.38 203.2 0)
 		(effects
 			(font
@@ -10843,6 +11313,16 @@
 			(justify left bottom)
 		)
 		(uuid "c92d026d-7ebf-4064-ba11-4682a5358b59")
+	)
+	(label "FAN2"
+		(at 90.17 127 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cad904e6-4c9b-45fb-9716-cfc3b29ec1a0")
 	)
 	(label "FAN1"
 		(at 199.39 276.86 0)
@@ -10894,7 +11374,7 @@
 		)
 		(uuid "e1066ddd-a4d5-4b24-b8ba-47c82a807271")
 	)
-	(label "GP8"
+	(label "FAN1"
 		(at 90.17 124.46 0)
 		(effects
 			(font
@@ -10902,17 +11382,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e219a9ed-0795-4656-95fa-855ede0418d0")
-	)
-	(label "FAN2"
-		(at 146.05 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fc3e713b-3c35-460b-a577-f045d1176f82")
+		(uuid "e19889b3-adb5-4939-b1b8-10fb7feb248c")
 	)
 	(symbol
 		(lib_id "SamacSys_Parts:SHT40-BD1B-R2")
@@ -11936,7 +12406,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 196.85 354.33 90)
+		(at 175.26 354.33 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11945,7 +12415,7 @@
 		(fields_autoplaced yes)
 		(uuid "12145ca8-0cd6-44e4-9c22-509f8909802a")
 		(property "Reference" "#PWR050"
-			(at 200.66 354.33 0)
+			(at 179.07 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11954,7 +12424,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 193.04 354.3299 90)
+			(at 171.45 354.3299 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11963,7 +12433,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 196.85 354.33 0)
+			(at 175.26 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11972,7 +12442,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 196.85 354.33 0)
+			(at 175.26 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11981,7 +12451,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 196.85 354.33 0)
+			(at 175.26 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14823,6 +15293,178 @@
 		)
 	)
 	(symbol
+		(lib_id "SLW-865144-2A-N-SMT-TR:SLW-865144-2A-N-SMT-TR")
+		(at 161.29 111.76 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "36e7bc32-0046-462b-8b14-acb57d4b994c")
+		(property "Reference" "S3"
+			(at 161.29 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SLW-865144-2A-N-SMT-TR"
+			(at 161.29 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SLW-865144-2A-N-SMT-TR:SW_SLW-865144-2A-N-SMT-TR"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "DigiKey_Part_Number" "2223-SLW-865144-2A-N-SMT-TRCT-ND"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/SLW-865144-2A-N-SMT-TR/Same+Sky/view-part/?ref=snap"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Switch Slide ON ON SPDT Raised Slide 0.3A 50VDC 10000Cycles Gull Wing SMD"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "Package"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/SLW-865144-2A-N-SMT-TR/Same+Sky/view-part/?ref=eda"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "1.01"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MF" "Same Sky"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "SLW-865144-2A-N-SMT-TR"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "Same Sky"
+			(at 161.29 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "38f38316-dec6-4868-a408-f10ce39c1f0f")
+		)
+		(pin "3"
+			(uuid "ca480678-58a6-49bc-8f4f-cf65ea5c456e")
+		)
+		(pin "1"
+			(uuid "ffbf5f1d-2fb0-4336-bc95-ce578a0e1505")
+		)
+		(instances
+			(project ""
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "S3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 308.61 59.69 0)
 		(unit 1)
@@ -15204,6 +15846,72 @@
 			(project "alarm"
 				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
 					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 345.44 325.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3bfe5faf-fe62-4dbd-a927-eada3f10a3a6")
+		(property "Reference" "#PWR052"
+			(at 345.44 331.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 345.44 330.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 345.44 325.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 345.44 325.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 345.44 325.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c70402c5-959e-4cac-a5d7-6edef597d497")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "#PWR052")
 					(unit 1)
 				)
 			)
@@ -15620,16 +16328,15 @@
 	)
 	(symbol
 		(lib_id "B4B-PH-SM4-TB:B4B-PH-SM4-TB")
-		(at 213.36 340.36 90)
+		(at 191.77 340.36 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "47e7ac7a-2f7f-4516-87a3-c2567176110a")
 		(property "Reference" "J8"
-			(at 224.79 334.0099 90)
+			(at 184.15 325.882 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15638,7 +16345,7 @@
 			)
 		)
 		(property "Value" "B4B-PH-SM4-TB"
-			(at 224.79 336.5499 90)
+			(at 183.896 328.422 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15647,7 +16354,7 @@
 			)
 		)
 		(property "Footprint" "B4B-PH-SM4-TB:JST_B4B-PH-SM4-TB"
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15657,7 +16364,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15666,7 +16373,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15675,7 +16382,7 @@
 			)
 		)
 		(property "PARTREV" "N/A"
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15685,7 +16392,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15695,7 +16402,7 @@
 			)
 		)
 		(property "SNAPEDA_PN" "B4B-PH-SM4-TB"
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15705,7 +16412,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" "6.6mm"
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15715,7 +16422,7 @@
 			)
 		)
 		(property "MANUFACTURER" "JST"
-			(at 213.36 340.36 0)
+			(at 191.77 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16254,6 +16961,181 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 347.98 321.31 270)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5203c0fd-3b25-4b93-8a92-ded57a17d188")
+		(property "Reference" "H8"
+			(at 351.79 320.0399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 351.79 322.5799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_DIN965_Pad"
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Availability" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description_1" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" ""
+			(at 347.98 321.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "150fa539-32f6-4b05-bc30-7eb4cb1c6491")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "H8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 284.48 199.39 90)
 		(unit 1)
@@ -16320,7 +17202,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 208.28 354.33 90)
+		(at 186.69 354.33 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16328,7 +17210,7 @@
 		(dnp no)
 		(uuid "56b7469c-9058-4ca5-af1f-112b2f2e1cb8")
 		(property "Reference" "R21"
-			(at 208.28 352.044 90)
+			(at 186.69 352.044 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16336,7 +17218,7 @@
 			)
 		)
 		(property "Value" "4.7kΩ"
-			(at 208.28 357.124 90)
+			(at 186.69 357.124 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16344,7 +17226,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
-			(at 208.28 356.108 90)
+			(at 186.69 356.108 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16353,7 +17235,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16362,7 +17244,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16371,7 +17253,7 @@
 			)
 		)
 		(property "Availability" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16380,7 +17262,7 @@
 			)
 		)
 		(property "Check_prices" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16389,7 +17271,7 @@
 			)
 		)
 		(property "Description_1" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16398,7 +17280,7 @@
 			)
 		)
 		(property "MANUFACTURER" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16407,7 +17289,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16416,7 +17298,7 @@
 			)
 		)
 		(property "MF" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16425,7 +17307,7 @@
 			)
 		)
 		(property "MP" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16434,7 +17316,7 @@
 			)
 		)
 		(property "PARTREV" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16443,7 +17325,7 @@
 			)
 		)
 		(property "Package" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16452,7 +17334,7 @@
 			)
 		)
 		(property "Price" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16461,7 +17343,7 @@
 			)
 		)
 		(property "STANDARD" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16470,7 +17352,7 @@
 			)
 		)
 		(property "SnapEDA_Link" ""
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16479,7 +17361,7 @@
 			)
 		)
 		(property "LCSC Part #" "C15401"
-			(at 208.28 354.33 0)
+			(at 186.69 354.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16747,6 +17629,73 @@
 			(project "alarm"
 				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
 					(reference "#PWR029")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 226.06 345.44 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "59d9ee7d-919d-4257-99b6-1a7f4bc1512d")
+		(property "Reference" "#PWR049"
+			(at 219.71 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 222.25 345.4399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 226.06 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 226.06 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 226.06 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "57c64d84-700f-42d0-9e63-b6c8bdf02add")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "#PWR049")
 					(unit 1)
 				)
 			)
@@ -18394,6 +19343,181 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 347.98 316.23 270)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "73e78150-c8d3-4cd9-95eb-69b5f88dd688")
+		(property "Reference" "H7"
+			(at 351.79 314.9599 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 351.79 317.4999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_DIN965_Pad"
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Availability" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description_1" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" ""
+			(at 347.98 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cc86e2db-b701-47fb-9f25-81af056815fc")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "H7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 50.8 327.66 0)
 		(unit 1)
@@ -18660,7 +19784,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 199.39 345.44 270)
+		(at 177.8 345.44 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18669,7 +19793,7 @@
 		(fields_autoplaced yes)
 		(uuid "85778293-7fe1-46f0-9dfb-24b25af87759")
 		(property "Reference" "#PWR047"
-			(at 193.04 345.44 0)
+			(at 171.45 345.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18678,7 +19802,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 195.58 345.4399 90)
+			(at 173.99 345.4399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18687,7 +19811,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 199.39 345.44 0)
+			(at 177.8 345.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18696,7 +19820,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 199.39 345.44 0)
+			(at 177.8 345.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18705,7 +19829,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 199.39 345.44 0)
+			(at 177.8 345.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19241,6 +20365,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 223.52 354.33 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9830af8f-e1d0-45a3-a23b-b538e97ccfeb")
+		(property "Reference" "#PWR048"
+			(at 227.33 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 219.71 354.3299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 223.52 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.52 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 223.52 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3d7699e1-62cd-4960-97fd-249183795443")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "#PWR048")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 339.09 261.62 0)
 		(unit 1)
@@ -19488,6 +20679,72 @@
 			(project "aquaponics_ctrl"
 				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
 					(reference "#PWR030")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 175.26 114.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9fbd633f-61eb-457a-95f1-57b502809e82")
+		(property "Reference" "#PWR051"
+			(at 175.26 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 175.26 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 175.26 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 175.26 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 175.26 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3015a2e7-e906-4072-a84e-d864b946c3b9")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "#PWR051")
 					(unit 1)
 				)
 			)
@@ -19848,6 +21105,181 @@
 			(project "ponictron"
 				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
 					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 347.98 306.07 270)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a553b546-0ad9-44a0-8173-aac4a2cb5be4")
+		(property "Reference" "H5"
+			(at 351.79 304.7999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 351.79 307.3399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_DIN965_Pad"
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Availability" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description_1" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" ""
+			(at 347.98 306.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "880e3ac9-4aee-46aa-b8a6-3ae8c08422c7")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "H5")
 					(unit 1)
 				)
 			)
@@ -21185,6 +22617,138 @@
 		)
 	)
 	(symbol
+		(lib_id "B4B-PH-SM4-TB:B4B-PH-SM4-TB")
+		(at 240.03 340.36 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ceb2363d-815b-4eb8-8ed6-4d53e8414e6c")
+		(property "Reference" "J9"
+			(at 232.156 326.39 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "B4B-PH-SM4-TB"
+			(at 232.156 328.676 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "B4B-PH-SM4-TB:JST_B4B-PH-SM4-TB"
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "N/A"
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SNAPEDA_PN" "B4B-PH-SM4-TB"
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "6.6mm"
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "JST"
+			(at 240.03 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "SH2"
+			(uuid "d2871dbe-b1c5-46f8-b4ac-c9042adcaf03")
+		)
+		(pin "2"
+			(uuid "0d204ba0-32c8-4da9-a8fd-c00a62253153")
+		)
+		(pin "1"
+			(uuid "850cbb3b-94b6-4d1e-9fae-a7b022011249")
+		)
+		(pin "4"
+			(uuid "cc466a0d-e5a1-4973-ab92-20c3aec51dc1")
+		)
+		(pin "SH1"
+			(uuid "d13e19c5-758b-4f52-ab7e-5fb31118ab03")
+		)
+		(pin "3"
+			(uuid "13899457-73d1-47dd-9ea8-2a4d38d927f8")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "J9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 349.25 261.62 0)
 		(unit 1)
@@ -22386,6 +23950,181 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole_Pad")
+		(at 347.98 311.15 270)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e758d9b0-3256-4fb5-8a1e-933b236fc07d")
+		(property "Reference" "H6"
+			(at 351.79 309.8799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 351.79 312.4199 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_DIN965_Pad"
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Availability" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description_1" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" ""
+			(at 347.98 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2c73d658-5315-4810-935f-aa049ca8698b")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "H6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
 		(at 226.06 62.23 270)
 		(unit 1)
 		(exclude_from_sim yes)
@@ -23578,6 +25317,190 @@
 			(project "ponictron"
 				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
 					(reference "#PWR028")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 234.95 354.33 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ffb3146d-544f-40c4-b33e-5faddfbe74e1")
+		(property "Reference" "R22"
+			(at 234.95 352.044 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7kΩ"
+			(at 234.95 357.124 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 234.95 356.108 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Availability" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description_1" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MP" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Package" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Price" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" ""
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C15401"
+			(at 234.95 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ea3abdb0-b45d-4ad9-9e6c-110edd282cff")
+		)
+		(pin "2"
+			(uuid "8b974c62-fef7-49bc-b038-0adc3b641505")
+		)
+		(instances
+			(project "ponictron"
+				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
+					(reference "R22")
 					(unit 1)
 				)
 			)

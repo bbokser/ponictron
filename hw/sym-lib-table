@@ -15,4 +15,5 @@
   (lib (name "DMP4015SSSQ-13")(type "KiCad")(uri "${KIPRJMOD}/libraries/DMP4015SSSQ-13/DMP4015SSSQ-13.kicad_sym")(options "")(descr ""))
   (lib (name "RJCSE538001")(type "KiCad")(uri "${KIPRJMOD}/libraries/RJCSE538001/RJCSE538001.kicad_sym")(options "")(descr ""))
   (lib (name "B4B-PH-SM4-TB")(type "KiCad")(uri "${KIPRJMOD}/libraries/B4B_PH_SM4_TB/B4B-PH-SM4-TB.kicad_sym")(options "")(descr ""))
+  (lib (name "SLW-865144-2A-N-SMT-TR")(type "KiCad")(uri "${KIPRJMOD}/libraries/SLW-865144-2A-N-SMT-TR/SLW-865144-2A-N-SMT-TR.kicad_sym")(options "")(descr ""))
 )
