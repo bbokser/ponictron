@@ -14,4 +14,7 @@
   (lib (name "RJCSE538001")(type "KiCad")(uri "${KIPRJMOD}/libraries/RJCSE538001")(options "")(descr ""))
   (lib (name "B4B_PH_SM4_TB")(type "KiCad")(uri "${KIPRJMOD}/libraries/B4B_PH_SM4_TB")(options "")(descr ""))
   (lib (name "SLW-865144-2A-N-SMT-TR")(type "KiCad")(uri "${KIPRJMOD}/libraries/SLW-865144-2A-N-SMT-TR")(options "")(descr ""))
+  (lib (name "B3B-PH-SM4-TB_LF__SN_")(type "KiCad")(uri "${KIPRJMOD}/libraries/B3B-PH-SM4-TB_LF__SN_")(options "")(descr ""))
+  (lib (name "MSD_11_A")(type "KiCad")(uri "${KIPRJMOD}/libraries/MSD_11_A")(options "")(descr ""))
+  (lib (name "0470531000")(type "KiCad")(uri "${KIPRJMOD}/libraries/0470531000/0470531000.pretty")(options "")(descr ""))
 )

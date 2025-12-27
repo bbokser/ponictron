@@ -16,4 +16,7 @@
   (lib (name "RJCSE538001")(type "KiCad")(uri "${KIPRJMOD}/libraries/RJCSE538001/RJCSE538001.kicad_sym")(options "")(descr ""))
   (lib (name "B4B-PH-SM4-TB")(type "KiCad")(uri "${KIPRJMOD}/libraries/B4B_PH_SM4_TB/B4B-PH-SM4-TB.kicad_sym")(options "")(descr ""))
   (lib (name "SLW-865144-2A-N-SMT-TR")(type "KiCad")(uri "${KIPRJMOD}/libraries/SLW-865144-2A-N-SMT-TR/SLW-865144-2A-N-SMT-TR.kicad_sym")(options "")(descr ""))
+  (lib (name "B3B-PH-SM4-TB_LF__SN_")(type "KiCad")(uri "${KIPRJMOD}/libraries/B3B-PH-SM4-TB_LF__SN_/B3B-PH-SM4-TB_LF__SN_.kicad_sym")(options "")(descr ""))
+  (lib (name "MSD-11-A")(type "KiCad")(uri "${KIPRJMOD}/libraries/MSD_11_A/MSD-11-A.kicad_sym")(options "")(descr ""))
+  (lib (name "0470531000")(type "KiCad")(uri "${KIPRJMOD}/libraries/0470531000/0470531000.kicad_sym")(options "")(descr ""))
 )
