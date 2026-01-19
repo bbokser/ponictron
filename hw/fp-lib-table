@@ -17,4 +17,5 @@
   (lib (name "B3B-PH-SM4-TB_LF__SN_")(type "KiCad")(uri "${KIPRJMOD}/libraries/B3B-PH-SM4-TB_LF__SN_")(options "")(descr ""))
   (lib (name "MSD_11_A")(type "KiCad")(uri "${KIPRJMOD}/libraries/MSD_11_A")(options "")(descr ""))
   (lib (name "0470531000")(type "KiCad")(uri "${KIPRJMOD}/libraries/0470531000/0470531000.pretty")(options "")(descr ""))
+  (lib (name "CPT_1203_03_SMT_TR")(type "KiCad")(uri "${KIPRJMOD}/libraries/CPT_1203_03_SMT_TR")(options "")(descr ""))
 )
