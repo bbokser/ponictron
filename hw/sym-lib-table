@@ -19,4 +19,5 @@
   (lib (name "B3B-PH-SM4-TB_LF__SN_")(type "KiCad")(uri "${KIPRJMOD}/libraries/B3B-PH-SM4-TB_LF__SN_/B3B-PH-SM4-TB_LF__SN_.kicad_sym")(options "")(descr ""))
   (lib (name "MSD-11-A")(type "KiCad")(uri "${KIPRJMOD}/libraries/MSD_11_A/MSD-11-A.kicad_sym")(options "")(descr ""))
   (lib (name "0470531000")(type "KiCad")(uri "${KIPRJMOD}/libraries/0470531000/0470531000.kicad_sym")(options "")(descr ""))
+  (lib (name "0855437001")(type "KiCad")(uri "${KIPRJMOD}/libraries/0855437001/0855437001.kicad_sym")(options "")(descr ""))
 )

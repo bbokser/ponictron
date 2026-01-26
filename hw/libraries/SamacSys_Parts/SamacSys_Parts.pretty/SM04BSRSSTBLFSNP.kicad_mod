@@ -1,7 +1,7 @@
 (footprint "SM04BSRSSTBLFSNP"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SM04B-SRSS-TB(LF)(SN)(P)-1")
 	(tags "Connector")
@@ -28,18 +28,6 @@
 			)
 		)
 	)
-	(property "Footprint" "SM04BSRSSTBLFSNP"
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f7bafefd-cf8a-45b1-a5f3-3ccb574ef2ec")
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(unlocked yes)
@@ -49,6 +37,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -61,6 +50,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -251,39 +241,40 @@
 	(pad "1" smd rect
 		(at -1.5 -2.287)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "54a67b86-37bf-4303-82ac-b15f218f4501")
 	)
 	(pad "2" smd rect
 		(at -0.5 -2.287)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "eeb716ee-20d6-4602-ba6d-aa9faed0d2db")
 	)
 	(pad "3" smd rect
 		(at 0.5 -2.287)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ee8aa82c-226d-44be-b73a-61373e3b1b8e")
 	)
 	(pad "4" smd rect
 		(at 1.5 -2.287)
 		(size 0.6 1.55)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "db3f0009-10a3-4593-877f-1889f05a9b40")
 	)
 	(pad "5" smd rect
 		(at -2.8 1.587)
 		(size 1.2 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "76d9ca58-d5f1-4817-b10f-a462f5672904")
 	)
 	(pad "6" smd rect
 		(at 2.8 1.587)
 		(size 1.2 1.8)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "a545989d-d1a4-462f-8b49-95eaa1739bd2")
 	)
+	(embedded_fonts no)
 	(model "C:/Users/bboks/Documents/git_windows/source/rp2040-alarm-clock/hw/libraries/PRT-14417.stp"
 		(offset
 			(xyz 0 1.5 -0.4)
@@ -293,6 +284,17 @@
 		)
 		(rotate
 			(xyz -90 0 0)
+		)
+	)
+	(model "${KIPRJMOD}/libraries/SamacSys_Parts/PRT-14417.stp"
+		(offset
+			(xyz 0 1.5 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
 		)
 	)
 )

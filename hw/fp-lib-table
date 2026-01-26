@@ -18,4 +18,7 @@
   (lib (name "MSD_11_A")(type "KiCad")(uri "${KIPRJMOD}/libraries/MSD_11_A")(options "")(descr ""))
   (lib (name "0470531000")(type "KiCad")(uri "${KIPRJMOD}/libraries/0470531000/0470531000.pretty")(options "")(descr ""))
   (lib (name "CPT_1203_03_SMT_TR")(type "KiCad")(uri "${KIPRJMOD}/libraries/CPT_1203_03_SMT_TR")(options "")(descr ""))
+  (lib (name "0855437001")(type "KiCad")(uri "${KIPRJMOD}/libraries/0855437001/0855437001.pretty")(options "")(descr ""))
+  (lib (name "MPS_LGA-18-10EP")(type "KiCad")(uri "${KIPRJMOD}/libraries/MPS_LGA-18-10EP.pretty")(options "")(descr ""))
+  (lib (name "MPM3550EGLE")(type "KiCad")(uri "${KIPRJMOD}/libraries/MPM3550EGLE")(options "")(descr ""))
 )

@@ -1,7 +1,7 @@
 (footprint "PEC11S929KS0015"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "PEC11S-929K-S0015-1")
 	(tags "Integrated Circuit")
@@ -28,18 +28,6 @@
 			)
 		)
 	)
-	(property "Footprint" "PEC11S929KS0015"
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "8ec9613e-761a-4adc-b1b5-5de92dc3c32d")
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(unlocked yes)
@@ -49,6 +37,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -61,6 +50,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -230,75 +220,76 @@
 		(at 0 4.5)
 		(size 1.55 2.2)
 		(drill oval 1.55 2.2)
-		(layers "F&B.Cu" "*.Mask")
+		(layers "*.Cu" "*.Mask")
 		(uuid "4435bf47-239c-4904-b741-f7121ea9a4d1")
 	)
 	(pad "A1" smd rect
 		(at -2.5 7.3)
 		(size 1.3 2.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3ddcd03b-e70f-4c1c-9ec0-165d3db9c914")
 	)
 	(pad "B1" smd rect
 		(at 2.5 7.3)
 		(size 1.3 2.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ccf5094a-0f55-41f1-bab9-17fc840f350f")
 	)
 	(pad "C1" smd rect
 		(at 0 7.3)
 		(size 1.3 2.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "9d089c41-8517-4de6-9453-21bed3d70046")
 	)
 	(pad "D1" smd rect
 		(at -2.5 -7)
 		(size 1.3 2.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3974c500-8f32-4499-a28d-c5789d5b4aea")
 	)
 	(pad "E1" smd rect
 		(at 2.5 -7)
 		(size 1.3 2.4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "560c5bee-e55a-4230-977d-369b16be9dfc")
 	)
 	(pad "MP1" smd rect
 		(at -6.375 0)
 		(size 3.75 4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "bbf0ba2f-9119-43d0-9e72-dabddf1d11ed")
 	)
 	(pad "MP2" smd rect
 		(at 6.375 0)
 		(size 3.75 4)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "5cc4859c-483a-4264-a4c9-65ad099830e5")
 	)
 	(pad "MP3" smd rect
 		(at -5 -7.9)
 		(size 2.5 3.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f31d3c44-fc9c-464f-b3e2-f469b98f7343")
 	)
 	(pad "MP4" smd rect
 		(at 5 -7.9)
 		(size 2.5 3.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2921fa67-e9b4-4fbe-983b-3aad46209d14")
 	)
 	(pad "MP5" smd rect
 		(at -5 7.9)
 		(size 2.5 3.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ade705d7-5b4f-44fe-9db5-9c5e4b1406b8")
 	)
 	(pad "MP6" smd rect
 		(at 5 7.9)
 		(size 2.5 3.2)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "33fe5548-3d8a-476b-9ba8-d347914d62cf")
 	)
+	(embedded_fonts no)
 	(model "C:\\Users\\bboks\\Documents\\git_windows\\source\\rp2040-alarm-clock\\hw\\libraries\\SamacSys_Parts.3dshapes\\PEC11S-929K-S0015.stp"
 		(offset
 			(xyz -1.779999945 3.859999837 -0.09999999999)
@@ -308,6 +299,17 @@
 		)
 		(rotate
 			(xyz 0 0 0)
+		)
+	)
+	(model "${KIPRJMOD}/libraries/SamacSys_Parts/SamacSys_Parts.3dshapes/PEC11S-929K-S0015.stp"
+		(offset
+			(xyz -1.75 4 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
 		)
 	)
 )
