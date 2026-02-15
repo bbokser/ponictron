@@ -20,4 +20,7 @@
   (lib (name "MSD-11-A")(type "KiCad")(uri "${KIPRJMOD}/libraries/MSD_11_A/MSD-11-A.kicad_sym")(options "")(descr ""))
   (lib (name "0470531000")(type "KiCad")(uri "${KIPRJMOD}/libraries/0470531000/0470531000.kicad_sym")(options "")(descr ""))
   (lib (name "0855437001")(type "KiCad")(uri "${KIPRJMOD}/libraries/0855437001/0855437001.kicad_sym")(options "")(descr ""))
+  (lib (name "AP63203WU-7")(type "KiCad")(uri "${KIPRJMOD}/libraries/AP63203WU-7/AP63203WU-7.kicad_sym")(options "")(descr ""))
+  (lib (name "SRR6028-3R9Y")(type "KiCad")(uri "${KIPRJMOD}/libraries/SRR6028-3R9Y/SRR6028-3R9Y.kicad_sym")(options "")(descr ""))
+  (lib (name "NC7WZ14P6X")(type "KiCad")(uri "${KIPRJMOD}/libraries/NC7WZ14P6X/NC7WZ14P6X.kicad_sym")(options "")(descr ""))
 )

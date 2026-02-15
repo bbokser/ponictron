@@ -21,4 +21,7 @@
   (lib (name "0855437001")(type "KiCad")(uri "${KIPRJMOD}/libraries/0855437001/0855437001.pretty")(options "")(descr ""))
   (lib (name "MPS_LGA-18-10EP")(type "KiCad")(uri "${KIPRJMOD}/libraries/MPS_LGA-18-10EP.pretty")(options "")(descr ""))
   (lib (name "MPM3550EGLE")(type "KiCad")(uri "${KIPRJMOD}/libraries/MPM3550EGLE")(options "")(descr ""))
+  (lib (name "AP63203WU-7")(type "KiCad")(uri "${KIPRJMOD}/libraries/AP63203WU-7/AP63203WU-7.pretty")(options "")(descr ""))
+  (lib (name "SRR6028-3R9Y")(type "KiCad")(uri "${KIPRJMOD}/libraries/SRR6028-3R9Y/SRR6028-3R9Y.pretty")(options "")(descr ""))
+  (lib (name "NC7WZ14P6X")(type "KiCad")(uri "${KIPRJMOD}/libraries/NC7WZ14P6X/NC7WZ14P6X.pretty")(options "")(descr ""))
 )
