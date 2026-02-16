@@ -1,0 +1,73 @@
+(footprint "WE-SMSA_78614015360"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -4.835 0)
+		(layer "F.SilkS")
+		(uuid "8caac82a-bca5-4997-af84-75cc00a985ba")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "WE-SMSA_78614015360"
+		(at 8.4424 4.7291 0)
+		(layer "F.Fab")
+		(uuid "e1d32144-6f36-413d-b7a4-7e2c429b8761")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ed7410f2-8a27-4bee-83b2-a046f49a8aa0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "34ef5024-901e-4666-b75e-8d470c50b634")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 7.4 7.4)
+		(drill 4.4)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "6ce5bdcb-90d3-4ab5-b4cd-419d68b85c20")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/78614015360/STP_78614015360_rev1.stp"
+		(offset
+			(xyz 0 0 1.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 90 -0 -0)
+		)
+	)
+)

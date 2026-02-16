@@ -23,4 +23,5 @@
   (lib (name "AP63203WU-7")(type "KiCad")(uri "${KIPRJMOD}/libraries/AP63203WU-7/AP63203WU-7.kicad_sym")(options "")(descr ""))
   (lib (name "SRR6028-3R9Y")(type "KiCad")(uri "${KIPRJMOD}/libraries/SRR6028-3R9Y/SRR6028-3R9Y.kicad_sym")(options "")(descr ""))
   (lib (name "NC7WZ14P6X")(type "KiCad")(uri "${KIPRJMOD}/libraries/NC7WZ14P6X/NC7WZ14P6X.kicad_sym")(options "")(descr ""))
+  (lib (name "78614015360")(type "KiCad")(uri "${KIPRJMOD}/libraries/78614015360/WE-SMSA_M3.kicad_sym")(options "")(descr ""))
 )
