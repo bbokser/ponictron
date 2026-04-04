@@ -1,0 +1,128 @@
+import time
+import board
+import busio
+from adafruit_onewire.bus import OneWireBus
+from fsm import FSM
+
+# hardware
+from disp import Disp
+from clock import Clock
+from encoder import Encoder
+from buzzer import Buzzer
+from button import PinButton
+from sense_ht import HTSensor
+from led import LED
+from dac import DAC
+from probe import Probe
+from light import Light
+
+# time.sleep(5)  # to ensure serial connection does not fail
+
+
+class OS(FSM):
+    def __init__(self, verbose):
+        # initialize class objects
+        i2c = busio.I2C(scl=board.GP5, sda=board.GP4)
+        spi = busio.SPI(clock=board.GP18, MOSI=board.GP19, MISO=None)
+        ow_bus = OneWireBus(board.GP3)
+        self.clock = Clock(i2c)
+        # this has to run after clock is created
+        super().__init__(verbose=verbose)
+        # disable the alarms on reset because I haven't figured out how to retrieve the saved info from the rtc
+        # self.clock.alarm1.disable()
+        # self.clock.alarm2.disable()
+        self.button_2 = PinButton(board.GP10)  # the upper one
+        self.button_1 = PinButton(board.GP11)  # the lower one
+        self.button_enc = PinButton(board.GP2)
+        self.encoder = Encoder(pinA=board.GP1, pinB=board.GP0)
+        self.buzzer = Buzzer(board.GP21)
+        self.sensor = HTSensor(i2c, address=0x45, units=0)
+        self.dac = DAC(i2c)
+        self.probe_0 = Probe(ow_bus, 0)
+        self.probe_1 = Probe(ow_bus, 1)
+        self.light = Light(
+            self.clock,
+            start_time=8.0,
+            end_time=20.0,
+            brightness_min=0.15,
+            brightness_max=0.6,
+        )
+        self.led = LED(board.LED)
+
+        self.disp = Disp(spi=spi, cs=board.GP17, dc=board.GP8, reset=board.GP13)
+        self.update_disp()
+
+        # 24 vs 12 hour format
+        self.format = 0
+        self.format_new = 0
+
+        self.wday_idx = 0
+        self.wday_set_new = [0] * 7
+        self.dt = 0.1
+        self.beat_rate = 0.3  # should be a multiple of dt
+        self.dac.set_value(self.light.get_brightness())
+
+    def run(self):
+        z = 0
+        k = 0
+        self.heartbeat = True
+        k_beat = int(self.beat_rate / self.dt)
+
+        j = 0
+        # how many seconds before refresh
+        refresh_time = 10 * 60
+        refresh_counter = int(refresh_time / self.dt)
+        # reheat the sensor chip once per day
+        reheat_counter = int(24 * 60 * 60 / refresh_time)
+
+        while True:
+            if k >= k_beat:
+                k = 0
+                self.heartbeat = not self.heartbeat
+            self.led.blink(self.heartbeat)
+            self.b_enter = self.button_enc.update()
+            self.b_save = self.button_2.update()
+            self.b_back = self.button_1.update()
+
+            self.execute()
+
+            if j > refresh_counter:
+                if z == 0:
+                    self.sensor.set_mode_read()
+                j = 0
+                self.update_disp()
+                z += 1
+                if z > reheat_counter:
+                    self.sensor.set_mode_heat()
+                    z = 0
+
+            k += 1
+            j += 1
+            time.sleep(self.dt)
+
+    def update_disp(self):
+        disp_info = {
+            "weekday": self.clock.get_weekday_str(),
+            "month": self.clock.get_month_str(),
+            "day": self.clock.get_day_str(),
+            "year": self.clock.get_year_str(),
+            "alarm1": self.clock.alarm1.get_str(),
+            "alarm1wdays": self.clock.alarm1.get_wday_set_str(),
+            "alarm2": self.clock.alarm2.get_str(),
+            "alarm2wdays": self.clock.alarm2.get_wday_set_str(),
+            "temp": self.sensor.get_temperature(),
+            "humidity": self.sensor.get_humidity(),
+            "meridiem": self.clock.get_meridiem_str(),
+            "probe_0_temp": self.probe_0.get_temp_str(),
+            "probe_1_temp": self.probe_1.get_temp_str(),
+            "lightinfo": self.light.get_info_str(),
+        }
+        self.inkdisp.clear()
+        self.inkdisp.apply_info(disp_info)
+        self.inkdisp.update()
+
+
+if __name__ == "__main__":
+    verbose = True
+    os = OS(verbose)
+    os.run()
