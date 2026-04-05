@@ -15,6 +15,7 @@ from led import LED
 from dac import DAC
 from probe import Probe
 from light import Light
+from micro_sd import MicroSD
 
 # time.sleep(5)  # to ensure serial connection does not fail
 
@@ -39,7 +40,8 @@ class OS(FSM):
         self.sensor = HTSensor(i2c, address=0x45, units=0)
         self.dac = DAC(i2c)
         self.probe_0 = Probe(ow_bus, 0)
-        self.probe_1 = Probe(ow_bus, 1)
+        # self.probe_1 = Probe(ow_bus, 1)
+        # self.micro_sd = MicroSD(spi, cs=board.GP20)
         self.light = Light(
             self.clock,
             start_time=8.0,
@@ -114,12 +116,12 @@ class OS(FSM):
             "humidity": self.sensor.get_humidity(),
             "meridiem": self.clock.get_meridiem_str(),
             "probe_0_temp": self.probe_0.get_temp_str(),
-            "probe_1_temp": self.probe_1.get_temp_str(),
+            # "probe_1_temp": self.probe_1.get_temp_str(),
             "lightinfo": self.light.get_info_str(),
         }
-        self.inkdisp.clear()
-        self.inkdisp.apply_info(disp_info)
-        self.inkdisp.update()
+        self.disp.clear()
+        self.disp.apply_info(disp_info)
+        self.disp.update()
 
 
 if __name__ == "__main__":

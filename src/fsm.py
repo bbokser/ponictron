@@ -38,14 +38,13 @@ class Alarming(State):
         self.f.clock.alarm2.log_start()
 
     def execute(self):
-        rf_input = self.f.rf.update()
-        self.f.as1115.display_hourmin(self.f.clock.get_hour(), self.f.clock.get_min())
+        b_enter = self.f.b_enter
+        self.f.disp.display_hourmin(self.f.clock.get_hour(), self.f.clock.get_min())
         self.f.buzzer.play(amp=1, on=self.f.heartbeat)
 
-        if (
-            self.f.clock.alarm1.get_status(rf_input) == False
-            and self.f.clock.alarm2.get_status(rf_input) == False
-        ):
+        if not self.f.clock.alarm1.get_status(
+            b_enter
+        ) and not self.f.clock.alarm2.get_status(b_enter):
             self.f.to_transition("toDefault")
 
     def exit(self):
@@ -60,19 +59,17 @@ class Default(State):
         self.display_hourmin = self.display_hourmin_24hr
 
     def enter(self):
-        # prevent from getting stuck in no-decode mode
-        self.f.as1115.enable_decode()
-        self.f.seg_colon.on()
+        self.f.disp.set_colon_on()
         if self.f.format == 0:
             self.display_hourmin = self.display_hourmin_24hr
         else:
             self.display_hourmin = self.display_hourmin_12hr
 
     def display_hourmin_24hr(self):
-        self.f.as1115.display_hourmin(self.f.clock.get_hour(), self.f.clock.get_min())
+        self.f.disp.display_hourmin(self.f.clock.get_hour(), self.f.clock.get_min())
 
     def display_hourmin_12hr(self):
-        self.f.as1115.display_hourmin(
+        self.f.disp.display_hourmin(
             self.f.clock.get_hour() % 12, self.f.clock.get_min()
         )
 
@@ -80,24 +77,15 @@ class Default(State):
         self.execute_default()
         self.display_hourmin()
 
-        if self.f.b_set_date == True:
-            if not self.f.rf._get_button():
-                self.f.to_transition("toSetYear")
-            else:
-                self.f.buzzer.play_error_tone()
-        elif self.f.b_set_time == True:
-            if not self.f.rf._get_button():
-                self.f.to_transition("toSetHour")
-            else:
-                self.f.buzzer.play_error_tone()
-        elif self.f.b_set_alarm == True:
-            if not self.f.rf._get_button():
-                self.f.to_transition("toSetAlarm1Hour")
-            else:
-                self.f.buzzer.play_error_tone()
-        elif self.f.b_set_brightness == True:
+        if self.f.b_set_date:
+            self.f.to_transition("toSetYear")
+        elif self.f.b_set_time:
+            self.f.to_transition("toSetHour")
+        elif self.f.b_set_alarm:
+            self.f.to_transition("toSetAlarm1Hour")
+        elif self.f.b_set_brightness:
             self.f.to_transition("toSetBrightness")
-        elif self.f.b_options == True:
+        elif self.f.b_options:
             self.f.to_transition("toSetUnits")
         else:
             pass
@@ -108,7 +96,7 @@ class SetYear(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.seg_colon.off()
+        self.f.disp.set_colon_off()
         self.f.year = self.f.clock.get_year()
         self.f.month = self.f.clock.get_month()
         self.f.day = self.f.clock.get_day()
@@ -119,13 +107,13 @@ class SetYear(State):
         self.f.year_new = utils.wrap_to_range(
             self.f.year + self.f.encoder.get_encoder_pos(), a=1970, b=2037
         )
-        self.f.as1115.display_int(self.f.year_new)
-        self.f.as1115.wink_left(self.f.heartbeat)
-        self.f.as1115.wink_right(self.f.heartbeat)
+        self.f.disp.display_int(self.f.year_new)
+        self.f.disp.wink_left(self.f.heartbeat)
+        self.f.disp.wink_right(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.to_transition("toSetMonth")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
         else:
             pass
@@ -143,12 +131,12 @@ class SetMonth(State):
         self.f.month_new = utils.wrap_to_range(
             self.f.month + self.f.encoder.get_encoder_pos(), a=1, b=12
         )
-        self.f.as1115.display_hourmin(self.f.month_new, self.f.day)
-        self.f.as1115.wink_left(self.f.heartbeat)
+        self.f.disp.display_hourmin(self.f.month_new, self.f.day)
+        self.f.disp.wink_left(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.to_transition("toSetDay")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
         else:
             pass
@@ -167,16 +155,16 @@ class SetDay(State):
         self.f.day_new = utils.wrap_to_range(
             self.f.day + self.f.encoder.get_encoder_pos(), a=1, b=day_max
         )
-        self.f.as1115.display_hourmin(self.f.month_new, self.f.day_new)
-        self.f.as1115.wink_right(self.f.heartbeat)
+        self.f.disp.display_hourmin(self.f.month_new, self.f.day_new)
+        self.f.disp.wink_right(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.clock.set_date(
                 year=self.f.year_new, month=self.f.month_new, day=self.f.day_new
             )
             self.f.update_disp()
             self.f.to_transition("toDefault")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
         else:
             pass
@@ -194,12 +182,12 @@ class SetHour(State):
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.as1115.display_hourmin(self.f.hour_new, self.f.minute)
-        self.f.as1115.wink_left(self.f.heartbeat)
+        self.f.disp.display_hourmin(self.f.hour_new, self.f.minute)
+        self.f.disp.wink_left(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.to_transition("toSetMin")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
         else:
             pass
@@ -215,14 +203,14 @@ class SetMin(State):
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        self.f.as1115.display_hourmin(self.f.hour_new, self.f.min_new)
-        self.f.as1115.wink_right(self.f.heartbeat)
+        self.f.disp.display_hourmin(self.f.hour_new, self.f.min_new)
+        self.f.disp.wink_right(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.clock.set_time(hour=self.f.hour_new, min=self.f.min_new)
             self.f.update_disp()
             self.f.to_transition("toDefault")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
         else:
             pass
@@ -250,16 +238,16 @@ class SetAlarmHour(State):
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.as1115.display_hourmin(self.f.hour_new, self.f.minute)
-        self.f.as1115.wink_left(self.f.heartbeat)
+        self.f.disp.display_hourmin(self.f.hour_new, self.f.minute)
+        self.f.disp.wink_left(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.to_transition(self.transition)
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.alarm.disable()
             self.f.update_disp()
             self.f.to_transition("toDefault")
-        elif self.f.b_set_alarm == True and self.transition_alt is not None:
+        elif self.f.b_set_alarm and self.transition_alt is not None:
             self.f.to_transition(self.transition_alt)
 
 
@@ -281,12 +269,12 @@ class SetAlarmMin(State):
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        self.f.as1115.display_hourmin(self.f.hour_new, self.f.min_new)
-        self.f.as1115.wink_right(self.f.heartbeat)
+        self.f.disp.display_hourmin(self.f.hour_new, self.f.min_new)
+        self.f.disp.wink_right(self.f.heartbeat)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.to_transition(self.transition)
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.alarm.disable()
             self.f.update_disp()
             self.f.to_transition("toDefault")
@@ -300,7 +288,7 @@ class SetAlarmWdays(State):
         self.transition = transition
 
     def enter(self):
-        self.f.seg_colon.off()
+        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         if self.wday_idx == 0:
             self.f.wday_set_new = list(self.alarm.wday_set)
@@ -310,20 +298,20 @@ class SetAlarmWdays(State):
         self.f.wday_set_new[self.wday_idx] = (
             self.alarm.wday_set[self.wday_idx] + self.f.encoder.get_encoder_pos()
         ) % 2
-        self.f.as1115.display_wday_set(
+        self.f.disp.display_wday_set(
             wday_set=self.f.wday_set_new,
             blink_pos=self.wday_idx,
             blink_bool=self.f.heartbeat,
         )
-        if self.f.b_enter == True and self.wday_idx >= 6:
+        if self.f.b_enter and self.wday_idx >= 6:
             self.alarm.set_alarm(
                 hour=self.f.hour_new, min=self.f.min_new, wday_set=self.f.wday_set_new
             )
             self.f.update_disp()
             self.f.to_transition("toDefault")
-        elif self.f.b_enter == True and self.wday_idx < 6:
+        elif self.f.b_enter and self.wday_idx < 6:
             self.f.to_transition(self.transition)
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.clock.alarm1.disable()
             self.f.to_transition("toDefault")
 
@@ -333,24 +321,22 @@ class SetBrightness(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.seg_colon.off()
+        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
-        self.f.brightness_original = self.f.as1115.brightness
+        self.f.brightness_original = self.f.disp.brightness
 
     def execute(self):
         self.execute_default()
         # minimum of 1 to prevent blinking from doing nothing
-        self.f.as1115.brightness = utils.wrap_to_range(
+        self.f.disp.brightness = utils.wrap_to_range(
             self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
         )
-        self.f.as1115.display_int(self.f.as1115.brightness)
-        self.f.seg_colon.set_brightness(self.f.as1115.brightness / 15)
-        self.f.seg_apost.set_brightness(self.f.as1115.brightness / 15)
+        self.f.disp.display_int(self.f.disp.brightness)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.to_transition("toDefault")
-        elif self.f.b_back == True:
-            self.f.as1115.brightness = self.f.brightness_original
+        elif self.f.b_back:
+            self.f.disp.brightness = self.f.brightness_original
             self.f.to_transition("toDefault")
 
 
@@ -359,7 +345,7 @@ class SetUnits(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.seg_colon.off()
+        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         self.f.units_new = self.f.sensor.units
 
@@ -367,17 +353,17 @@ class SetUnits(State):
         self.execute_default()
         self.f.units_new = (self.f.sensor.units + self.f.encoder.get_encoder_pos()) % 2
         if self.f.units_new == 0:
-            self.f.as1115.display_letter("C")
+            self.f.disp.display_letter("C")
         else:
-            self.f.as1115.display_letter("F")
-        self.f.as1115.wink_right(self.f.heartbeat)
-        if self.f.b_enter == True:
+            self.f.disp.display_letter("F")
+        self.f.disp.wink_right(self.f.heartbeat)
+        if self.f.b_enter:
             self.f.sensor.change_units(self.f.units_new)
             self.f.update_disp()
             self.f.to_transition("toDefault")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
-        elif self.f.b_options == True:
+        elif self.f.b_options:
             self.f.to_transition("toSetPitch")
 
 
@@ -386,8 +372,7 @@ class SetPitch(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.as1115.enable_decode()
-        self.f.seg_colon.off()
+        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         self.f.pitch_new = self.f.buzzer.pitch
 
@@ -400,15 +385,15 @@ class SetPitch(State):
             )
             * 50
         )
-        self.f.as1115.display_int(self.f.pitch_new)
+        self.f.disp.display_int(self.f.pitch_new)
         self.f.buzzer.play(amp=0.25, pitch=self.f.pitch_new)
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.buzzer.pitch = self.f.pitch_new
             self.f.to_transition("toDefault")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
-        elif self.f.b_options == True:
+        elif self.f.b_options:
             self.f.to_transition("toSetTimeFormat")
 
     def exit(self):
@@ -420,7 +405,7 @@ class SetTimeFormat(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.seg_colon.off()
+        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         self.f.format_new = self.f.format
 
@@ -428,18 +413,18 @@ class SetTimeFormat(State):
         self.execute_default()
         self.f.format_new = (self.f.format + self.f.encoder.get_encoder_pos()) % 2
         if self.f.format_new == 0:
-            self.f.as1115.display_24hr()
+            self.f.disp.display_24hr()
         else:
-            self.f.as1115.display_12hr()
+            self.f.disp.display_12hr()
 
-        if self.f.b_enter == True:
+        if self.f.b_enter:
             self.f.format = self.f.format_new
             self.f.clock.alarm1.change_format(self.f.format)
             self.f.clock.alarm2.change_format(self.f.format)
             self.f.clock.change_format(self.f.format)
             self.f.update_disp()
             self.f.to_transition("toDefault")
-        elif self.f.b_back == True:
+        elif self.f.b_back:
             self.f.to_transition("toDefault")
 
 
@@ -561,7 +546,7 @@ class FSM:
     def execute(self):
         if self.trans:
             # prevents seg disp from getting stuck in a wink/blink
-            self.as1115.unwink()
+            self.disp.unwink()
 
             self.curState.exit()
             if self.verbose is True:

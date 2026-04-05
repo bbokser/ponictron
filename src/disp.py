@@ -5,7 +5,7 @@ import utils
 # from ulab import numpy as np
 import displayio
 import vectorio
-
+from fourwire import FourWire
 import adafruit_ili9341
 import supervisor
 from adafruit_display_shapes.rect import Rect
@@ -24,7 +24,7 @@ class Disp:
     def __init__(self, spi, cs, dc, reset):
 
         # epd_busy = board.GP16
-        display_bus = displayio.FourWire(
+        display_bus = FourWire(
             spi, command=dc, chip_select=cs, reset=reset, baudrate=1000000
         )
         display = adafruit_ili9341.ILI9341(display_bus, width=320, height=240)
@@ -110,18 +110,14 @@ class Disp:
             x=col_1,
             y=row_3,
         )
-        self.draw_bmp("/bmps/alarm1.bmp", x=col_1, y=row_4 - offset_icon)
+        self.draw_bmp("/bmps/temp.bmp", x=col_1, y=row_4 - offset_icon)
         self.draw_text(
-            text=info["alarm1"] + " " + info["alarm1wdays"],
+            text=info["probe_0_temp"],
             x=col_1 + offset_txt,
             y=row_4,
         )
 
         self.draw_bmp("/bmps/elec.bmp", x=col_2, y=row_1 - offset_icon)
-        if info["usb"]:
-            self.draw_text(text="USB", x=col_2 + offset_txt, y=row_1)
-        else:
-            self.draw_battery(frac=info["batt"], x=col_2 + offset_txt, y=0)
 
         self.draw_bmp("/bmps/temp.bmp", x=col_2, y=row_2 - offset_icon)
         self.draw_text(text=info["temp"], x=col_2 + offset_txt, y=row_2)
@@ -129,37 +125,13 @@ class Disp:
         self.draw_bmp("/bmps/humidity.bmp", x=col_2, y=row_3 - offset_icon)
         self.draw_text(text=info["humidity"] + " %", x=col_2 + offset_txt, y=row_3)
 
-        self.draw_bmp("/bmps/alarm2.bmp", x=col_1, y=row_5 - offset_icon)
+        self.draw_bmp("/bmps/elec.bmp", x=col_1, y=row_5 - offset_icon)
         self.draw_text(
-            text=info["alarm2"] + " " + info["alarm2wdays"],
+            text=info["lightinfo"],
             x=col_1 + offset_txt,
             y=row_5,
         )
         return None
-
-    def draw_battery(self, frac, x, y):
-        frac = utils.clip(frac, 0, 1)
-        clearance = 2
-        height = 20
-        width_max = 40
-        case = Rect(x, y, width_max, height, fill=None, outline=utils.colors["black"])
-        fill = Rect(
-            x + clearance,
-            y + clearance,
-            int(frac * width_max) - clearance * 2,
-            height - clearance * 2,
-            fill=utils.colors["black"],
-        )
-        nub = Rect(
-            x + width_max,
-            y + int(height / 4),
-            5,
-            int(height / 2),
-            fill=utils.colors["black"],
-        )
-        self.g.append(case)
-        self.g.append(fill)
-        self.g.append(nub)
 
     def draw_polygon(self, points: list, color: str):
         """
