@@ -77,18 +77,18 @@ class Default(State):
         self.execute_default()
         self.display_hourmin()
 
-        if self.f.b_set_date:
-            self.f.to_transition("toSetYear")
-        elif self.f.b_set_time:
-            self.f.to_transition("toSetHour")
-        elif self.f.b_set_alarm:
-            self.f.to_transition("toSetAlarm1Hour")
-        elif self.f.b_set_brightness:
-            self.f.to_transition("toSetBrightness")
-        elif self.f.b_options:
-            self.f.to_transition("toSetUnits")
-        else:
-            pass
+        # if self.f.b_set_date:
+        #     self.f.to_transition("toSetYear")
+        # elif self.f.b_set_time:
+        #     self.f.to_transition("toSetHour")
+        # elif self.f.b_set_alarm:
+        #     self.f.to_transition("toSetAlarm1Hour")
+        # elif self.f.b_set_brightness:
+        #     self.f.to_transition("toSetBrightness")
+        # elif self.f.b_options:
+        #     self.f.to_transition("toSetUnits")
+        # else:
+        #     pass
 
 
 class SetYear(State):
@@ -162,7 +162,6 @@ class SetDay(State):
             self.f.clock.set_date(
                 year=self.f.year_new, month=self.f.month_new, day=self.f.day_new
             )
-            self.f.update_disp()
             self.f.to_transition("toDefault")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
@@ -208,7 +207,6 @@ class SetMin(State):
 
         if self.f.b_enter:
             self.f.clock.set_time(hour=self.f.hour_new, min=self.f.min_new)
-            self.f.update_disp()
             self.f.to_transition("toDefault")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
@@ -245,7 +243,6 @@ class SetAlarmHour(State):
             self.f.to_transition(self.transition)
         elif self.f.b_back:
             self.alarm.disable()
-            self.f.update_disp()
             self.f.to_transition("toDefault")
         elif self.f.b_set_alarm and self.transition_alt is not None:
             self.f.to_transition(self.transition_alt)
@@ -276,7 +273,6 @@ class SetAlarmMin(State):
             self.f.to_transition(self.transition)
         elif self.f.b_back:
             self.alarm.disable()
-            self.f.update_disp()
             self.f.to_transition("toDefault")
 
 
@@ -307,7 +303,6 @@ class SetAlarmWdays(State):
             self.alarm.set_alarm(
                 hour=self.f.hour_new, min=self.f.min_new, wday_set=self.f.wday_set_new
             )
-            self.f.update_disp()
             self.f.to_transition("toDefault")
         elif self.f.b_enter and self.wday_idx < 6:
             self.f.to_transition(self.transition)
@@ -359,7 +354,6 @@ class SetUnits(State):
         self.f.disp.wink_right(self.f.heartbeat)
         if self.f.b_enter:
             self.f.sensor.change_units(self.f.units_new)
-            self.f.update_disp()
             self.f.to_transition("toDefault")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
@@ -422,7 +416,6 @@ class SetTimeFormat(State):
             self.f.clock.alarm1.change_format(self.f.format)
             self.f.clock.alarm2.change_format(self.f.format)
             self.f.clock.change_format(self.f.format)
-            self.f.update_disp()
             self.f.to_transition("toDefault")
         elif self.f.b_back:
             self.f.to_transition("toDefault")

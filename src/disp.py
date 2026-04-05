@@ -27,7 +27,9 @@ class Disp:
         display_bus = FourWire(
             spi, command=dc, chip_select=cs, reset=reset, baudrate=1000000
         )
-        display = adafruit_ili9341.ILI9341(display_bus, width=320, height=240)
+        display = adafruit_ili9341.ILI9341(
+            display_bus, width=320, height=240, rotation=180
+        )
 
         # create displayio group
         g = displayio.Group()
@@ -49,28 +51,32 @@ class Disp:
         self.color_list = color_list
         # change this to match the smaller font size
         self.size_font_small = 24
+        # TODO: implement brightness
+        self.brightness = 1
 
-    def clear(self):
+    def clear(self) -> None:
         # clear the group
         self.g = displayio.Group()
 
-    def update(self):
+    def update(self) -> None:
         # Add the Group to the Display
         self.display.root_group = self.g
         self.display.refresh()
 
-    def get_idx(self, color: str):
+    def get_idx(self, color: str) -> int:
         """
         Convert color name to index
         """
         return self.color_names.index(color)
 
-    def draw_bmp(self, path: str, x: int, y: int):
+    def draw_bmp(self, path: str, x: int, y: int) -> None:
         odb = displayio.OnDiskBitmap(path)
         image = displayio.TileGrid(odb, pixel_shader=odb.pixel_shader, x=x, y=y)
         self.g.append(image)
 
-    def draw_text(self, text: str, x: int, y: int, color: str = "black", opt: int = 1):
+    def draw_text(
+        self, text: str, x: int, y: int, color: str = "black", opt: int = 1
+    ) -> None:
         # display = self.display
         # lbl = Label(terminalio.FONT, text=text, color=utils.colors[color], scale=scale)
         if opt == 1:
@@ -85,7 +91,37 @@ class Disp:
         self.g.append(lbl)
         return None
 
-    def apply_info(self, info: dict):
+    def set_colon_off(self) -> None:
+        pass
+
+    def set_colon_on(self) -> None:
+        pass
+
+    def display_int(self, year: int) -> None:
+        pass
+
+    def wink_left(self, wink_bool: bool) -> None:
+        pass
+
+    def wink_right(self, wink_bool: bool) -> None:
+        pass
+
+    def display_hourmin(self, month: int, day: int) -> None:
+        pass
+
+    def display_wday_set(self, wday_set, blink_pos: int, blink_bool: bool) -> None:
+        pass
+
+    def display_letter(self, letter: str) -> None:
+        pass
+
+    def display_24hr(self) -> None:
+        pass
+
+    def display_12hr(self) -> None:
+        pass
+
+    def apply_info(self, info: dict) -> None:
         display = self.display
         self.draw_bg(color="white")
         x_center = display.width // 2
@@ -133,7 +169,7 @@ class Disp:
         )
         return None
 
-    def draw_polygon(self, points: list, color: str):
+    def draw_polygon(self, points: list, color: str) -> None:
         """
         p = palette
         points = list of tuples e.g. [(1, 2), (2, 2), (3, 4), (5, 6)]
@@ -149,7 +185,7 @@ class Disp:
         self.g.append(polygon)
         return None
 
-    def draw_bg(self, color: str):
+    def draw_bg(self, color: str) -> None:
         """
         draw background
         """
