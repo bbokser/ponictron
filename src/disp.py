@@ -67,8 +67,8 @@ class Disp:
 
         row_step_size = self.size_font_small
         self.rows = [0] * 7
-        self.rows[0] = self.size_font_small - 6
-        for i in range(len(self.rows)):
+        self.rows[0] = self.size_font_small - 4
+        for i in range(len(self.rows) - 1):
             self.rows[i + 1] = self.rows[i] + row_step_size
 
     def clear(self) -> None:
@@ -126,6 +126,7 @@ class Disp:
         pass
 
     def display_date(self, year: str, month: str, day: str) -> None:
+        self.draw_bg(color="white")
         self.draw_text(
             year + "/" + month + "/" + day,
             x=self.display.width // 2,
@@ -134,6 +135,7 @@ class Disp:
         )
 
     def display_hourmin(self, hour: str, minute: str) -> None:
+        self.draw_bg(color="white")
         self.draw_text(
             hour + ":" + minute,
             x=self.display.width // 2,
@@ -154,6 +156,7 @@ class Disp:
         pass
 
     def display_units(self, units: int, blink_bool: bool) -> None:
+        self.draw_bg(color="white")
         self.draw_text(
             "Units: ",
             x=self.display.width // 2,
@@ -178,6 +181,7 @@ class Disp:
             )
 
     def display_option_selection(self, option_idx: int) -> None:
+        self.draw_bg(color="white")
         x = self.display.width // 2
         for i in range(len(self.rows)):
             if i == option_idx:
@@ -206,29 +210,28 @@ class Disp:
             x=col_1,
             y=self.rows[0],
         )
-        self.draw_text(text=info["time"] + info["meridiem"], x=col_2, y=self.rows[0])
-        self.draw_bmp("/bmps/temp.bmp", x=col_1, y=self.rows[3] - offset_icon)
+        self.draw_bmp("/bmps/temp.bmp", x=col_1, y=self.rows[1] - offset_icon)
         self.draw_text(
             text=info["probe_0_temp"],
             x=col_1 + offset_txt,
-            y=self.rows[3],
+            y=self.rows[1],
         )
 
         # self.draw_bmp("/bmps/elec.bmp", x=col_2, y=row_1 - offset_icon)
 
-        self.draw_bmp("/bmps/temp.bmp", x=col_2, y=self.rows[1] - offset_icon)
-        self.draw_text(text=info["temp"], x=col_2 + offset_txt, y=self.rows[1])
+        self.draw_bmp("/bmps/temp.bmp", x=col_2, y=self.rows[0] - offset_icon)
+        self.draw_text(text=info["temp"], x=col_2 + offset_txt, y=self.rows[0])
 
-        self.draw_bmp("/bmps/humidity.bmp", x=col_2, y=self.rows[2] - offset_icon)
+        self.draw_bmp("/bmps/humidity.bmp", x=col_2, y=self.rows[1] - offset_icon)
         self.draw_text(
-            text=info["humidity"] + " %", x=col_2 + offset_txt, y=self.rows[2]
+            text=info["humidity"] + " %", x=col_2 + offset_txt, y=self.rows[1]
         )
 
-        self.draw_bmp("/bmps/elec.bmp", x=col_1, y=self.rows[4] - offset_icon)
+        self.draw_bmp("/bmps/elec.bmp", x=col_1, y=self.rows[2] - offset_icon)
         self.draw_text(
             text=info["lightinfo"],
             x=col_1 + offset_txt,
-            y=self.rows[4],
+            y=self.rows[2],
         )
         return None
 

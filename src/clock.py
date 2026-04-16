@@ -20,7 +20,7 @@ class Clock:
         self.rtc = adafruit_ds3231.DS3231(i2c)
         self.alarm1 = Alarm(rtc=self.rtc, idx=0)
         self.alarm2 = Alarm(rtc=self.rtc, idx=1)
-        self.get_time_str = self.get_time_str_24hr
+        self.get_time_str = self.get_time_str_24_hr
 
     def set_date(self, year: int, month: int, day: int):
         year = utils.clip(year, 1970, 2037)  # duct-tape Y2038 problem
@@ -109,6 +109,6 @@ class Clock:
 
     def change_format(self, format) -> None:
         if format == 0:
-            self.get_time_str = self.get_time_str_24hr
+            self.get_time_str = self.get_time_str_24_hr
         else:
-            self.get_time_str = self.get_time_str_12hr
+            self.get_time_str = self.get_time_str_12_hr

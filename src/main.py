@@ -84,7 +84,7 @@ class OS(FSM):
             self.b_enter = self.button_enc.update()
             self.b_save = self.button_2.update()
             self.b_back = self.button_1.update()
-
+            print(self.b_enter, self.b_save, self.b_back)
             self.disp.clear()
             self.execute()
             self.disp.update()

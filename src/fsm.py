@@ -74,7 +74,6 @@ class Default(State):
             "alarm2wdays": self.f.clock.alarm2.get_wday_set_str(),
             "temp": self.f.sensor.get_temperature(),
             "humidity": self.f.sensor.get_humidity(),
-            "meridiem": self.f.clock.get_meridiem_str(),
             "probe_0_temp": self.f.probe_0.get_temp_str(),
             # "probe_1_temp": self.f.probe_1.get_temp_str(),
             "lightinfo": self.f.light.get_info_str(),
@@ -221,7 +220,7 @@ class SetHour(State):
             hour_text = "  "
         else:
             hour_text = "{:d}".format(self.f.hour_new)
-        self.f.disp.display_time(hour_text, str(self.f.minute))
+        self.f.disp.display_hourmin(hour_text, str(self.f.minute))
 
         if self.f.b_enter:
             self.f.to_transition("toSetMin")
@@ -245,7 +244,7 @@ class SetMin(State):
             text = "  "
         else:
             text = "{:02d}".format(self.f.min_new)
-        self.f.disp.display_time(str(self.f.hour_new), text)
+        self.f.disp.display_hourmin(str(self.f.hour_new), text)
 
         if self.f.b_enter:
             self.f.clock.set_time(hour=self.f.hour_new, min=self.f.min_new)
@@ -481,41 +480,41 @@ class FSM:
         self.add_state(
             "set_alarm1_hour",
             SetAlarmHour,
-            alarm=self.f.clock.alarm1,
+            alarm=self.clock.alarm1,
             transition="toSetAlarm1Min",
             transition_alt="toSetAlarm2Hour",
         )
         self.add_state(
             "set_alarm1_min",
             SetAlarmMin,
-            alarm=self.f.clock.alarm1,
+            alarm=self.clock.alarm1,
             transition="toSetAlarm1Wday0",
         )
         self.add_state(
             "set_alarm2_hour",
             SetAlarmHour,
-            alarm=self.f.clock.alarm2,
+            alarm=self.clock.alarm2,
             transition="toSetAlarm2Min",
             transition_alt=None,
         )
         self.add_state(
             "set_alarm2_min",
             SetAlarmMin,
-            alarm=self.f.clock.alarm2,
+            alarm=self.clock.alarm2,
             transition="toSetAlarm2Wday0",
         )
         for i in range(7):
             self.add_state(
                 "set_alarm1_wday" + str(i),
                 SetAlarmWdays,
-                alarm=self.f.clock.alarm1,
+                alarm=self.clock.alarm1,
                 wday_idx=i,
                 transition="toSetAlarm1Wday" + str(i + 1),
             )
             self.add_state(
                 "set_alarm2_wday" + str(i),
                 SetAlarmWdays,
-                alarm=self.f.clock.alarm2,
+                alarm=self.clock.alarm2,
                 wday_idx=i,
                 transition="toSetAlarm2Wday" + str(i + 1),
             )
@@ -524,7 +523,9 @@ class FSM:
         self.add_state("set_units", SetUnits)
         self.add_state("set_pitch", SetPitch)
         self.add_state("set_time_format", SetTimeFormat)
+        self.add_state("options", Options)
 
+        self.add_transition("toOptions", Transition("options"))
         self.add_transition("toAlarming", Transition("alarming"))
         self.add_transition("toSetYear", Transition("set_year"))
         self.add_transition("toSetMonth", Transition("set_month"))
@@ -569,9 +570,6 @@ class FSM:
 
     def execute(self):
         if self.trans:
-            # prevents seg disp from getting stuck in a wink/blink
-            self.disp.unwink()
-
             self.curState.exit()
             if self.verbose is True:
                 self.curState.punch_out()
