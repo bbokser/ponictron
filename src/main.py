@@ -87,24 +87,6 @@ class OS(FSM):
 
             self.disp.clear()
             self.execute()
-            disp_info = {
-                "weekday": self.clock.get_weekday_str(),
-                "month": self.clock.get_month_str(),
-                "day": self.clock.get_day_str(),
-                "year": self.clock.get_year_str(),
-                "alarm1": self.clock.alarm1.get_str(),
-                "alarm1wdays": self.clock.alarm1.get_wday_set_str(),
-                "alarm2": self.clock.alarm2.get_str(),
-                "alarm2wdays": self.clock.alarm2.get_wday_set_str(),
-                "temp": self.sensor.get_temperature(),
-                "humidity": self.sensor.get_humidity(),
-                "meridiem": self.clock.get_meridiem_str(),
-                "probe_0_temp": self.probe_0.get_temp_str(),
-                # "probe_1_temp": self.probe_1.get_temp_str(),
-                "lightinfo": self.light.get_info_str(),
-            }
-
-            self.disp.apply_info(disp_info)
             self.disp.update()
             if j > refresh_counter:
                 if z == 0:

@@ -19,6 +19,17 @@ supervisor.runtime.autoreload = False
 
 displayio.release_displays()
 
+OPTIONS = [
+    "Year",
+    "Time",
+    "Alarm1",
+    "Alarm2",
+    "Brightness",
+    "Units",
+    "Pitch",
+    "Time Format",
+]
+
 
 class Disp:
     def __init__(self, spi, cs, dc, reset):
@@ -54,6 +65,12 @@ class Disp:
         # TODO: implement brightness
         self.brightness = 1
 
+        row_step_size = self.size_font_small
+        self.rows = [0] * 7
+        self.rows[0] = self.size_font_small - 6
+        for i in range(len(self.rows)):
+            self.rows[i + 1] = self.rows[i] + row_step_size
+
     def clear(self) -> None:
         # clear the group
         self.g = displayio.Group()
@@ -75,7 +92,13 @@ class Disp:
         self.g.append(image)
 
     def draw_text(
-        self, text: str, x: int, y: int, color: str = "black", opt: int = 1
+        self,
+        text: str,
+        x: int,
+        y: int,
+        color: str = "black",
+        opt: int = 1,
+        align: str = "left",
     ) -> None:
         # display = self.display
         # lbl = Label(terminalio.FONT, text=text, color=utils.colors[color], scale=scale)
@@ -86,7 +109,12 @@ class Disp:
         else:
             raise Exception("Invalid font")
         lbl = Label(font, text=text, color=utils.colors[color], scale=1)
-        lbl.anchor_point = (0.0, 1.0)
+        if align == "left":
+            lbl.anchor_point = (0.0, 1.0)
+        elif align == "right":
+            lbl.anchor_point = (1.0, 1.0)
+        else:
+            lbl.anchor_point = (0.5, 1.0)  # center align
         lbl.anchored_position = (x, y)  # (display.width // 2, display.height // 2)
         self.g.append(lbl)
         return None
@@ -97,8 +125,21 @@ class Disp:
     def set_colon_on(self) -> None:
         pass
 
-    def display_int(self, year: int) -> None:
-        pass
+    def display_date(self, year: str, month: str, day: str) -> None:
+        self.draw_text(
+            year + "/" + month + "/" + day,
+            x=self.display.width // 2,
+            y=self.display.height // 2,
+            align="center",
+        )
+
+    def display_hourmin(self, hour: str, minute: str) -> None:
+        self.draw_text(
+            hour + ":" + minute,
+            x=self.display.width // 2,
+            y=self.display.height // 2,
+            align="center",
+        )
 
     def wink_left(self, wink_bool: bool) -> None:
         pass
@@ -106,20 +147,43 @@ class Disp:
     def wink_right(self, wink_bool: bool) -> None:
         pass
 
-    def display_hourmin(self, month: int, day: int) -> None:
+    def display_pitch(self, pitch: int) -> None:
         pass
 
     def display_wday_set(self, wday_set, blink_pos: int, blink_bool: bool) -> None:
         pass
 
-    def display_letter(self, letter: str) -> None:
-        pass
+    def display_units(self, units: int, blink_bool: bool) -> None:
+        self.draw_text(
+            "Units: ",
+            x=self.display.width // 2,
+            y=self.display.height // 2,
+            align="right",
+        )
+        if blink_bool:
+            pass
+        elif units == 1:
+            self.draw_text(
+                "Fahrenheight",
+                x=self.display.width // 2,
+                y=self.display.height // 2,
+                align="left",
+            )
+        else:
+            self.draw_text(
+                "Celsius",
+                x=self.display.width // 2,
+                y=self.display.height // 2,
+                align="left",
+            )
 
-    def display_24hr(self) -> None:
-        pass
-
-    def display_12hr(self) -> None:
-        pass
+    def display_option_selection(self, option_idx: int) -> None:
+        x = self.display.width // 2
+        for i in range(len(self.rows)):
+            if i == option_idx:
+                self.draw_text(OPTIONS[i], x=x + 5, y=self.rows[i], align="center")
+            else:
+                self.draw_text(OPTIONS[i], x=x, y=self.rows[i], align="center")
 
     def apply_info(self, info: dict) -> None:
         display = self.display
@@ -128,44 +192,43 @@ class Disp:
 
         col_1 = 5
         col_2 = x_center + int(x_center / 4)
-        row_1 = self.size_font_small - 6
-        row_step_size = self.size_font_small
-        row_2 = row_1 + row_step_size
-        row_3 = row_2 + row_step_size
-        row_4 = row_3 + row_step_size
-        row_5 = row_4 + row_step_size
         offset_icon = 18
         offset_txt = 24
 
         self.draw_text(
-            text=info["weekday"], x=col_1, y=14 + self.size_font_small, opt=2
-        )
-        self.draw_text(text=info["meridiem"], x=int(3 * x_center / 4), y=row_2)
-        self.draw_text(
-            text=info["month"] + " " + info["day"] + " " + info["year"],
+            text=info["weekday"]
+            + ", "
+            + info["month"]
+            + " "
+            + info["day"]
+            + " "
+            + info["year"],
             x=col_1,
-            y=row_3,
+            y=self.rows[0],
         )
-        self.draw_bmp("/bmps/temp.bmp", x=col_1, y=row_4 - offset_icon)
+        self.draw_text(text=info["time"] + info["meridiem"], x=col_2, y=self.rows[0])
+        self.draw_bmp("/bmps/temp.bmp", x=col_1, y=self.rows[3] - offset_icon)
         self.draw_text(
             text=info["probe_0_temp"],
             x=col_1 + offset_txt,
-            y=row_4,
+            y=self.rows[3],
         )
 
-        self.draw_bmp("/bmps/elec.bmp", x=col_2, y=row_1 - offset_icon)
+        # self.draw_bmp("/bmps/elec.bmp", x=col_2, y=row_1 - offset_icon)
 
-        self.draw_bmp("/bmps/temp.bmp", x=col_2, y=row_2 - offset_icon)
-        self.draw_text(text=info["temp"], x=col_2 + offset_txt, y=row_2)
+        self.draw_bmp("/bmps/temp.bmp", x=col_2, y=self.rows[1] - offset_icon)
+        self.draw_text(text=info["temp"], x=col_2 + offset_txt, y=self.rows[1])
 
-        self.draw_bmp("/bmps/humidity.bmp", x=col_2, y=row_3 - offset_icon)
-        self.draw_text(text=info["humidity"] + " %", x=col_2 + offset_txt, y=row_3)
+        self.draw_bmp("/bmps/humidity.bmp", x=col_2, y=self.rows[2] - offset_icon)
+        self.draw_text(
+            text=info["humidity"] + " %", x=col_2 + offset_txt, y=self.rows[2]
+        )
 
-        self.draw_bmp("/bmps/elec.bmp", x=col_1, y=row_5 - offset_icon)
+        self.draw_bmp("/bmps/elec.bmp", x=col_1, y=self.rows[4] - offset_icon)
         self.draw_text(
             text=info["lightinfo"],
             x=col_1 + offset_txt,
-            y=row_5,
+            y=self.rows[4],
         )
         return None
 

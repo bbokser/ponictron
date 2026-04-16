@@ -56,39 +56,69 @@ class Alarming(State):
 class Default(State):
     def __init__(self, fsm, name):
         super().__init__(fsm, name)
-        self.display_hourmin = self.display_hourmin_24hr
 
     def enter(self):
-        self.f.disp.set_colon_on()
-        if self.f.format == 0:
-            self.display_hourmin = self.display_hourmin_24hr
-        else:
-            self.display_hourmin = self.display_hourmin_12hr
-
-    def display_hourmin_24hr(self):
-        self.f.disp.display_hourmin(self.f.clock.get_hour(), self.f.clock.get_min())
-
-    def display_hourmin_12hr(self):
-        self.f.disp.display_hourmin(
-            self.f.clock.get_hour() % 12, self.f.clock.get_min()
-        )
+        pass
 
     def execute(self):
         self.execute_default()
-        self.display_hourmin()
+        disp_info = {
+            "time": self.f.clock.get_time_str(),
+            "weekday": self.f.clock.get_weekday_str(),
+            "month": self.f.clock.get_month_str(),
+            "day": self.f.clock.get_day_str(),
+            "year": self.f.clock.get_year_str(),
+            "alarm1": self.f.clock.alarm1.get_str(),
+            "alarm1wdays": self.f.clock.alarm1.get_wday_set_str(),
+            "alarm2": self.f.clock.alarm2.get_str(),
+            "alarm2wdays": self.f.clock.alarm2.get_wday_set_str(),
+            "temp": self.f.sensor.get_temperature(),
+            "humidity": self.f.sensor.get_humidity(),
+            "meridiem": self.f.clock.get_meridiem_str(),
+            "probe_0_temp": self.f.probe_0.get_temp_str(),
+            # "probe_1_temp": self.f.probe_1.get_temp_str(),
+            "lightinfo": self.f.light.get_info_str(),
+        }
+        self.f.disp.apply_info(disp_info)
+        if self.f.b_save:
+            self.f.to_transition("toOptions")
+        else:
+            pass
 
-        # if self.f.b_set_date:
-        #     self.f.to_transition("toSetYear")
-        # elif self.f.b_set_time:
-        #     self.f.to_transition("toSetHour")
-        # elif self.f.b_set_alarm:
-        #     self.f.to_transition("toSetAlarm1Hour")
-        # elif self.f.b_set_brightness:
-        #     self.f.to_transition("toSetBrightness")
-        # elif self.f.b_options:
-        #     self.f.to_transition("toSetUnits")
-        # else:
-        #     pass
+
+class Options(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+        self.n_options = 4
+
+    def enter(self):
+        self.f.encoder.rezero()
+        self.option_idx = 0
+
+    def execute(self):
+        self.execute_default()
+        self.option_idx = utils.wrap_to_range(
+            self.f.encoder.get_encoder_pos(), 0, self.n_options
+        )
+        self.f.disp.display_option_selection(self.option_idx)
+        if self.f.b_enter and self.option_idx == 0:
+            self.f.to_transition("toSetYear")
+        elif self.f.b_enter and self.option_idx == 1:
+            self.f.to_transition("toSetHour")
+        elif self.f.b_enter and self.option_idx == 2:
+            self.f.to_transition("toSetAlarm1Hour")
+        elif self.f.b_enter and self.option_idx == 3:
+            self.f.to_transition("toSetAlarm2Hour")
+        elif self.f.b_enter and self.option_idx == 4:
+            self.f.to_transition("toSetBrightness")
+        elif self.f.b_enter and self.option_idx == 5:
+            self.f.to_transition("toSetUnits")
+        elif self.f.b_enter and self.option_idx == 6:
+            self.f.to_transition("toSetPitch")
+        elif self.f.b_enter and self.option_idx == 7:
+            self.f.to_transition("toSetTimeFormat")
+        elif self.f.b_back:
+            self.f.to_transition("toDefault")
 
 
 class SetYear(State):
@@ -96,7 +126,6 @@ class SetYear(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.disp.set_colon_off()
         self.f.year = self.f.clock.get_year()
         self.f.month = self.f.clock.get_month()
         self.f.day = self.f.clock.get_day()
@@ -107,9 +136,11 @@ class SetYear(State):
         self.f.year_new = utils.wrap_to_range(
             self.f.year + self.f.encoder.get_encoder_pos(), a=1970, b=2037
         )
-        self.f.disp.display_int(self.f.year_new)
-        self.f.disp.wink_left(self.f.heartbeat)
-        self.f.disp.wink_right(self.f.heartbeat)
+        if self.f.heartbeat:
+            year_text = "    "
+        else:
+            year_text = str(self.f.year_new)
+        self.f.disp.display_date(year_text, str(self.f.month), str(self.f.day))
 
         if self.f.b_enter:
             self.f.to_transition("toSetMonth")
@@ -131,8 +162,11 @@ class SetMonth(State):
         self.f.month_new = utils.wrap_to_range(
             self.f.month + self.f.encoder.get_encoder_pos(), a=1, b=12
         )
-        self.f.disp.display_hourmin(self.f.month_new, self.f.day)
-        self.f.disp.wink_left(self.f.heartbeat)
+        if self.f.heartbeat:
+            month_text = "  "
+        else:
+            month_text = str(self.f.month_new)
+        self.f.disp.display_date(str(self.f.year_new), month_text, str(self.f.day))
 
         if self.f.b_enter:
             self.f.to_transition("toSetDay")
@@ -155,9 +189,11 @@ class SetDay(State):
         self.f.day_new = utils.wrap_to_range(
             self.f.day + self.f.encoder.get_encoder_pos(), a=1, b=day_max
         )
-        self.f.disp.display_hourmin(self.f.month_new, self.f.day_new)
-        self.f.disp.wink_right(self.f.heartbeat)
-
+        if self.f.heartbeat:
+            day_text = "  "
+        else:
+            day_text = str(self.f.day_new)
+        self.f.disp.display_date(str(self.f.year_new), str(self.f.month_new), day_text)
         if self.f.b_enter:
             self.f.clock.set_date(
                 year=self.f.year_new, month=self.f.month_new, day=self.f.day_new
@@ -181,8 +217,11 @@ class SetHour(State):
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.display_hourmin(self.f.hour_new, self.f.minute)
-        self.f.disp.wink_left(self.f.heartbeat)
+        if self.f.heartbeat:
+            hour_text = "  "
+        else:
+            hour_text = "{:d}".format(self.f.hour_new)
+        self.f.disp.display_time(hour_text, str(self.f.minute))
 
         if self.f.b_enter:
             self.f.to_transition("toSetMin")
@@ -202,8 +241,11 @@ class SetMin(State):
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        self.f.disp.display_hourmin(self.f.hour_new, self.f.min_new)
-        self.f.disp.wink_right(self.f.heartbeat)
+        if self.f.heartbeat:
+            text = "  "
+        else:
+            text = "{:02d}".format(self.f.min_new)
+        self.f.disp.display_time(str(self.f.hour_new), text)
 
         if self.f.b_enter:
             self.f.clock.set_time(hour=self.f.hour_new, min=self.f.min_new)
@@ -284,7 +326,6 @@ class SetAlarmWdays(State):
         self.transition = transition
 
     def enter(self):
-        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         if self.wday_idx == 0:
             self.f.wday_set_new = list(self.alarm.wday_set)
@@ -299,7 +340,7 @@ class SetAlarmWdays(State):
             blink_pos=self.wday_idx,
             blink_bool=self.f.heartbeat,
         )
-        if self.f.b_enter and self.wday_idx >= 6:
+        if self.f.b_save:
             self.alarm.set_alarm(
                 hour=self.f.hour_new, min=self.f.min_new, wday_set=self.f.wday_set_new
             )
@@ -316,7 +357,6 @@ class SetBrightness(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         self.f.brightness_original = self.f.disp.brightness
 
@@ -340,25 +380,19 @@ class SetUnits(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.disp.set_colon_off()
+
         self.f.encoder.rezero()
         self.f.units_new = self.f.sensor.units
 
     def execute(self):
         self.execute_default()
         self.f.units_new = (self.f.sensor.units + self.f.encoder.get_encoder_pos()) % 2
-        if self.f.units_new == 0:
-            self.f.disp.display_letter("C")
-        else:
-            self.f.disp.display_letter("F")
-        self.f.disp.wink_right(self.f.heartbeat)
+        self.f.disp.display_units(self.f.units_new, self.f.heartbeat)
         if self.f.b_enter:
             self.f.sensor.change_units(self.f.units_new)
             self.f.to_transition("toDefault")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
-        elif self.f.b_options:
-            self.f.to_transition("toSetPitch")
 
 
 class SetPitch(State):
@@ -366,7 +400,6 @@ class SetPitch(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.disp.set_colon_off()
         self.f.encoder.rezero()
         self.f.pitch_new = self.f.buzzer.pitch
 
@@ -379,7 +412,7 @@ class SetPitch(State):
             )
             * 50
         )
-        self.f.disp.display_int(self.f.pitch_new)
+        self.f.disp.display_pitch(self.f.pitch_new)
         self.f.buzzer.play(amp=0.25, pitch=self.f.pitch_new)
 
         if self.f.b_enter:
@@ -387,8 +420,6 @@ class SetPitch(State):
             self.f.to_transition("toDefault")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
-        elif self.f.b_options:
-            self.f.to_transition("toSetTimeFormat")
 
     def exit(self):
         self.f.buzzer.shutoff()
@@ -399,7 +430,7 @@ class SetTimeFormat(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        self.f.disp.set_colon_off()
+
         self.f.encoder.rezero()
         self.f.format_new = self.f.format
 
@@ -450,41 +481,41 @@ class FSM:
         self.add_state(
             "set_alarm1_hour",
             SetAlarmHour,
-            alarm=self.clock.alarm1,
+            alarm=self.f.clock.alarm1,
             transition="toSetAlarm1Min",
             transition_alt="toSetAlarm2Hour",
         )
         self.add_state(
             "set_alarm1_min",
             SetAlarmMin,
-            alarm=self.clock.alarm1,
+            alarm=self.f.clock.alarm1,
             transition="toSetAlarm1Wday0",
         )
         self.add_state(
             "set_alarm2_hour",
             SetAlarmHour,
-            alarm=self.clock.alarm2,
+            alarm=self.f.clock.alarm2,
             transition="toSetAlarm2Min",
             transition_alt=None,
         )
         self.add_state(
             "set_alarm2_min",
             SetAlarmMin,
-            alarm=self.clock.alarm2,
+            alarm=self.f.clock.alarm2,
             transition="toSetAlarm2Wday0",
         )
         for i in range(7):
             self.add_state(
                 "set_alarm1_wday" + str(i),
                 SetAlarmWdays,
-                alarm=self.clock.alarm1,
+                alarm=self.f.clock.alarm1,
                 wday_idx=i,
                 transition="toSetAlarm1Wday" + str(i + 1),
             )
             self.add_state(
                 "set_alarm2_wday" + str(i),
                 SetAlarmWdays,
-                alarm=self.clock.alarm2,
+                alarm=self.f.clock.alarm2,
                 wday_idx=i,
                 transition="toSetAlarm2Wday" + str(i + 1),
             )

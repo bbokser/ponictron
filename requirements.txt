@@ -8,7 +8,6 @@ adafruit_display_shapes
 adafruit_display_text
 adafruit_register
 font_ostrich_sans_black_24
-font_ostrich_sans_black_60
 adafruit_ds18x20
 adafruit_ili9341
 adafruit_mcp4725
