@@ -58,7 +58,7 @@ class Default(State):
         super().__init__(fsm, name)
 
     def enter(self):
-        pass
+        self.f.disp.switch_to_layer(self.f.disp.layer_main)
 
     def execute(self):
         self.execute_default()
@@ -78,7 +78,7 @@ class Default(State):
             # "probe_1_temp": self.f.probe_1.get_temp_str(),
             "lightinfo": self.f.light.get_info_str(),
         }
-        self.f.disp.apply_info(disp_info)
+        self.f.disp.update_layer_main(disp_info)
         if self.f.b_save:
             self.f.to_transition("toOptions")
         else:
@@ -93,13 +93,14 @@ class Options(State):
     def enter(self):
         self.f.encoder.rezero()
         self.option_idx = 0
+        self.f.disp.switch_to_layer(self.f.disp.layer_option)
 
     def execute(self):
         self.execute_default()
         self.option_idx = utils.wrap_to_range(
             self.f.encoder.get_encoder_pos(), 0, self.n_options
         )
-        self.f.disp.display_option_selection(self.option_idx)
+        self.f.disp.update_layer_option(self.option_idx)
         if self.f.b_enter and self.option_idx == 0:
             self.f.to_transition("toSetYear")
         elif self.f.b_enter and self.option_idx == 1:
@@ -129,17 +130,19 @@ class SetYear(State):
         self.f.month = self.f.clock.get_month()
         self.f.day = self.f.clock.get_day()
         self.f.encoder.rezero()
+        self.f.disp.switch_to_layer(self.f.disp.layer_date)
+        self.f.disp.month_date.text = str(self.f.month)
+        self.f.disp.day_date.text = str(self.f.day)
+        self.f.disp.year_date.color = utils.colors["green"]
+        self.f.disp.month_date.color = utils.colors["black"]
+        self.f.disp.day_date.color = utils.colors["black"]
 
     def execute(self):
         self.execute_default()
         self.f.year_new = utils.wrap_to_range(
             self.f.year + self.f.encoder.get_encoder_pos(), a=1970, b=2037
         )
-        if self.f.heartbeat:
-            year_text = "    "
-        else:
-            year_text = str(self.f.year_new)
-        self.f.disp.display_date(year_text, str(self.f.month), str(self.f.day))
+        self.f.disp.year_date.text = str(self.f.year_new)
 
         if self.f.b_enter:
             self.f.to_transition("toSetMonth")
@@ -155,17 +158,16 @@ class SetMonth(State):
 
     def enter(self):
         self.f.encoder.rezero()
+        self.f.disp.month_date.color = utils.colors["green"]
+        self.f.disp.year_date.color = utils.colors["black"]
+        self.f.disp.day_date.color = utils.colors["black"]
 
     def execute(self):
         self.execute_default()
         self.f.month_new = utils.wrap_to_range(
             self.f.month + self.f.encoder.get_encoder_pos(), a=1, b=12
         )
-        if self.f.heartbeat:
-            month_text = "  "
-        else:
-            month_text = str(self.f.month_new)
-        self.f.disp.display_date(str(self.f.year_new), month_text, str(self.f.day))
+        self.f.disp.month_date.text = str(self.f.month_new)
 
         if self.f.b_enter:
             self.f.to_transition("toSetDay")
@@ -181,6 +183,9 @@ class SetDay(State):
 
     def enter(self):
         self.f.encoder.rezero()
+        self.f.disp.day_date.color = utils.colors["green"]
+        self.f.disp.month_date.color = utils.colors["black"]
+        self.f.disp.year_date.color = utils.colors["black"]
 
     def execute(self):
         self.execute_default()
@@ -188,11 +193,7 @@ class SetDay(State):
         self.f.day_new = utils.wrap_to_range(
             self.f.day + self.f.encoder.get_encoder_pos(), a=1, b=day_max
         )
-        if self.f.heartbeat:
-            day_text = "  "
-        else:
-            day_text = str(self.f.day_new)
-        self.f.disp.display_date(str(self.f.year_new), str(self.f.month_new), day_text)
+        self.f.disp.day_date.text = str(self.f.day_new)
         if self.f.b_enter:
             self.f.clock.set_date(
                 year=self.f.year_new, month=self.f.month_new, day=self.f.day_new
@@ -212,15 +213,12 @@ class SetHour(State):
         self.f.hour = self.f.clock.get_hour()
         self.f.minute = self.f.clock.get_min()
         self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_hour(min=str(self.f.minute))
 
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        if self.f.heartbeat:
-            hour_text = "  "
-        else:
-            hour_text = "{:d}".format(self.f.hour_new)
-        self.f.disp.display_hourmin(hour_text, str(self.f.minute))
+        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
 
         if self.f.b_enter:
             self.f.to_transition("toSetMin")
@@ -236,15 +234,12 @@ class SetMin(State):
 
     def enter(self):
         self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_min(hour=str(self.f.hour_new))
 
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        if self.f.heartbeat:
-            text = "  "
-        else:
-            text = "{:02d}".format(self.f.min_new)
-        self.f.disp.display_hourmin(str(self.f.hour_new), text)
+        self.f.disp.time_min.text = "{:02d}".format(self.f.min_new)
 
         if self.f.b_enter:
             self.f.clock.set_time(hour=self.f.hour_new, min=self.f.min_new)
@@ -273,12 +268,12 @@ class SetAlarmHour(State):
         self.f.hour = self.alarm.get_hour()
         self.f.minute = self.alarm.get_min()
         self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_hour(min=str(self.f.minute))
 
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.display_hourmin(self.f.hour_new, self.f.minute)
-        self.f.disp.wink_left(self.f.heartbeat)
+        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
 
         if self.f.b_enter:
             self.f.to_transition(self.transition)
@@ -303,12 +298,12 @@ class SetAlarmMin(State):
 
     def enter(self):
         self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_min(hour=str(self.f.hour_new))
 
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        self.f.disp.display_hourmin(self.f.hour_new, self.f.min_new)
-        self.f.disp.wink_right(self.f.heartbeat)
+        self.f.disp.time_min.text = "{:02d}".format(self.f.min_new)
 
         if self.f.b_enter:
             self.f.to_transition(self.transition)
@@ -382,11 +377,12 @@ class SetUnits(State):
 
         self.f.encoder.rezero()
         self.f.units_new = self.f.sensor.units
+        self.f.disp.switch_to_layer(self.f.disp.layer_units)
 
     def execute(self):
         self.execute_default()
         self.f.units_new = (self.f.sensor.units + self.f.encoder.get_encoder_pos()) % 2
-        self.f.disp.display_units(self.f.units_new, self.f.heartbeat)
+        self.f.disp.update_layer_units(self.f.units_new)
         if self.f.b_enter:
             self.f.sensor.change_units(self.f.units_new)
             self.f.to_transition("toDefault")
