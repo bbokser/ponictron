@@ -30,9 +30,9 @@ OPTIONS = [
     "Time Format",
 ]
 ALIGN = {
-    "left:"(0.0, 1.0),
-    "right:"(1.0, 1.0),
-    "center:"(0.5, 1.0),
+    "left": (0.0, 1.0),
+    "right": (1.0, 1.0),
+    "center": (0.5, 1.0),
 }
 
 
@@ -77,6 +77,7 @@ class Disp:
         self.create_layer_options()
         self.create_layer_time()
         self.create_layer_units()
+        self.switch_to_layer(self.layer_main)
 
     def create_layer_main(self) -> None:
         x_center = self.display.width // 2
@@ -187,7 +188,8 @@ class Disp:
         self.options = {}
         for i in range(len(self.rows)):
             self.options.setdefault(
-                OPTIONS[i], self.create_label(x=x, y=self.rows[i], align="center")
+                OPTIONS[i],
+                self.create_label(text=OPTIONS[i], x=x, y=self.rows[i], align="center"),
             )
         self.layer_options = displayio.Group()
         self.layer_options.append(self.bg_options)
@@ -197,18 +199,19 @@ class Disp:
     def create_layer_time(self) -> None:
         self.bg_time = self.create_bg(color="white")
         self.time_hour = self.create_label(
-            x=self.display.width // 2,
-            y=self.display.height // 2 - 2,
+            x=self.display.width // 2 - 2,
+            y=self.display.height // 2,
             align="right",
         )
         self.time_colon = self.create_label(
+            text=":",
             x=self.display.width // 2,
             y=self.display.height // 2,
             align="center",
         )
         self.time_min = self.create_label(
-            x=self.display.width // 2,
-            y=self.display.height // 2 + 2,
+            x=self.display.width // 2 + 2,
+            y=self.display.height // 2,
             align="left",
         )
         self.layer_time = displayio.Group()
@@ -251,18 +254,17 @@ class Disp:
         self.hum_main.text = info["humidity"] + " %"
         self.light_main.text = info["lightinfo"]
 
-    def update_layer_option(self, option_idx: int) -> None:
+    def update_layer_options(self, option_idx: int) -> None:
         self.options[OPTIONS[option_idx]].color = utils.colors["green"]
         for i in range(len(self.rows)):
             if i != option_idx:
                 self.options[OPTIONS[i]].color = utils.colors["black"]
 
     def update_layer_units(self, units: int) -> None:
-        match units:
-            case 1:
-                self.units_units.text = "Fahrenheit"
-            case _:
-                self.units_units.text = "Celsius"
+        if units == 1:
+            self.units_units.text = "Fahrenheit"
+        else:
+            self.units_units.text = "Celsius"
 
     def enter_layer_time_hour(self, min: str) -> None:
         """Enter the hour layer and set minute. Preparing to set hour"""
@@ -296,7 +298,7 @@ class Disp:
         """
         return self.color_names.index(color)
 
-    def create_bmp(self, path: str, x: int, y: int) -> None:
+    def create_bmp(self, path: str, x: int, y: int) -> displayio.TileGrid:
         odb = displayio.OnDiskBitmap(path)
         image = displayio.TileGrid(odb, pixel_shader=odb.pixel_shader, x=x, y=y)
         return image
@@ -309,21 +311,20 @@ class Disp:
         color: str = "black",
         typeface: int = 1,
         align: str = "left",
-    ) -> None:
+    ) -> Label:
         """Create label object"""
-        match typeface:
-            case 1:
-                font = font_small
-            case 2:
-                font = font_large
-            case _:
-                raise Exception("Invalid font")
+        if typeface == 1:
+            font = font_small
+        elif typeface == 2:
+            font = font_large
+        else:
+            raise Exception("Invalid font")
         lbl = Label(font, text=text, color=utils.colors[color], scale=1)
         lbl.anchor_point = ALIGN[align]
         lbl.anchored_position = (x, y)
         return lbl
 
-    def create_polygon(self, points: list, color: str) -> None:
+    def create_polygon(self, points: list, color: str) -> vectorio.Polygon:
         """
         p = palette
         points = list of tuples e.g. [(1, 2), (2, 2), (3, 4), (5, 6)]
@@ -336,10 +337,9 @@ class Disp:
             y=display.height // 2,
             color_index=self.get_idx(color),
         )
-        self.g.append(polygon)
-        return None
+        return polygon
 
-    def create_bg(self, color: str) -> None:
+    def create_bg(self, color: str) -> vectorio.Rectangle:
         """
         draw background
         """
@@ -352,5 +352,4 @@ class Disp:
             y=0,
             color_index=self.get_idx(color),
         )
-        self.g.append(rect)
-        return None
+        return rect

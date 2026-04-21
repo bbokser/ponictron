@@ -93,14 +93,14 @@ class Options(State):
     def enter(self):
         self.f.encoder.rezero()
         self.option_idx = 0
-        self.f.disp.switch_to_layer(self.f.disp.layer_option)
+        self.f.disp.switch_to_layer(self.f.disp.layer_options)
 
     def execute(self):
         self.execute_default()
         self.option_idx = utils.wrap_to_range(
             self.f.encoder.get_encoder_pos(), 0, self.n_options
         )
-        self.f.disp.update_layer_option(self.option_idx)
+        self.f.disp.update_layer_options(self.option_idx)
         if self.f.b_enter and self.option_idx == 0:
             self.f.to_transition("toSetYear")
         elif self.f.b_enter and self.option_idx == 1:

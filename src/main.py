@@ -35,7 +35,7 @@ class OS(FSM):
         self.button_2 = PinButton(board.GP10)  # the upper one
         self.button_1 = PinButton(board.GP11)  # the lower one
         self.button_enc = PinButton(board.GP2)
-        self.encoder = Encoder(pinA=board.GP1, pinB=board.GP0)
+        self.encoder = Encoder(pinA=board.GP0, pinB=board.GP1)
         self.buzzer = Buzzer(board.GP21)
         self.sensor = HTSensor(i2c, address=0x45, units=0)
         self.dac = DAC(i2c)
