@@ -63,11 +63,12 @@ class Disp:
         self.color_list = color_list
         # should match the smaller font size
         self.size_font_small = 24
+        self.size_font_large = 60
         # TODO: implement brightness
         self.brightness = 1
 
         row_step_size = self.size_font_small
-        self.rows = [0] * 7
+        self.rows = [0] * 8
         self.rows[0] = self.size_font_small - 4
         for i in range(len(self.rows) - 1):
             self.rows[i + 1] = self.rows[i] + row_step_size
@@ -76,6 +77,7 @@ class Disp:
         self.create_layer_date()
         self.create_layer_options()
         self.create_layer_time()
+        self.create_layer_brightness()
         self.create_layer_units()
         self.switch_to_layer(self.layer_main)
 
@@ -89,16 +91,49 @@ class Disp:
 
         # column 1
         self.bg_main = self.create_bg(color="white")
-        self.datetime_main = self.create_label(
+        self.date_main = self.create_label(
             x=col_1,
             y=self.rows[0],
         )
+        self.time_main = self.create_label(
+            x=col_1,
+            y=self.rows[1],
+        )
+        self.alarm1_icon_main = self.create_bmp(
+            "/bmps/alarm1.bmp", x=col_1, y=self.rows[2] - offset_icon
+        )
+        self.alarm1_main = self.create_label(
+            x=col_1,
+            y=self.rows[2],
+        )
+        self.alarm2_icon_main = self.create_bmp(
+            "/bmps/alarm2.bmp", x=col_1, y=self.rows[3] - offset_icon
+        )
+        self.alarm2_main = self.create_label(
+            x=col_1,
+            y=self.rows[3],
+        )
         self.probe0_icon_main = self.create_bmp(
-            "/bmps/temp.bmp", x=col_1, y=self.rows[1] - offset_icon
+            "/bmps/temp.bmp", x=col_1, y=self.rows[4] - offset_icon
         )
         self.probe0_main = self.create_label(
             x=col_1 + offset_txt,
-            y=self.rows[1],
+            y=self.rows[4],
+        )
+        self.probe1_icon_main = self.create_bmp(
+            "/bmps/temp.bmp", x=col_1, y=self.rows[5] - offset_icon
+        )
+        self.probe1_main = self.create_label(
+            x=col_1 + offset_txt,
+            y=self.rows[5],
+        )
+
+        self.light_icon_main = self.create_bmp(
+            "/bmps/elec.bmp", x=col_1, y=self.rows[6] - offset_icon
+        )
+        self.light_main = self.create_label(
+            x=col_1 + offset_txt,
+            y=self.rows[6],
         )
 
         # column 2
@@ -111,18 +146,17 @@ class Disp:
             "/bmps/humidity.bmp", x=col_2, y=self.rows[1] - offset_icon
         )
         self.hum_main = self.create_label(x=col_2 + offset_txt, y=self.rows[1])
-        self.light_icon_main = self.create_bmp(
-            "/bmps/elec.bmp", x=col_1, y=self.rows[2] - offset_icon
-        )
-        self.light_main = self.create_label(
-            x=col_1 + offset_txt,
-            y=self.rows[2],
-        )
+
         objects = [
             self.bg_main,
-            self.datetime_main,
+            self.date_main,
+            self.time_main,
+            self.alarm1_main,
+            self.alarm2_main,
             self.probe0_icon_main,
             self.probe0_main,
+            self.probe1_icon_main,
+            self.probe1_main,
             self.temp_icon_main,
             self.temp_main,
             self.hum_icon_main,
@@ -199,25 +233,46 @@ class Disp:
     def create_layer_time(self) -> None:
         self.bg_time = self.create_bg(color="white")
         self.time_hour = self.create_label(
-            x=self.display.width // 2 - 2,
+            x=self.display.width // 2 - self.size_font_large,
             y=self.display.height // 2,
+            typeface=2,
             align="right",
         )
         self.time_colon = self.create_label(
             text=":",
             x=self.display.width // 2,
             y=self.display.height // 2,
+            typeface=2,
             align="center",
         )
         self.time_min = self.create_label(
-            x=self.display.width // 2 + 2,
+            x=self.display.width // 2 + self.size_font_large,
             y=self.display.height // 2,
+            typeface=2,
             align="left",
         )
         self.layer_time = displayio.Group()
         objects = [self.bg_time, self.time_hour, self.time_colon, self.time_min]
         for object in objects:
             self.layer_time.append(object)
+
+    def create_layer_brightness(self) -> None:
+        self.bg_br = self.create_bg(color="white")
+        self.title_br = self.create_label(
+            text="Brightness",
+            x=self.display.width // 2,
+            y=self.display.height // 2 - self.size_font_small // 2,
+            align="center",
+        )
+        self.brightness_br = self.create_label(
+            x=self.display.width // 2,
+            y=self.display.height // 2 + self.size_font_small // 2,
+            align="left",
+        )
+        self.layer_brightness = displayio.Group()
+        objects = [self.bg_br, self.title_br, self.brightness_br]
+        for object in objects:
+            self.layer_brightness.append(object)
 
     def create_layer_units(self) -> None:
         self.bg_units = self.create_bg(color="white")
@@ -240,7 +295,7 @@ class Disp:
     ### Updating ###
 
     def update_layer_main(self, info: dict) -> None:
-        self.datetime_main.text = (
+        self.date_main.text = (
             info["weekday"]
             + ", "
             + info["month"]
@@ -249,16 +304,23 @@ class Disp:
             + " "
             + info["year"]
         )
+        self.time_main.text = info["time"]
+        self.alarm1_main.text = info["alarm1"] + " " + info["alarm1wdays"]
+        self.alarm2_main.text = info["alarm2"] + " " + info["alarm2wdays"]
         self.probe0_main.text = info["probe_0_temp"]
+        self.probe1_main.text = info["probe_1_temp"]
         self.temp_main.text = info["temp"]
         self.hum_main.text = info["humidity"] + " %"
         self.light_main.text = info["lightinfo"]
 
     def update_layer_options(self, option_idx: int) -> None:
         self.options[OPTIONS[option_idx]].color = utils.colors["green"]
-        for i in range(len(self.rows)):
+        for i in range(len(OPTIONS)):
             if i != option_idx:
                 self.options[OPTIONS[i]].color = utils.colors["black"]
+
+    def update_layer_brightness(self, brightness: int) -> None:
+        self.brightness_br.text = str(brightness)
 
     def update_layer_units(self, units: int) -> None:
         if units == 1:
@@ -267,7 +329,7 @@ class Disp:
             self.units_units.text = "Celsius"
 
     def enter_layer_time_hour(self, min: str) -> None:
-        """Enter the hour layer and set minute. Preparing to set hour"""
+        """Enter the time layer and set minute. Preparing to set hour"""
         self.display.root_group = self.layer_time
         self.time_min.text = min
         self.time_hour.color = utils.colors["green"]

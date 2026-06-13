@@ -7,7 +7,8 @@ from fsm import FSM
 # hardware
 from disp import Disp
 from clock import Clock
-from encoder import Encoder
+
+from encoder import SeesawEncoder
 from buzzer import Buzzer
 from button import PinButton
 from sense_ht import HTSensor
@@ -15,7 +16,7 @@ from led import LED
 from dac import DAC
 from probe import Probe
 from light import Light
-from micro_sd import MicroSD
+# from micro_sd import MicroSD
 
 # time.sleep(5)  # to ensure serial connection does not fail
 
@@ -23,7 +24,7 @@ from micro_sd import MicroSD
 class OS(FSM):
     def __init__(self, verbose):
         # initialize class objects
-        i2c = busio.I2C(scl=board.GP5, sda=board.GP4)
+        i2c = busio.I2C(scl=board.GP5, sda=board.GP4, frequency=50000)
         spi = busio.SPI(clock=board.GP18, MOSI=board.GP19, MISO=None)
         ow_bus = OneWireBus(board.GP3)
         self.clock = Clock(i2c)
@@ -34,13 +35,14 @@ class OS(FSM):
         # self.clock.alarm2.disable()
         self.button_2 = PinButton(board.GP10)  # the upper one
         self.button_1 = PinButton(board.GP11)  # the lower one
-        self.button_enc = PinButton(board.GP2)
-        self.encoder = Encoder(pinA=board.GP0, pinB=board.GP1)
+        # self.button_enc = PinButton(board.GP2)
+        # self.encoder = Encoder(pinA=board.GP0, pinB=board.GP1)
+        self.encoder = SeesawEncoder(i2c, address=0x36)
         self.buzzer = Buzzer(board.GP21)
         self.sensor = HTSensor(i2c, address=0x45, units=0)
         self.dac = DAC(i2c)
         self.probe_0 = Probe(ow_bus, 0)
-        # self.probe_1 = Probe(ow_bus, 1)
+        self.probe_1 = Probe(ow_bus, 1)
         # self.micro_sd = MicroSD(spi, cs=board.GP20)
         self.light = Light(
             self.clock,
@@ -81,7 +83,7 @@ class OS(FSM):
                 k = 0
                 self.heartbeat = not self.heartbeat
             self.led.blink(self.heartbeat)
-            self.b_enter = self.button_enc.update()
+            self.b_enter = self.encoder.update_button()
             self.b_save = self.button_2.update()
             self.b_back = self.button_1.update()
             self.execute()

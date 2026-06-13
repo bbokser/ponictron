@@ -1,4 +1,5 @@
 import utils
+from disp import OPTIONS
 
 
 class State:
@@ -75,7 +76,7 @@ class Default(State):
             "temp": self.f.sensor.get_temperature(),
             "humidity": self.f.sensor.get_humidity(),
             "probe_0_temp": self.f.probe_0.get_temp_str(),
-            # "probe_1_temp": self.f.probe_1.get_temp_str(),
+            "probe_1_temp": self.f.probe_1.get_temp_str(),
             "lightinfo": self.f.light.get_info_str(),
         }
         self.f.disp.update_layer_main(disp_info)
@@ -88,7 +89,6 @@ class Default(State):
 class Options(State):
     def __init__(self, fsm, name):
         super().__init__(fsm, name)
-        self.n_options = 4
 
     def enter(self):
         self.f.encoder.rezero()
@@ -98,7 +98,7 @@ class Options(State):
     def execute(self):
         self.execute_default()
         self.option_idx = utils.wrap_to_range(
-            self.f.encoder.get_encoder_pos(), 0, self.n_options
+            self.f.encoder.get_encoder_pos(), 0, len(OPTIONS) - 1
         )
         self.f.disp.update_layer_options(self.option_idx)
         if self.f.b_enter and self.option_idx == 0:
@@ -257,12 +257,13 @@ class SetAlarmHour(State):
         name,
         alarm,
         transition: str = "toSetAlarm1Min",
-        transition_alt: str | None = "toSetAlarm2Hour",
     ):
+        """
+        transition: Next state
+        """
         super().__init__(fsm, name)
         self.alarm = alarm
         self.transition = transition
-        self.transition_alt = transition_alt
 
     def enter(self):
         self.f.hour = self.alarm.get_hour()
@@ -280,8 +281,6 @@ class SetAlarmHour(State):
         elif self.f.b_back:
             self.alarm.disable()
             self.f.to_transition("toDefault")
-        elif self.f.b_set_alarm and self.transition_alt is not None:
-            self.f.to_transition(self.transition_alt)
 
 
 class SetAlarmMin(State):
@@ -353,6 +352,7 @@ class SetBrightness(State):
     def enter(self):
         self.f.encoder.rezero()
         self.f.brightness_original = self.f.disp.brightness
+        self.f.disp.switch_to_layer(self.f.disp.layer_brightness)
 
     def execute(self):
         self.execute_default()
@@ -360,7 +360,7 @@ class SetBrightness(State):
         self.f.disp.brightness = utils.wrap_to_range(
             self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
         )
-        self.f.disp.display_int(self.f.disp.brightness)
+        self.f.disp.update_layer_brightness(brightness=self.f.disp.brightness)
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -478,7 +478,6 @@ class FSM:
             SetAlarmHour,
             alarm=self.clock.alarm1,
             transition="toSetAlarm1Min",
-            transition_alt="toSetAlarm2Hour",
         )
         self.add_state(
             "set_alarm1_min",
@@ -491,7 +490,6 @@ class FSM:
             SetAlarmHour,
             alarm=self.clock.alarm2,
             transition="toSetAlarm2Min",
-            transition_alt=None,
         )
         self.add_state(
             "set_alarm2_min",
