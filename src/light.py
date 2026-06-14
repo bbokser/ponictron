@@ -47,17 +47,16 @@ class Light:
             brightness = utils.percentize(
                 self.midday / 2 - delta_hours, 0.0, self.timespan / 2
             )
-            brightness = utils.translate(brightness, self.brightness_min, self.brightness_max)
+            brightness = utils.translate(
+                brightness, self.brightness_min, self.brightness_max
+            )
             # prevent high-pitched whine
             if 0.0 < brightness < self.brightness_min + 0.01:
                 brightness = 0.0
             return brightness
 
-    def get_info_str(self) -> str:
-        return (
-            "{:.1f}".format(self.start_time)
-            + "-"
-            + "{:.1f}".format(self.end_time)
-            + ", value="
-            + "{:.2f}".format(self.get_brightness())
-        )
+    def get_timerange_str(self) -> str:
+        return "{:.1f}".format(self.start_time) + "-" + "{:.1f}".format(self.end_time)
+
+    def get_brightness_str(self) -> str:
+        return "{:.2f}".format(self.get_brightness())

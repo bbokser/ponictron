@@ -77,7 +77,8 @@ class Default(State):
             "humidity": self.f.sensor.get_humidity(),
             "probe_0_temp": self.f.probe_0.get_temp_str(),
             "probe_1_temp": self.f.probe_1.get_temp_str(),
-            "lightinfo": self.f.light.get_info_str(),
+            "light_timerange": self.f.light.get_timerange_str(),
+            "light_brightness": self.f.light.get_brightness_str(),
         }
         self.f.disp.update_layer_main(disp_info)
         if self.f.b_save:
@@ -213,7 +214,7 @@ class SetHour(State):
         self.f.hour = self.f.clock.get_hour()
         self.f.minute = self.f.clock.get_min()
         self.f.encoder.rezero()
-        self.f.disp.enter_layer_time_hour(min=str(self.f.minute))
+        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
 
     def execute(self):
         self.execute_default()
@@ -322,18 +323,20 @@ class SetAlarmWdays(State):
         self.f.encoder.rezero()
         if self.wday_idx == 0:
             self.f.wday_set_new = list(self.alarm.wday_set)
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Alarm Weekdays")
 
     def execute(self):
         self.execute_default()
         self.f.wday_set_new[self.wday_idx] = (
             self.alarm.wday_set[self.wday_idx] + self.f.encoder.get_encoder_pos()
         ) % 2
-        self.f.disp.display_wday_set(
-            wday_set=self.f.wday_set_new,
-            blink_pos=self.wday_idx,
-            blink_bool=self.f.heartbeat,
+        self.f.disp.update_layer_value(
+            value=utils.weekday[self.wday_idx]
+            + ": "
+            + str(bool(self.f.wday_set_new[self.wday_idx]))
         )
-        if self.f.b_save:
+        if (self.f.b_enter and self.wday_idx == 6) or self.f.b_save:
             self.alarm.set_alarm(
                 hour=self.f.hour_new, min=self.f.min_new, wday_set=self.f.wday_set_new
             )
@@ -352,7 +355,8 @@ class SetBrightness(State):
     def enter(self):
         self.f.encoder.rezero()
         self.f.brightness_original = self.f.disp.brightness
-        self.f.disp.switch_to_layer(self.f.disp.layer_brightness)
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Brightness")
 
     def execute(self):
         self.execute_default()
@@ -360,7 +364,7 @@ class SetBrightness(State):
         self.f.disp.brightness = utils.wrap_to_range(
             self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
         )
-        self.f.disp.update_layer_brightness(brightness=self.f.disp.brightness)
+        self.f.disp.update_layer_value(value=self.f.disp.brightness)
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -374,15 +378,19 @@ class SetUnits(State):
         super().__init__(fsm, name)
 
     def enter(self):
-
         self.f.encoder.rezero()
         self.f.units_new = self.f.sensor.units
-        self.f.disp.switch_to_layer(self.f.disp.layer_units)
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Units")
 
     def execute(self):
         self.execute_default()
         self.f.units_new = (self.f.sensor.units + self.f.encoder.get_encoder_pos()) % 2
-        self.f.disp.update_layer_units(self.f.units_new)
+        if self.f.units_new == 1:
+            self.f.disp.update_layer_value("Fahrenheit")
+        else:
+            self.f.disp.update_layer_value("Celsius")
+
         if self.f.b_enter:
             self.f.sensor.change_units(self.f.units_new)
             self.f.to_transition("toDefault")
@@ -397,6 +405,8 @@ class SetPitch(State):
     def enter(self):
         self.f.encoder.rezero()
         self.f.pitch_new = self.f.buzzer.pitch
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Pitch")
 
     def execute(self):
         self.execute_default()
@@ -407,7 +417,7 @@ class SetPitch(State):
             )
             * 50
         )
-        self.f.disp.display_pitch(self.f.pitch_new)
+        self.f.disp.update_layer_value(self.f.pitch_new)
         self.f.buzzer.play(amp=0.25, pitch=self.f.pitch_new)
 
         if self.f.b_enter:
@@ -428,14 +438,16 @@ class SetTimeFormat(State):
 
         self.f.encoder.rezero()
         self.f.format_new = self.f.format
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Time Format")
 
     def execute(self):
         self.execute_default()
         self.f.format_new = (self.f.format + self.f.encoder.get_encoder_pos()) % 2
         if self.f.format_new == 0:
-            self.f.disp.display_24hr()
+            self.f.disp.update_layer_value("24 Hr")
         else:
-            self.f.disp.display_12hr()
+            self.f.disp.update_layer_value("12 Hr")
 
         if self.f.b_enter:
             self.f.format = self.f.format_new

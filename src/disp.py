@@ -8,7 +8,6 @@ import vectorio
 from fourwire import FourWire
 import adafruit_ili9341
 import supervisor
-from adafruit_display_shapes.rect import Rect
 from adafruit_display_text.bitmap_label import Label
 from font_ostrich_sans_black_24 import FONT as font_small
 from font_ostrich_sans_black_60 import FONT as font_large
@@ -31,8 +30,8 @@ OPTIONS = [
 ]
 ALIGN = {
     "left": (0.0, 1.0),
-    "right": (1.0, 1.0),
     "center": (0.5, 1.0),
+    "right": (1.0, 1.0),
 }
 
 
@@ -73,84 +72,71 @@ class Disp:
         for i in range(len(self.rows) - 1):
             self.rows[i + 1] = self.rows[i] + row_step_size
 
+        self.x_center = self.display.width // 2
+        self.cols = [5, self.x_center + int(self.x_center / 4)]
+        self.offset_txt = 24
+        self.offset_icon = 18
         self.create_layer_main()
         self.create_layer_date()
         self.create_layer_options()
         self.create_layer_time()
-        self.create_layer_brightness()
-        self.create_layer_units()
+        self.create_layer_value()
         self.switch_to_layer(self.layer_main)
 
+    def gen_icon_label_pair(self, col: int, row: int, bmp: str) -> tuple[Label, Label]:
+        icon = self.create_bmp(
+            bmp, x=self.cols[col], y=self.rows[row] - self.offset_icon
+        )
+        label = self.create_label(
+            x=self.cols[col] + self.offset_txt,
+            y=self.rows[row],
+        )
+        return icon, label
+
     def create_layer_main(self) -> None:
-        x_center = self.display.width // 2
-
-        col_1 = 5
-        col_2 = x_center + int(x_center / 4)
-        offset_icon = 18
-        offset_txt = 24
-
         # column 1
         self.bg_main = self.create_bg(color="white")
         self.date_main = self.create_label(
-            x=col_1,
+            x=self.cols[0],
             y=self.rows[0],
         )
         self.time_main = self.create_label(
-            x=col_1,
+            x=self.cols[0],
             y=self.rows[1],
         )
-        self.alarm1_icon_main = self.create_bmp(
-            "/bmps/alarm1.bmp", x=col_1, y=self.rows[2] - offset_icon
+        self.alarm1_icon_main, self.alarm1_main = self.gen_icon_label_pair(
+            col=0, row=2, bmp="/bmps/alarm1.bmp"
         )
-        self.alarm1_main = self.create_label(
-            x=col_1,
-            y=self.rows[2],
+        self.alarm2_icon_main, self.alarm2_main = self.gen_icon_label_pair(
+            col=0, row=3, bmp="/bmps/alarm2.bmp"
         )
-        self.alarm2_icon_main = self.create_bmp(
-            "/bmps/alarm2.bmp", x=col_1, y=self.rows[3] - offset_icon
+        self.light_icon_main, self.light_main = self.gen_icon_label_pair(
+            col=0, row=4, bmp="/bmps/elec.bmp"
         )
-        self.alarm2_main = self.create_label(
-            x=col_1,
-            y=self.rows[3],
-        )
-        self.probe0_icon_main = self.create_bmp(
-            "/bmps/temp.bmp", x=col_1, y=self.rows[4] - offset_icon
-        )
-        self.probe0_main = self.create_label(
-            x=col_1 + offset_txt,
-            y=self.rows[4],
-        )
-        self.probe1_icon_main = self.create_bmp(
-            "/bmps/temp.bmp", x=col_1, y=self.rows[5] - offset_icon
-        )
-        self.probe1_main = self.create_label(
-            x=col_1 + offset_txt,
-            y=self.rows[5],
-        )
-
-        self.light_icon_main = self.create_bmp(
-            "/bmps/elec.bmp", x=col_1, y=self.rows[6] - offset_icon
-        )
-        self.light_main = self.create_label(
-            x=col_1 + offset_txt,
-            y=self.rows[6],
+        self.light_timerange_icon_main, self.light_timerange_main = (
+            self.gen_icon_label_pair(col=0, row=5, bmp="/bmps/elec.bmp")
         )
 
         # column 2
         # self.create_bmp("/bmps/elec.bmp", x=col_2, y=row_1 - offset_icon)
-        self.temp_icon_main = self.create_bmp(
-            "/bmps/temp.bmp", x=col_2, y=self.rows[0] - offset_icon
+        self.hum_icon_main, self.hum_main = self.gen_icon_label_pair(
+            col=1, row=0, bmp="/bmps/humidity.bmp"
         )
-        self.temp_main = self.create_label(x=col_2 + offset_txt, y=self.rows[0])
-        self.hum_icon_main = self.create_bmp(
-            "/bmps/humidity.bmp", x=col_2, y=self.rows[1] - offset_icon
+        self.temp_icon_main, self.temp_main = self.gen_icon_label_pair(
+            col=1, row=1, bmp="/bmps/temp.bmp"
         )
-        self.hum_main = self.create_label(x=col_2 + offset_txt, y=self.rows[1])
-
+        self.probe0_icon_main, self.probe0_main = self.gen_icon_label_pair(
+            col=1, row=2, bmp="/bmps/temp.bmp"
+        )
+        self.probe1_icon_main, self.probe1_main = self.gen_icon_label_pair(
+            col=1, row=3, bmp="/bmps/temp.bmp"
+        )
         objects = [
             self.bg_main,
             self.date_main,
             self.time_main,
+            self.alarm1_icon_main,
+            self.alarm2_icon_main,
             self.alarm1_main,
             self.alarm2_main,
             self.probe0_icon_main,
@@ -163,6 +149,8 @@ class Disp:
             self.hum_main,
             self.light_icon_main,
             self.light_main,
+            self.light_timerange_icon_main,
+            self.light_timerange_main,
         ]
         self.layer_main = displayio.Group()
         for object in objects:
@@ -233,22 +221,19 @@ class Disp:
     def create_layer_time(self) -> None:
         self.bg_time = self.create_bg(color="white")
         self.time_hour = self.create_label(
-            x=self.display.width // 2 - self.size_font_large,
+            x=self.display.width // 2 - 2,
             y=self.display.height // 2,
-            typeface=2,
             align="right",
         )
         self.time_colon = self.create_label(
             text=":",
             x=self.display.width // 2,
-            y=self.display.height // 2,
-            typeface=2,
+            y=self.display.height // 2 - 6,
             align="center",
         )
         self.time_min = self.create_label(
-            x=self.display.width // 2 + self.size_font_large,
+            x=self.display.width // 2 + 2,
             y=self.display.height // 2,
-            typeface=2,
             align="left",
         )
         self.layer_time = displayio.Group()
@@ -256,41 +241,22 @@ class Disp:
         for object in objects:
             self.layer_time.append(object)
 
-    def create_layer_brightness(self) -> None:
-        self.bg_br = self.create_bg(color="white")
-        self.title_br = self.create_label(
-            text="Brightness",
+    def create_layer_value(self) -> None:
+        self.bg_value = self.create_bg(color="white")
+        self.title_value = self.create_label(
             x=self.display.width // 2,
             y=self.display.height // 2 - self.size_font_small // 2,
             align="center",
         )
-        self.brightness_br = self.create_label(
+        self.value_value = self.create_label(
             x=self.display.width // 2,
             y=self.display.height // 2 + self.size_font_small // 2,
-            align="left",
-        )
-        self.layer_brightness = displayio.Group()
-        objects = [self.bg_br, self.title_br, self.brightness_br]
-        for object in objects:
-            self.layer_brightness.append(object)
-
-    def create_layer_units(self) -> None:
-        self.bg_units = self.create_bg(color="white")
-        self.title_units = self.create_label(
-            text="Units",
-            x=self.display.width // 2,
-            y=self.display.height // 2 - self.size_font_small // 2,
             align="center",
         )
-        self.units_units = self.create_label(
-            x=self.display.width // 2,
-            y=self.display.height // 2 + self.size_font_small // 2,
-            align="left",
-        )
-        self.layer_units = displayio.Group()
-        objects = [self.bg_units, self.title_units, self.units_units]
+        self.layer_value = displayio.Group()
+        objects = [self.bg_value, self.title_value, self.value_value]
         for object in objects:
-            self.layer_units.append(object)
+            self.layer_value.append(object)
 
     ### Updating ###
 
@@ -307,11 +273,12 @@ class Disp:
         self.time_main.text = info["time"]
         self.alarm1_main.text = info["alarm1"] + " " + info["alarm1wdays"]
         self.alarm2_main.text = info["alarm2"] + " " + info["alarm2wdays"]
-        self.probe0_main.text = info["probe_0_temp"]
-        self.probe1_main.text = info["probe_1_temp"]
-        self.temp_main.text = info["temp"]
+        self.probe0_main.text = "P0: " + info["probe_0_temp"]
+        self.probe1_main.text = "P1: " + info["probe_1_temp"]
+        self.temp_main.text = "B: " + info["temp"]
         self.hum_main.text = info["humidity"] + " %"
-        self.light_main.text = info["lightinfo"]
+        self.light_timerange_main.text = "Time Range: " + info["light_timerange"]
+        self.light_main.text = info["light_brightness"]
 
     def update_layer_options(self, option_idx: int) -> None:
         self.options[OPTIONS[option_idx]].color = utils.colors["green"]
@@ -319,14 +286,11 @@ class Disp:
             if i != option_idx:
                 self.options[OPTIONS[i]].color = utils.colors["black"]
 
-    def update_layer_brightness(self, brightness: int) -> None:
-        self.brightness_br.text = str(brightness)
+    def update_layer_value(self, value: int) -> None:
+        self.value_value.text = str(value)
 
-    def update_layer_units(self, units: int) -> None:
-        if units == 1:
-            self.units_units.text = "Fahrenheit"
-        else:
-            self.units_units.text = "Celsius"
+    def update_layer_value_title(self, title: str) -> None:
+        self.title_value.text = title
 
     def enter_layer_time_hour(self, min: str) -> None:
         """Enter the time layer and set minute. Preparing to set hour"""
@@ -340,12 +304,6 @@ class Disp:
         self.time_hour.text = hour
         self.time_min.color = utils.colors["green"]
         self.time_hour.color = utils.colors["black"]
-
-    def display_pitch(self, pitch: int) -> None:
-        pass
-
-    def display_wday_set(self, wday_set, blink_pos: int, blink_bool: bool) -> None:
-        pass
 
     def switch_to_layer(self, layer: displayio.Group) -> None:
         # show the desired layer
