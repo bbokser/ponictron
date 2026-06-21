@@ -16,8 +16,8 @@ from led import LED
 from dac import DAC
 from probe import Probe
 from light import Light
-# from micro_sd import MicroSD
-
+from micro_sd import MicroSD
+from fan import Fan
 # time.sleep(5)  # to ensure serial connection does not fail
 
 
@@ -35,15 +35,13 @@ class OS(FSM):
         # self.clock.alarm2.disable()
         self.button_2 = PinButton(board.GP10)  # the upper one
         self.button_1 = PinButton(board.GP11)  # the lower one
-        # self.button_enc = PinButton(board.GP2)
-        # self.encoder = Encoder(pinA=board.GP0, pinB=board.GP1)
         self.encoder = SeesawEncoder(i2c, address=0x36)
         self.buzzer = Buzzer(board.GP21)
         self.sensor = HTSensor(i2c, address=0x45, units=0)
         self.dac = DAC(i2c)
         self.probe_0 = Probe(ow_bus, 0)
         self.probe_1 = Probe(ow_bus, 1)
-        # self.micro_sd = MicroSD(spi, cs=board.GP20)
+        self.micro_sd = MicroSD(spi, cs=board.GP20)
         self.light = Light(
             self.clock,
             start_time=8.0,
@@ -52,7 +50,7 @@ class OS(FSM):
             brightness_max=0.6,
         )
         self.led = LED(board.LED)
-
+        self.fan = Fan(board.GP22, speed=0.2)
         self.disp = Disp(spi=spi, cs=board.GP17, dc=board.GP8, reset=board.GP13)
 
         # 24 vs 12 hour format
@@ -89,6 +87,7 @@ class OS(FSM):
             self.execute()
             self.disp.update()
             if j > refresh_counter:
+                self.dac.set_value(self.light.get_brightness())
                 if z == 0:
                     self.sensor.set_mode_read()
                 j = 0

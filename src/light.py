@@ -22,19 +22,26 @@ class Light:
             siesta: hour at which siesta occurs
         """
         self.clock = clock
-
-        assert end_time > start_time
-        assert end_time < 24.0
         self.start_time = start_time
         self.end_time = end_time
         self.siesta = siesta
-        # time at which brightness peaks
-        self.midday = (start_time + end_time) / 2
-        # how many hours the light should be on for
-        self.timespan = end_time - start_time
         # brightness range, must be between 0 and 1
         self.brightness_min = brightness_min
         self.brightness_max = brightness_max
+        self.recalculate()
+
+    def recalculate(self) -> None:
+        if self.end_time <= self.start_time:
+            self.end_time += 1
+        if self.end_time > 24.0:
+            self.start_time -= 1
+            self.end_time -= 1
+        self.brightness_min = utils.clip(self.brightness_min, 0.0, 1.0)
+        self.brightness_max = utils.clip(self.brightness_max, 0.0, 1.0)
+        # time at which brightness peaks
+        self.midday = (self.start_time + self.end_time) / 2
+        # how many hours the light should be on for
+        self.timespan = self.end_time - self.start_time
 
     def get_brightness(self) -> float:
         if int(self.clock.get_hour()) == self.siesta:

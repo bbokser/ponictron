@@ -1,5 +1,5 @@
 import utils
-from disp import OPTIONS
+from disp import OPTIONS, LIGHT_OPTIONS
 
 
 class State:
@@ -118,6 +118,37 @@ class Options(State):
             self.f.to_transition("toSetPitch")
         elif self.f.b_enter and self.option_idx == 7:
             self.f.to_transition("toSetTimeFormat")
+        elif self.f.b_enter and self.option_idx == 8:
+            self.f.to_transition("toSetLightOpts")
+        elif self.f.b_back:
+            self.f.to_transition("toDefault")
+
+
+class LightOptions(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.encoder.rezero()
+        self.lightopt_idx = 0
+        self.f.disp.switch_to_layer(self.f.disp.layer_lightopts)
+
+    def execute(self):
+        self.execute_default()
+        self.lightopt_idx = utils.wrap_to_range(
+            self.f.encoder.get_encoder_pos(), 0, len(LIGHT_OPTIONS) - 1
+        )
+        self.f.disp.update_layer_lightopts(self.lightopt_idx)
+        if self.f.b_enter and self.option_idx == 0:
+            self.f.to_transition("toSetStartTime")
+        elif self.f.b_enter and self.option_idx == 1:
+            self.f.to_transition("toSetEndTime")
+        elif self.f.b_enter and self.option_idx == 2:
+            self.f.to_transition("toSetMaxBright")
+        elif self.f.b_enter and self.option_idx == 3:
+            self.f.to_transition("toSetMinBright")
+        elif self.f.b_enter and self.option_idx == 4:
+            self.f.to_transition("toSetSiesta")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
 
@@ -459,6 +490,133 @@ class SetTimeFormat(State):
             self.f.to_transition("toDefault")
 
 
+class SetStartTime(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.hour = int(self.f.light.start_time)
+        self.f.minute = 0
+        self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+
+    def execute(self):
+        self.execute_default()
+        self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
+        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+
+        if self.f.b_enter:
+            self.f.light.start_time = self.f.hour_new
+            self.f.light.recalculate()
+            self.f.to_transition("toDefault")
+        elif self.f.b_back:
+            self.f.to_transition("toDefault")
+        else:
+            pass
+
+
+class SetEndTime(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.hour = int(self.f.light.end_time)
+        self.f.minute = 0
+        self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+
+    def execute(self):
+        self.execute_default()
+        self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
+        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+
+        if self.f.b_enter:
+            self.f.light.end_time = self.f.hour_new
+            self.f.light.recalculate()
+            self.f.to_transition("toDefault")
+        elif self.f.b_back:
+            self.f.to_transition("toDefault")
+        else:
+            pass
+
+
+class SetMaxBright(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.encoder.rezero()
+        self.f.brightness_original = self.f.light.brightness_max
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Max Light Brightness")
+
+    def execute(self):
+        self.execute_default()
+        # minimum of 1 to prevent blinking from doing nothing
+        self.f.light.brightness_max = utils.wrap_to_range(
+            self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
+        )
+        self.f.disp.update_layer_value(value=self.f.light.brightness_max)
+
+        if self.f.b_enter:
+            self.f.to_transition("toDefault")
+            self.f.light.recalculate()
+        elif self.f.b_back:
+            self.f.light.brightness_max = self.f.brightness_original
+            self.f.to_transition("toDefault")
+
+
+class SetMinBright(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.encoder.rezero()
+        self.f.brightness_original = self.f.light.brightness_min
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Min Light Brightness")
+
+    def execute(self):
+        self.execute_default()
+        # minimum of 1 to prevent blinking from doing nothing
+        self.f.light.brightness_min = utils.wrap_to_range(
+            self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
+        )
+        self.f.disp.update_layer_value(value=self.f.light.brightness_min)
+
+        if self.f.b_enter:
+            self.f.to_transition("toDefault")
+            self.f.light.recalculate()
+        elif self.f.b_back:
+            self.f.light.brightness_min = self.f.brightness_original
+            self.f.to_transition("toDefault")
+
+
+class SetSiesta(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.hour = int(self.f.light.siesta)
+        self.f.minute = 0
+        self.f.encoder.rezero()
+        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+
+    def execute(self):
+        self.execute_default()
+        self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
+        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+
+        if self.f.b_enter:
+            self.f.light.siesta = self.f.hour_new
+            self.f.light.recalculate()
+            self.f.to_transition("toDefault")
+        elif self.f.b_back:
+            self.f.to_transition("toDefault")
+        else:
+            pass
+
+
 class Transition:
     def __init__(self, tostate):
         self.toState = tostate
@@ -529,6 +687,7 @@ class FSM:
         self.add_state("set_units", SetUnits)
         self.add_state("set_pitch", SetPitch)
         self.add_state("set_time_format", SetTimeFormat)
+        self.add_state("set_light_options", LightOptions)
         self.add_state("options", Options)
 
         self.add_transition("toOptions", Transition("options"))
@@ -546,6 +705,20 @@ class FSM:
         self.add_transition("toSetUnits", Transition("set_units"))
         self.add_transition("toSetPitch", Transition("set_pitch"))
         self.add_transition("toSetTimeFormat", Transition("set_time_format"))
+        self.add_transition("toSetLightOpts", Transition("set_light_options"))
+
+        self.add_state("set_start_time", SetStartTime)
+        self.add_state("set_end_time", SetEndTime)
+        self.add_state("set_max_bright", SetMaxBright)
+        self.add_state("set_min_bright", SetMinBright)
+        self.add_state("set_siesta", SetSiesta)
+
+        self.add_transition("toSetStartTime", Transition("set_start_time"))
+        self.add_transition("toSetEndTime", Transition("set_end_time"))
+        self.add_transition("toSetMaxBright", Transition("set_max_bright"))
+        self.add_transition("toSetMinBright", Transition("set_min_bright"))
+        self.add_transition("toSetSiesta", Transition("set_siesta"))
+
         self.add_transition("toDefault", Transition("default"))
         for i in range(7):
             self.add_transition(

@@ -28,6 +28,14 @@ OPTIONS = [
     "Pitch",
     "Time Format",
 ]
+
+LIGHT_OPTIONS = [
+    "Start Time",
+    "End Time",
+    "Max Brightness",
+    "Min Brightness",
+    "Siesta",
+]
 ALIGN = {
     "left": (0.0, 1.0),
     "center": (0.5, 1.0),
@@ -79,6 +87,7 @@ class Disp:
         self.create_layer_main()
         self.create_layer_date()
         self.create_layer_options()
+        self.create_layer_lightopts()
         self.create_layer_time()
         self.create_layer_value()
         self.switch_to_layer(self.layer_main)
@@ -218,6 +227,20 @@ class Disp:
         for x in list(self.options.values()):
             self.layer_options.append(x)
 
+    def create_layer_lightopts(self) -> None:
+        self.bg_lightopts = self.create_bg(color="white")
+        x = self.display.width // 2
+        self.lightopts = {}
+        for i in range(len(self.rows)):
+            self.lightopts.setdefault(
+                LIGHT_OPTIONS[i],
+                self.create_label(text=OPTIONS[i], x=x, y=self.rows[i], align="center"),
+            )
+        self.layer_lightopts = displayio.Group()
+        self.layer_lightopts.append(self.bg_lightopts)
+        for x in list(self.lightopts.values()):
+            self.layer_lightopts.append(x)
+
     def create_layer_time(self) -> None:
         self.bg_time = self.create_bg(color="white")
         self.time_hour = self.create_label(
@@ -285,6 +308,12 @@ class Disp:
         for i in range(len(OPTIONS)):
             if i != option_idx:
                 self.options[OPTIONS[i]].color = utils.colors["black"]
+
+    def update_layer_lightopts(self, option_idx: int) -> None:
+        self.lightopts[LIGHT_OPTIONS[option_idx]].color = utils.colors["green"]
+        for i in range(len(LIGHT_OPTIONS)):
+            if i != option_idx:
+                self.lightopts[LIGHT_OPTIONS[i]].color = utils.colors["black"]
 
     def update_layer_value(self, value: int) -> None:
         self.value_value.text = str(value)
