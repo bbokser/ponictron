@@ -3,8 +3,10 @@ from adafruit_ds18x20 import DS18X20
 
 class Probe:
     def __init__(self, ow_bus, index: int) -> None:
-
-        self.ds18 = DS18X20(ow_bus, ow_bus.scan()[index])
+        try:
+            self.ds18 = DS18X20(ow_bus, ow_bus.scan()[index])
+        except Exception:
+            pass
         # pass
 
     def get_temp_str(self) -> str:

@@ -65,5 +65,12 @@ class Light:
     def get_timerange_str(self) -> str:
         return "{:.1f}".format(self.start_time) + "-" + "{:.1f}".format(self.end_time)
 
+    def get_brightrange_str(self) -> str:
+        return (
+            "{:.1f}".format(self.brightness_min)
+            + "-"
+            + "{:.1f}".format(self.brightness_max)
+        )
+
     def get_brightness_str(self) -> str:
         return "{:.2f}".format(self.get_brightness())

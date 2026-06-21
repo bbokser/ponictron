@@ -49,9 +49,16 @@ class OS(FSM):
             brightness_min=0.15,
             brightness_max=0.6,
         )
-        self.led = LED(board.LED)
+        # board.LED clashes with GP9 pwm slice
+        # self.led = LED(board.LED)
         self.fan = Fan(board.GP22, speed=0.2)
-        self.disp = Disp(spi=spi, cs=board.GP17, dc=board.GP8, reset=board.GP13)
+        self.disp = Disp(
+            spi=spi,
+            cs=board.GP17,
+            dc=board.GP8,
+            reset=board.GP13,
+            backlight=board.GP9,
+        )
 
         # 24 vs 12 hour format
         self.format = 0
@@ -80,7 +87,7 @@ class OS(FSM):
             if k >= k_beat:
                 k = 0
                 self.heartbeat = not self.heartbeat
-            self.led.blink(self.heartbeat)
+            # self.led.blink(self.heartbeat)
             self.b_enter = self.encoder.update_button()
             self.b_save = self.button_2.update()
             self.b_back = self.button_1.update()

@@ -79,6 +79,7 @@ class Default(State):
             "probe_1_temp": self.f.probe_1.get_temp_str(),
             "light_timerange": self.f.light.get_timerange_str(),
             "light_brightness": self.f.light.get_brightness_str(),
+            "light_brightrange": self.f.light.get_brightrange_str(),
         }
         self.f.disp.update_layer_main(disp_info)
         if self.f.b_save:
@@ -139,15 +140,15 @@ class LightOptions(State):
             self.f.encoder.get_encoder_pos(), 0, len(LIGHT_OPTIONS) - 1
         )
         self.f.disp.update_layer_lightopts(self.lightopt_idx)
-        if self.f.b_enter and self.option_idx == 0:
+        if self.f.b_enter and self.lightopt_idx == 0:
             self.f.to_transition("toSetStartTime")
-        elif self.f.b_enter and self.option_idx == 1:
+        elif self.f.b_enter and self.lightopt_idx == 1:
             self.f.to_transition("toSetEndTime")
-        elif self.f.b_enter and self.option_idx == 2:
+        elif self.f.b_enter and self.lightopt_idx == 2:
             self.f.to_transition("toSetMaxBright")
-        elif self.f.b_enter and self.option_idx == 3:
+        elif self.f.b_enter and self.lightopt_idx == 3:
             self.f.to_transition("toSetMinBright")
-        elif self.f.b_enter and self.option_idx == 4:
+        elif self.f.b_enter and self.lightopt_idx == 4:
             self.f.to_transition("toSetSiesta")
         elif self.f.b_back:
             self.f.to_transition("toDefault")
@@ -385,22 +386,32 @@ class SetBrightness(State):
 
     def enter(self):
         self.f.encoder.rezero()
-        self.f.brightness_original = self.f.disp.brightness
+        self.f.brightness_original = self.f.disp.get_brightness()
         self.f.disp.switch_to_layer(self.f.disp.layer_value)
-        self.f.disp.update_layer_value_title("Brightness")
+        self.f.disp.update_layer_value_title("Display Brightness")
 
     def execute(self):
         self.execute_default()
         # minimum of 1 to prevent blinking from doing nothing
-        self.f.disp.brightness = utils.wrap_to_range(
-            self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
+        count_max = 9
+        self.f.disp.set_brightness(
+            utils.percentize(
+                utils.wrap_to_range(
+                    self.f.brightness_original + self.f.encoder.get_encoder_pos(),
+                    1,
+                    count_max,
+                ),
+                0,
+                count_max,
+            )
+            ** 2
         )
-        self.f.disp.update_layer_value(value=self.f.disp.brightness)
+        self.f.disp.update_layer_value(value=self.f.disp.get_brightness())
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
         elif self.f.b_back:
-            self.f.disp.brightness = self.f.brightness_original
+            self.f.disp.set_brightness(self.f.brightness_original)
             self.f.to_transition("toDefault")
 
 
@@ -553,8 +564,18 @@ class SetMaxBright(State):
     def execute(self):
         self.execute_default()
         # minimum of 1 to prevent blinking from doing nothing
-        self.f.light.brightness_max = utils.wrap_to_range(
-            self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
+        count_max = 9
+        self.f.light.brightness_max = (
+            utils.percentize(
+                utils.wrap_to_range(
+                    self.f.brightness_original + self.f.encoder.get_encoder_pos(),
+                    1,
+                    count_max,
+                ),
+                0,
+                count_max,
+            )
+            ** 2
         )
         self.f.disp.update_layer_value(value=self.f.light.brightness_max)
 
@@ -579,8 +600,18 @@ class SetMinBright(State):
     def execute(self):
         self.execute_default()
         # minimum of 1 to prevent blinking from doing nothing
-        self.f.light.brightness_min = utils.wrap_to_range(
-            self.f.brightness_original + self.f.encoder.get_encoder_pos(), 1, 15
+        count_max = 9
+        self.f.light.brightness_min = (
+            utils.percentize(
+                utils.wrap_to_range(
+                    self.f.brightness_original + self.f.encoder.get_encoder_pos(),
+                    1,
+                    count_max,
+                ),
+                0,
+                count_max,
+            )
+            ** 2
         )
         self.f.disp.update_layer_value(value=self.f.light.brightness_min)
 

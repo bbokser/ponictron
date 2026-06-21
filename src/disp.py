@@ -11,7 +11,7 @@ import supervisor
 from adafruit_display_text.bitmap_label import Label
 from font_ostrich_sans_black_24 import FONT as font_small
 from font_ostrich_sans_black_60 import FONT as font_large
-
+from led import LED
 # print('free memory left after imports: ', gc.mem_free())
 
 supervisor.runtime.autoreload = False
@@ -23,10 +23,11 @@ OPTIONS = [
     "Time",
     "Alarm1",
     "Alarm2",
-    "Brightness",
+    "Display Brightness",
     "Units",
     "Pitch",
     "Time Format",
+    "Light Options",
 ]
 
 LIGHT_OPTIONS = [
@@ -44,8 +45,7 @@ ALIGN = {
 
 
 class Disp:
-    def __init__(self, spi, cs, dc, reset):
-
+    def __init__(self, spi, cs, dc, reset, backlight):
         # epd_busy = board.GP16
         display_bus = FourWire(
             spi, command=dc, chip_select=cs, reset=reset, baudrate=1000000
@@ -72,10 +72,9 @@ class Disp:
         self.size_font_small = 24
         self.size_font_large = 60
         # TODO: implement brightness
-        self.brightness = 1
-
+        self.backlight = LED(backlight, frequency=100)
         row_step_size = self.size_font_small
-        self.rows = [0] * 8
+        self.rows = [0] * 10
         self.rows[0] = self.size_font_small - 4
         for i in range(len(self.rows) - 1):
             self.rows[i + 1] = self.rows[i] + row_step_size
@@ -91,6 +90,12 @@ class Disp:
         self.create_layer_time()
         self.create_layer_value()
         self.switch_to_layer(self.layer_main)
+
+    def set_brightness(self, percent: float) -> None:
+        self.backlight.set_brightness(percent)
+
+    def get_brightness(self) -> float:
+        return self.backlight.get_brightness()
 
     def gen_icon_label_pair(self, col: int, row: int, bmp: str) -> tuple[Label, Label]:
         icon = self.create_bmp(
@@ -124,6 +129,9 @@ class Disp:
         )
         self.light_timerange_icon_main, self.light_timerange_main = (
             self.gen_icon_label_pair(col=0, row=5, bmp="/bmps/elec.bmp")
+        )
+        self.light_brightrange_icon_main, self.light_brightrange_main = (
+            self.gen_icon_label_pair(col=0, row=6, bmp="/bmps/elec.bmp")
         )
 
         # column 2
@@ -160,6 +168,8 @@ class Disp:
             self.light_main,
             self.light_timerange_icon_main,
             self.light_timerange_main,
+            self.light_brightrange_icon_main,
+            self.light_brightrange_main,
         ]
         self.layer_main = displayio.Group()
         for object in objects:
@@ -217,7 +227,7 @@ class Disp:
         self.bg_options = self.create_bg(color="white")
         x = self.display.width // 2
         self.options = {}
-        for i in range(len(self.rows)):
+        for i in range(len(OPTIONS)):
             self.options.setdefault(
                 OPTIONS[i],
                 self.create_label(text=OPTIONS[i], x=x, y=self.rows[i], align="center"),
@@ -231,10 +241,12 @@ class Disp:
         self.bg_lightopts = self.create_bg(color="white")
         x = self.display.width // 2
         self.lightopts = {}
-        for i in range(len(self.rows)):
+        for i in range(len(LIGHT_OPTIONS)):
             self.lightopts.setdefault(
                 LIGHT_OPTIONS[i],
-                self.create_label(text=OPTIONS[i], x=x, y=self.rows[i], align="center"),
+                self.create_label(
+                    text=LIGHT_OPTIONS[i], x=x, y=self.rows[i], align="center"
+                ),
             )
         self.layer_lightopts = displayio.Group()
         self.layer_lightopts.append(self.bg_lightopts)
@@ -301,7 +313,10 @@ class Disp:
         self.temp_main.text = "B: " + info["temp"]
         self.hum_main.text = info["humidity"] + " %"
         self.light_timerange_main.text = "Time Range: " + info["light_timerange"]
-        self.light_main.text = info["light_brightness"]
+        self.light_main.text = "Brightness: " + info["light_brightness"]
+        self.light_brightrange_main.text = (
+            "Brightness Range: " + info["light_brightrange"]
+        )
 
     def update_layer_options(self, option_idx: int) -> None:
         self.options[OPTIONS[option_idx]].color = utils.colors["green"]
