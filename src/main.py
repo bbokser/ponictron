@@ -5,14 +5,13 @@ from adafruit_onewire.bus import OneWireBus
 from fsm import FSM
 
 # hardware
+# from led import LED
 from disp import Disp
 from clock import Clock
-
 from encoder import SeesawEncoder
 from buzzer import Buzzer
 from button import PinButton
 from sense_ht import HTSensor
-from led import LED
 from dac import DAC
 from probe import Probe
 from light import Light

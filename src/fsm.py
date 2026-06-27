@@ -54,6 +54,23 @@ class Alarming(State):
         self.f.buzzer.shutoff()
 
 
+class Idle(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.disp.switch_to_layer(self.f.disp.layer_main)
+        self.pos_init = self.f.encoder.get_encoder_pos()
+        self.brightness_init = self.f.disp.get_brightness()
+        self.f.disp.set_brightness(0.0)
+
+    def execute(self):
+        self.execute_default()
+        if self.f.encoder.get_encoder_pos() != self.pos_init:
+            self.f.disp.set_brightness(self.brightness_init)
+            self.f.to_transition("toDefault")
+
+
 class Default(State):
     def __init__(self, fsm, name):
         super().__init__(fsm, name)
@@ -84,8 +101,8 @@ class Default(State):
         self.f.disp.update_layer_main(disp_info)
         if self.f.b_save:
             self.f.to_transition("toOptions")
-        else:
-            pass
+        elif self.f.b_back:
+            self.f.to_transition("toIdle")
 
 
 class Options(State):
@@ -667,6 +684,7 @@ class FSM:
         self.prevState = None
         self.trans = None
 
+        self.add_state("options", Idle)
         self.add_state("default", Default)
         self.add_state("alarming", Alarming)
         self.add_state("set_year", SetYear)
@@ -721,6 +739,7 @@ class FSM:
         self.add_state("set_light_options", LightOptions)
         self.add_state("options", Options)
 
+        self.add_transition("toIdle", Transition("idle"))
         self.add_transition("toOptions", Transition("options"))
         self.add_transition("toAlarming", Transition("alarming"))
         self.add_transition("toSetYear", Transition("set_year"))
