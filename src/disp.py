@@ -27,6 +27,7 @@ OPTIONS = [
     "Units",
     "Pitch",
     "Time Format",
+    "Fan Speed",
     "Light Options",
 ]
 
@@ -330,7 +331,7 @@ class Disp:
             if i != option_idx:
                 self.lightopts[LIGHT_OPTIONS[i]].color = utils.colors["black"]
 
-    def update_layer_value(self, value: int) -> None:
+    def update_layer_value(self, value: int | float | str) -> None:
         self.value_value.text = str(value)
 
     def update_layer_value_title(self, title: str) -> None:

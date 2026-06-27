@@ -423,7 +423,9 @@ class SetBrightness(State):
             )
             ** 2
         )
-        self.f.disp.update_layer_value(value=self.f.disp.get_brightness())
+        self.f.disp.update_layer_value(
+            value="{:.2f}".format(self.f.disp.get_brightness())
+        )
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -518,6 +520,39 @@ class SetTimeFormat(State):
             self.f.to_transition("toDefault")
 
 
+class SetFanSpeed(State):
+    def __init__(self, fsm, name):
+        super().__init__(fsm, name)
+
+    def enter(self):
+        self.f.encoder.rezero()
+        self.fan_original = self.f.fan.get_speed()
+        self.f.disp.switch_to_layer(self.f.disp.layer_value)
+        self.f.disp.update_layer_value_title("Fan Speed")
+
+    def execute(self):
+        self.execute_default()
+        count_max = 10
+        self.f.fan.set_speed(
+            utils.percentize(
+                utils.wrap_to_range(
+                    self.fan_original + self.f.encoder.get_encoder_pos(),
+                    0,
+                    count_max,
+                ),
+                0,
+                count_max,
+            )
+        )
+        self.f.disp.update_layer_value(value="{:.2f}".format(self.f.fan.get_speed()))
+
+        if self.f.b_enter:
+            self.f.to_transition("toDefault")
+        elif self.f.b_back:
+            self.f.fan.set_speed(self.fan_original)
+            self.f.to_transition("toDefault")
+
+
 class SetStartTime(State):
     def __init__(self, fsm, name):
         super().__init__(fsm, name)
@@ -594,7 +629,9 @@ class SetMaxBright(State):
             )
             ** 2
         )
-        self.f.disp.update_layer_value(value=self.f.light.brightness_max)
+        self.f.disp.update_layer_value(
+            value="{:.2f}".format(self.f.light.brightness_max)
+        )
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -630,7 +667,9 @@ class SetMinBright(State):
             )
             ** 2
         )
-        self.f.disp.update_layer_value(value=self.f.light.brightness_min)
+        self.f.disp.update_layer_value(
+            value="{:.2f}".format(self.f.light.brightness_min)
+        )
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -736,6 +775,7 @@ class FSM:
         self.add_state("set_units", SetUnits)
         self.add_state("set_pitch", SetPitch)
         self.add_state("set_time_format", SetTimeFormat)
+        self.add_state("set_fan_speed", SetFanSpeed)
         self.add_state("set_light_options", LightOptions)
         self.add_state("options", Options)
 
@@ -755,6 +795,7 @@ class FSM:
         self.add_transition("toSetUnits", Transition("set_units"))
         self.add_transition("toSetPitch", Transition("set_pitch"))
         self.add_transition("toSetTimeFormat", Transition("set_time_format"))
+        self.add_transition("toSetFanSpeed", Transition("set_fan_speed"))
         self.add_transition("toSetLightOpts", Transition("set_light_options"))
 
         self.add_state("set_start_time", SetStartTime)
