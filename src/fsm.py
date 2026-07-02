@@ -105,6 +105,20 @@ class Default(State):
             self.f.to_transition("toIdle")
 
 
+OPTION_TRANSITIONS = [
+    "toSetYear",
+    "toSetHour",
+    "toSetAlarm1Hour",
+    "toSetAlarm2Hour",
+    "toSetBrightness",
+    "toSetUnits",
+    "toSetPitch",
+    "toSetTimeFormat",
+    "toSetFanSpeed",
+    "toSetLightOpts",
+]
+
+
 class Options(State):
     def __init__(self, fsm, name):
         super().__init__(fsm, name)
@@ -120,26 +134,19 @@ class Options(State):
             self.f.encoder.get_encoder_pos(), 0, len(OPTIONS) - 1
         )
         self.f.disp.update_layer_options(self.option_idx)
-        if self.f.b_enter and self.option_idx == 0:
-            self.f.to_transition("toSetYear")
-        elif self.f.b_enter and self.option_idx == 1:
-            self.f.to_transition("toSetHour")
-        elif self.f.b_enter and self.option_idx == 2:
-            self.f.to_transition("toSetAlarm1Hour")
-        elif self.f.b_enter and self.option_idx == 3:
-            self.f.to_transition("toSetAlarm2Hour")
-        elif self.f.b_enter and self.option_idx == 4:
-            self.f.to_transition("toSetBrightness")
-        elif self.f.b_enter and self.option_idx == 5:
-            self.f.to_transition("toSetUnits")
-        elif self.f.b_enter and self.option_idx == 6:
-            self.f.to_transition("toSetPitch")
-        elif self.f.b_enter and self.option_idx == 7:
-            self.f.to_transition("toSetTimeFormat")
-        elif self.f.b_enter and self.option_idx == 8:
-            self.f.to_transition("toSetLightOpts")
+        if self.f.b_enter:
+            self.f.to_transition(OPTION_TRANSITIONS[self.option_idx])
         elif self.f.b_back:
             self.f.to_transition("toDefault")
+
+
+LIGHTOPTION_TRANSITIONS = [
+    "toSetStartTime",
+    "toSetEndTime",
+    "toSetMaxBright",
+    "toSetMinBright",
+    "toSetSiesta",
+]
 
 
 class LightOptions(State):
@@ -157,16 +164,8 @@ class LightOptions(State):
             self.f.encoder.get_encoder_pos(), 0, len(LIGHT_OPTIONS) - 1
         )
         self.f.disp.update_layer_lightopts(self.lightopt_idx)
-        if self.f.b_enter and self.lightopt_idx == 0:
-            self.f.to_transition("toSetStartTime")
-        elif self.f.b_enter and self.lightopt_idx == 1:
-            self.f.to_transition("toSetEndTime")
-        elif self.f.b_enter and self.lightopt_idx == 2:
-            self.f.to_transition("toSetMaxBright")
-        elif self.f.b_enter and self.lightopt_idx == 3:
-            self.f.to_transition("toSetMinBright")
-        elif self.f.b_enter and self.lightopt_idx == 4:
-            self.f.to_transition("toSetSiesta")
+        if self.f.b_enter:
+            self.f.to_transition(LIGHTOPTION_TRANSITIONS[self.lightopt_idx])
         elif self.f.b_back:
             self.f.to_transition("toDefault")
 
@@ -723,7 +722,7 @@ class FSM:
         self.prevState = None
         self.trans = None
 
-        self.add_state("options", Idle)
+        self.add_state("idle", Idle)
         self.add_state("default", Default)
         self.add_state("alarming", Alarming)
         self.add_state("set_year", SetYear)
