@@ -15,4 +15,3 @@ class Probe:
         except Exception:
             temp = None
         return str(temp)
-        # return "None"

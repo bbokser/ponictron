@@ -1,5 +1,5 @@
 import utils
-from disp import OPTIONS, LIGHT_OPTIONS
+from disp import LIGHT_OPTIONS, OPTIONS
 
 
 class State:
@@ -262,12 +262,12 @@ class SetHour(State):
         self.f.hour = self.f.clock.get_hour()
         self.f.minute = self.f.clock.get_min()
         self.f.encoder.rezero()
-        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+        self.f.disp.enter_layer_time_hour(min=f"{self.f.minute:02d}")
 
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+        self.f.disp.time_hour.text = f"{self.f.hour_new:d}"
 
         if self.f.b_enter:
             self.f.to_transition("toSetMin")
@@ -288,7 +288,7 @@ class SetMin(State):
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        self.f.disp.time_min.text = "{:02d}".format(self.f.min_new)
+        self.f.disp.time_min.text = f"{self.f.min_new:02d}"
 
         if self.f.b_enter:
             self.f.clock.set_time(hour=self.f.hour_new, min=self.f.min_new)
@@ -323,7 +323,7 @@ class SetAlarmHour(State):
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+        self.f.disp.time_hour.text = f"{self.f.hour_new:d}"
 
         if self.f.b_enter:
             self.f.to_transition(self.transition)
@@ -351,7 +351,7 @@ class SetAlarmMin(State):
     def execute(self):
         self.execute_default()
         self.f.min_new = (self.f.minute + self.f.encoder.get_encoder_pos()) % 60
-        self.f.disp.time_min.text = "{:02d}".format(self.f.min_new)
+        self.f.disp.time_min.text = f"{self.f.min_new:02d}"
 
         if self.f.b_enter:
             self.f.to_transition(self.transition)
@@ -422,9 +422,7 @@ class SetBrightness(State):
             )
             ** 2
         )
-        self.f.disp.update_layer_value(
-            value="{:.2f}".format(self.f.disp.get_brightness())
-        )
+        self.f.disp.update_layer_value(value=f"{self.f.disp.get_brightness():.2f}")
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -543,7 +541,7 @@ class SetFanSpeed(State):
                 count_max,
             )
         )
-        self.f.disp.update_layer_value(value="{:.2f}".format(self.f.fan.get_speed()))
+        self.f.disp.update_layer_value(value=f"{self.f.fan.get_speed():.2f}")
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -560,12 +558,12 @@ class SetStartTime(State):
         self.f.hour = int(self.f.light.start_time)
         self.f.minute = 0
         self.f.encoder.rezero()
-        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+        self.f.disp.enter_layer_time_hour(min=f"{self.f.minute:02d}")
 
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+        self.f.disp.time_hour.text = f"{self.f.hour_new:d}"
 
         if self.f.b_enter:
             self.f.light.start_time = self.f.hour_new
@@ -585,12 +583,12 @@ class SetEndTime(State):
         self.f.hour = int(self.f.light.end_time)
         self.f.minute = 0
         self.f.encoder.rezero()
-        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+        self.f.disp.enter_layer_time_hour(min=f"{self.f.minute:02d}")
 
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+        self.f.disp.time_hour.text = f"{self.f.hour_new:d}"
 
         if self.f.b_enter:
             self.f.light.end_time = self.f.hour_new
@@ -628,9 +626,7 @@ class SetMaxBright(State):
             )
             ** 2
         )
-        self.f.disp.update_layer_value(
-            value="{:.2f}".format(self.f.light.brightness_max)
-        )
+        self.f.disp.update_layer_value(value=f"{self.f.light.brightness_max:.2f}")
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -666,9 +662,7 @@ class SetMinBright(State):
             )
             ** 2
         )
-        self.f.disp.update_layer_value(
-            value="{:.2f}".format(self.f.light.brightness_min)
-        )
+        self.f.disp.update_layer_value(value=f"{self.f.light.brightness_min:.2f}")
 
         if self.f.b_enter:
             self.f.to_transition("toDefault")
@@ -686,12 +680,12 @@ class SetSiesta(State):
         self.f.hour = int(self.f.light.siesta)
         self.f.minute = 0
         self.f.encoder.rezero()
-        self.f.disp.enter_layer_time_hour(min="{:02d}".format(self.f.minute))
+        self.f.disp.enter_layer_time_hour(min=f"{self.f.minute:02d}")
 
     def execute(self):
         self.execute_default()
         self.f.hour_new = (self.f.hour + self.f.encoder.get_encoder_pos()) % 24
-        self.f.disp.time_hour.text = "{:d}".format(self.f.hour_new)
+        self.f.disp.time_hour.text = f"{self.f.hour_new:d}"
 
         if self.f.b_enter:
             self.f.light.siesta = self.f.hour_new

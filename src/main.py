@@ -1,22 +1,25 @@
 import time
+
 import board
 import busio
 from adafruit_onewire.bus import OneWireBus
-from fsm import FSM
+
+from button import PinButton
+from buzzer import Buzzer
+from clock import Clock
+from dac import DAC
 
 # hardware
 # from led import LED
 from disp import Disp
-from clock import Clock
 from encoder import SeesawEncoder
-from buzzer import Buzzer
-from button import PinButton
-from sense_ht import HTSensor
-from dac import DAC
-from probe import Probe
+from fan import Fan
+from fsm import FSM
 from light import Light
 from micro_sd import MicroSD
-from fan import Fan
+from probe import Probe
+from sense_ht import HTSensor
+
 # time.sleep(5)  # to ensure serial connection does not fail
 
 
@@ -43,10 +46,10 @@ class OS(FSM):
         self.micro_sd = MicroSD(spi, cs=board.GP20)
         self.light = Light(
             self.clock,
-            start_time=8.0,
-            end_time=20.0,
-            brightness_min=0.15,
-            brightness_max=0.6,
+            start_time=6.0,
+            end_time=18.0,
+            brightness_min=0.1,
+            brightness_max=0.2,
         )
         # board.LED clashes with GP9 pwm slice
         # self.led = LED(board.LED)

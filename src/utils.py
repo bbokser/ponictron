@@ -40,8 +40,9 @@ tones = {"c4": 262, "d4": 294, "e4": 330, "f4": 359, "g4": 392, "a4": 440, "b4":
 
 
 def leapyear(year: int) -> bool:
-    # check whether a given year is a leap year.
     """
+    Check whether or not a given year is a leap year.
+    Returns True if leap year
     https://www.rmg.co.uk/stories/topics/which-years-are-leap-years-can-you-have-leap-seconds
     "To be a leap year, the year number must be divisible by four
     except for end-of-century years, which must be divisible by 400"
@@ -52,10 +53,8 @@ def leapyear(year: int) -> bool:
     if (year % 100) != 0:
         # years divisible by 4 but not 100 are leap years
         return True
-    if (year % 400) != 0:
-        # years divisible by 4 and 100 but not 400 are not leap years
-        return False
-    return True
+    # years divisible by 4 and 100 but not 400 are not leap years
+    return (year % 400) == 0
 
 
 def get_max_day(year: int, month: int) -> int:

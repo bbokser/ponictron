@@ -1,9 +1,10 @@
-import adafruit_ds3231
 import time
-import adafruit_datetime
-from busio import I2C
-import utils
 
+import adafruit_datetime
+import adafruit_ds3231
+from busio import I2C
+
+import utils
 from alarms import Alarm
 
 
@@ -63,15 +64,15 @@ class Clock:
     def get_day_str(self) -> str:
         current = self.rtc.datetime
         suffix = get_suffix(current.tm_mday)
-        day_str = "{:d}{}".format(current.tm_mday, suffix)
+        day_str = f"{current.tm_mday:d}{suffix}"
         return day_str
 
     def get_year_str(self) -> str:
-        return "{:d}".format(self.rtc.datetime.tm_year)
+        return f"{self.rtc.datetime.tm_year:d}"
 
     def get_time_str_24_hr(self) -> str:
         current = self.rtc.datetime
-        return "{:d}:{:02d}".format(current.tm_hour, current.tm_min)
+        return f"{current.tm_hour:d}:{current.tm_min:02d}"
 
     def get_time_str_12_hr(self) -> str:
         current = self.rtc.datetime
@@ -80,7 +81,10 @@ class Clock:
             meridiem = "PM"
         else:
             meridiem = "AM"
-        return "{:d}:{:02d}".format(current.tm_hour % 12, current.tm_min) + meridiem
+        if current.tm_hour % 12 == 0:
+            return f"{12:d}:{current.tm_min:02d} {meridiem}"
+        else:
+            return f"{current.tm_hour % 12:d}:{current.tm_min:02d} {meridiem}"
 
     def get_year(self) -> int:
         return self.rtc.datetime.tm_year

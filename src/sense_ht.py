@@ -22,10 +22,10 @@ class HTSensor:
         self.sht.mode = adafruit_sht4x.Mode.LOWHEAT_100MS
 
     def get_temperature_celsius(self) -> str:
-        return "{:.1f} C".format(round(self.sht.temperature, 1))
+        return f"{round(self.sht.temperature, 1):.1f} C"
 
     def get_temperature_fahrenheit(self) -> str:
-        return "{:.1f} F".format(round(self.sht.temperature * 9 / 5 + 32, 1))
+        return f"{round(self.sht.temperature * 9 / 5 + 32, 1):.1f} F"
 
     def get_humidity(self) -> str:
-        return "{:.1f}".format(round(self.sht.relative_humidity, 1))
+        return f"{round(self.sht.relative_humidity, 1):.1f}"

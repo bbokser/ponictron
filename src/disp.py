@@ -1,17 +1,19 @@
-import utils
+import adafruit_ili9341
 
 # import gc  # garbage collector
 # print('free memory left before (most) imports: ', gc.mem_free())
 # from ulab import numpy as np
 import displayio
-import vectorio
-from fourwire import FourWire
-import adafruit_ili9341
 import supervisor
+import vectorio
 from adafruit_display_text.bitmap_label import Label
 from font_ostrich_sans_black_24 import FONT as font_small
 from font_ostrich_sans_black_60 import FONT as font_large
+from fourwire import FourWire
+
+import utils
 from led import LED
+
 # print('free memory left after imports: ', gc.mem_free())
 
 supervisor.runtime.autoreload = False
@@ -60,7 +62,7 @@ class Disp:
         self.color_names = list(utils.colors.keys())
         n = len(color_list)
         p = displayio.Palette(n)
-        for i in range(0, n):
+        for i in range(n):
             p[i] = color_list[i]
         self.p = p
 
@@ -72,7 +74,6 @@ class Disp:
         # should match the smaller font size
         self.size_font_small = 24
         self.size_font_large = 60
-        # TODO: implement brightness
         self.backlight = LED(backlight, frequency=100)
         row_step_size = self.size_font_small
         self.rows = [0] * 10
@@ -331,7 +332,7 @@ class Disp:
             if i != option_idx:
                 self.lightopts[LIGHT_OPTIONS[i]].color = utils.colors["black"]
 
-    def update_layer_value(self, value: int | float | str) -> None:
+    def update_layer_value(self, value: float | str) -> None:
         self.value_value.text = str(value)
 
     def update_layer_value_title(self, title: str) -> None:

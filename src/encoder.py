@@ -1,29 +1,6 @@
-import rotaryio
-
-
-class Encoder:
-    """
-    Handles encoder
-    """
-
-    def __init__(self, pinA, pinB):
-        # encoder
-        self.encoder = rotaryio.IncrementalEncoder(pinA, pinB, divisor=2)
-        self.zero_pos = self.encoder.position
-
-    def rezero(self):
-        # re-zero encoder
-        self.zero_pos = self.encoder.position
-
-    def get_encoder_pos(self):
-        # encoder feedback
-        return self.encoder.position - self.zero_pos
-
-
 from adafruit_seesaw import digitalio, rotaryio
-from busio import I2C
-
 from adafruit_seesaw.seesaw import Seesaw
+from busio import I2C
 
 
 class SeesawEncoder:

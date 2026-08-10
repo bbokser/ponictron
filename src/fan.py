@@ -12,7 +12,7 @@ class Fan:
         self.on()
 
     def get_speed(self) -> float:
-        return self._saved_duty_cycle
+        return self._saved_duty_cycle / 65535
 
     def on(self):
         self.fan.duty_cycle = self._saved_duty_cycle

@@ -1,5 +1,7 @@
-import adafruit_datetime
 import time
+
+import adafruit_datetime
+
 import utils
 
 
@@ -50,9 +52,7 @@ class Alarm:
 
     def get_wday_set_str(self) -> str:
         string = ""
-        if not any(self.wday_set):
-            pass
-        elif self.enable == False:
+        if not any(self.wday_set) or self.enable == False:
             pass
         else:
             for i in range(7):
@@ -64,7 +64,7 @@ class Alarm:
 
     def get_str_24hr(self) -> str:
         if self.enable is True:
-            return "{:02d}:{:02d}".format(self.get_hour(), self.get_min()) + " "
+            return f"{self.get_hour():02d}:{self.get_min():02d} "
         else:
             return "None"
 
@@ -76,7 +76,10 @@ class Alarm:
             meridiem = "AM"
 
         if self.enable is True:
-            return "{:02d}:{:02d}".format(hour % 12, self.get_min()) + meridiem + " "
+            if hour % 12 == 0:
+                return f"{12:d}:{self.get_min():02d} {meridiem}"
+            else:
+                return f"{hour % 12:02d}:{self.get_min():02d} {meridiem}"
         else:
             return "None"
 

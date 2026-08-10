@@ -1,6 +1,5 @@
-from busio import I2C
-
 import adafruit_mcp4725
+from busio import I2C
 
 
 class DAC:
