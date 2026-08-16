@@ -612,13 +612,12 @@ class SetMaxBright(State):
 
     def execute(self):
         self.execute_default()
-        # minimum of 1 to prevent blinking from doing nothing
         count_max = 9
         self.f.light.brightness_max = (
             utils.percentize(
                 utils.wrap_to_range(
                     self.f.brightness_original + self.f.encoder.get_encoder_pos(),
-                    1,
+                    0,
                     count_max,
                 ),
                 0,
@@ -648,13 +647,12 @@ class SetMinBright(State):
 
     def execute(self):
         self.execute_default()
-        # minimum of 1 to prevent blinking from doing nothing
         count_max = 9
         self.f.light.brightness_min = (
             utils.percentize(
                 utils.wrap_to_range(
                     self.f.brightness_original + self.f.encoder.get_encoder_pos(),
-                    1,
+                    0,
                     count_max,
                 ),
                 0,

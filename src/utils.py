@@ -58,8 +58,10 @@ def leapyear(year: int) -> bool:
 
 
 def get_max_day(year: int, month: int) -> int:
-    # return the number of days in the given month and for the given year
-    # https://stackoverflow.com/questions/15148534/calculating-number-of-days-in-a-month-based-on-leap-year
+    """
+    Return the number of days in the given month and for the given year
+    https://stackoverflow.com/questions/15148534/calculating-number-of-days-in-a-month-based-on-leap-year
+    """
     assert 1 <= month <= 12
     if month in [1, 3, 5, 7, 8, 10, 12]:
         return 31
@@ -75,8 +77,11 @@ def get_max_day(year: int, month: int) -> int:
 
 def wrap_to_range(x: int, a: int, b: int) -> int:
     """
-    x: the value to wrap
-    a <= x <= b
+    Wrap a <= x <= b
+
+    :param x: the value to wrap
+    :param a: lower bound
+    :param b: upper bound
     """
     return int((x - a) % (b - a + 1) + a)
 
@@ -92,19 +97,29 @@ def clip(input: float, min: float, max: float) -> float:
 
 
 def translate(percent: float, min: float, max: float) -> float:
-    # map range from 0 to 1 to a range from spec'd min and max
+    """map range from 0 to 1 to a range from spec'd min and max
+
+    :param percent: Input percentage, must be between 0 and 1
+    :param min: Minimum output. 0 gets mapped to this value
+    :param max: Maximum output. 1 gets mapped to this value
+    """
     diff = max - min
     return percent * diff + min
 
 
 def percentize(value: float, min: float, max: float) -> float:
-    # map range from from spec'd min and max to range from 0 to 1
+    """map range from from spec'd min and max to range from 0 to 1
+
+    :param value: Input value to map
+    :param min: Minimum. Anything below gets mapped to 0
+    :param max: Maximum. Anything above gets mapped to 1
+    """
     diff = max - min
     return (clip(value, min, max) - min) / diff
 
 
 def last_to_first(input: list) -> list:
-    # move last item in list to front
+    """move last item in list to front"""
     output = list(input)
     last_element = output.pop()
     output.insert(0, last_element)
