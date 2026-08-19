@@ -26,4 +26,5 @@
   (lib (name "NC7WZ14P6X")(type "KiCad")(uri "${KIPRJMOD}/libraries/NC7WZ14P6X/NC7WZ14P6X.pretty")(options "")(descr ""))
   (lib (name "78614015360")(type "KiCad")(uri "${KIPRJMOD}/libraries/78614015360")(options "")(descr ""))
   (lib (name "WA-SMSI_9774100151")(type "KiCad")(uri "${KIPRJMOD}/libraries/WA-SMSI_9774100151")(options "")(descr ""))
+  (lib (name "SN74LVC2G240DCUR")(type "KiCad")(uri "${KIPRJMOD}/libraries/SN74LVC2G240DCUR")(options "")(descr ""))
 )
