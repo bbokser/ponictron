@@ -9156,16 +9156,6 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 129.54) (xy 52.07 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "23cbab07-55fe-4b85-bc3b-65d97e7bb4a6")
-	)
-	(wire
-		(pts
 			(xy 173.99 177.8) (xy 200.66 177.8)
 		)
 		(stroke
@@ -9253,16 +9243,6 @@
 			(type default)
 		)
 		(uuid "2dd65e2e-4c18-4738-98e0-34584877419b")
-	)
-	(wire
-		(pts
-			(xy 483.87 311.15) (xy 501.65 311.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2f515b33-cfd4-4ab6-8db2-d93a5d57e6b5")
 	)
 	(wire
 		(pts
@@ -9426,6 +9406,16 @@
 	)
 	(wire
 		(pts
+			(xy 496.57 323.85) (xy 496.57 313.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b6fcfdb-a587-4dcb-9b8c-615edfbe870c")
+	)
+	(wire
+		(pts
 			(xy 394.97 280.67) (xy 421.64 280.67)
 		)
 		(stroke
@@ -9463,6 +9453,16 @@
 			(type default)
 		)
 		(uuid "4c9fc298-3210-4393-8493-66533e4188dc")
+	)
+	(wire
+		(pts
+			(xy 496.57 313.69) (xy 501.65 313.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d3f0b3a-49f5-4300-9a1b-d1f9f7e65898")
 	)
 	(wire
 		(pts
@@ -9756,6 +9756,16 @@
 	)
 	(wire
 		(pts
+			(xy 501.65 323.85) (xy 496.57 323.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6bdc29f8-2b5d-4a02-b520-07b39694d044")
+	)
+	(wire
+		(pts
 			(xy 403.86 194.31) (xy 403.86 190.5)
 		)
 		(stroke
@@ -9896,6 +9906,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 111.76) (xy 29.21 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7bc5db1a-9136-44ea-800a-60a5b699d754")
+	)
+	(wire
+		(pts
 			(xy 519.43 120.65) (xy 521.97 120.65)
 		)
 		(stroke
@@ -10023,16 +10043,6 @@
 			(type default)
 		)
 		(uuid "8f4a0626-20c7-4ce3-88cd-5c5b04fd5d12")
-	)
-	(wire
-		(pts
-			(xy 29.21 111.76) (xy 52.07 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8f706d54-e99a-4717-8884-f76ae48e1029")
 	)
 	(wire
 		(pts
@@ -10393,6 +10403,16 @@
 			(type default)
 		)
 		(uuid "b1a57f79-17d3-46fb-8b7a-1ac11718d17c")
+	)
+	(wire
+		(pts
+			(xy 492.76 311.15) (xy 501.65 311.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2872f41-3d8d-468c-9e51-b2f6e377bcc5")
 	)
 	(wire
 		(pts
@@ -10916,6 +10936,16 @@
 	)
 	(wire
 		(pts
+			(xy 29.21 129.54) (xy 52.07 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f939476a-c48e-4ed7-9eb3-517a038c90a0")
+	)
+	(wire
+		(pts
 			(xy 429.26 80.01) (xy 434.34 80.01)
 		)
 		(stroke
@@ -11094,6 +11124,16 @@
 		)
 		(uuid "1c8eb3ec-e003-4b7f-9420-8574a9f59a5a")
 	)
+	(label "Buzzer_EN"
+		(at 52.07 106.68 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1e64f8ae-80c5-411f-9c5f-bc7ca2dfa7f4")
+	)
 	(label "SDA"
 		(at 394.97 278.13 0)
 		(effects
@@ -11235,7 +11275,7 @@
 		(uuid "3c4bcb83-0249-42cf-935a-9d1bcc73c28f")
 	)
 	(label "BUT2"
-		(at 52.07 106.68 180)
+		(at 52.07 109.22 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11255,12 +11295,12 @@
 		(uuid "3f28663f-312a-44c3-bbcf-6ba32952510a")
 	)
 	(label "onewire"
-		(at 44.45 111.76 0)
+		(at 52.07 129.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "406d8f2b-d5de-4603-b294-c45a449138ce")
 	)
@@ -11293,6 +11333,16 @@
 			(justify right bottom)
 		)
 		(uuid "5211309b-b7c0-4813-b883-86d5c1c504f9")
+	)
+	(label "Buzzer_EN"
+		(at 496.57 313.69 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "56b3ebf7-5592-443b-8abf-4c21e981f10c")
 	)
 	(label "DispCS"
 		(at 189.23 88.9 0)
@@ -11395,12 +11445,12 @@
 		(uuid "9214173f-c38c-402c-bee1-4e1d420cb784")
 	)
 	(label "Buzzer"
-		(at 483.87 311.15 0)
+		(at 492.76 311.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "96644143-c1f6-475b-94fe-9fcb993725e3")
 	)
@@ -11545,7 +11595,7 @@
 		(uuid "d11bbcca-dce6-4377-9f11-d08dbf5964eb")
 	)
 	(label "BUT1"
-		(at 52.07 109.22 180)
+		(at 52.07 111.76 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16672,179 +16722,6 @@
 			(project "ponictron"
 				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
 					(reference "R10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 43.18 129.54 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "477f7700-d760-40f0-91e2-1bb5b1bc39dc")
-		(property "Reference" "TP1"
-			(at 39.878 124.46 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GP10"
-			(at 39.878 127 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_1.5x1.5mm"
-			(at 43.18 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 43.18 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "test point"
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Availability" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Check_prices" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description_1" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MP" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "PARTREV" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Package" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Price" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "STANDARD" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "SnapEDA_Link" ""
-			(at 43.18 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "074053d5-8820-45cb-a899-b70fe0adadd0")
-		)
-		(instances
-			(project "ponictron"
-				(path "/10078caa-7fd0-475a-83d7-2ff1e936c6b6"
-					(reference "TP1")
 					(unit 1)
 				)
 			)
