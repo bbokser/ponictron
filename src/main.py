@@ -85,28 +85,32 @@ class OS(FSM):
         # reheat the sensor chip once per day
         reheat_counter = int(24 * 60 * 60 / refresh_time)
 
+        last_tick = time.monotonic()
+
         while True:
-            if k >= k_beat:
-                k = 0
-                self.heartbeat = not self.heartbeat
-            # self.led.blink(self.heartbeat)
-            self.b_enter = self.encoder.update_button()
-            self.b_save = self.button_2.update()
-            self.b_back = self.button_1.update()
-            self.execute()
-            self.disp.update()
-            if j > refresh_counter:
-                self.dac.set_value(self.light.get_brightness())
-                if z == 0:
-                    self.sensor.set_mode_read()
-                j = 0
-                z += 1
-                if z > reheat_counter:
-                    self.sensor.set_mode_heat()
-                    z = 0
-            k += 1
-            j += 1
-            time.sleep(self.dt)
+            current_time = time.monotonic()
+            if current_time - last_tick >= self.dt:
+                last_tick = current_time
+                if k >= k_beat:
+                    k = 0
+                    self.heartbeat = not self.heartbeat
+                # self.led.blink(self.heartbeat)
+                self.b_enter = self.encoder.update_button()
+                self.b_save = self.button_2.update()
+                self.b_back = self.button_1.update()
+                self.execute()
+                # self.disp.update()
+                if j > refresh_counter:
+                    self.dac.set_value(self.light.get_brightness())
+                    if z == 0:
+                        self.sensor.set_mode_read()
+                    j = 0
+                    z += 1
+                    if z > reheat_counter:
+                        self.sensor.set_mode_heat()
+                        z = 0
+                k += 1
+                j += 1
 
 
 if __name__ == "__main__":

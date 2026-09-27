@@ -12,7 +12,7 @@ class Buzzer:
         self.duty_min = 100
         self.duty_max = 2730
 
-    def play(self, amp: float, pitch: int = None, on: bool = True):
+    def play(self, amp: float, pitch: int | None = None, on: bool = True):
         """
         pitch = frequency
         amp = amplitude, between 0 and 1

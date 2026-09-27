@@ -296,28 +296,28 @@ class Disp:
             self.layer_value.append(object)
 
     ### Updating ###
+    def _update_label(self, label: Label, new_text: str) -> None:
+        """Only update label if the text has changed"""
+        if label.text != new_text:
+            label.text = new_text
 
     def update_layer_main(self, info: dict) -> None:
-        self.date_main.text = (
-            info["weekday"]
-            + ", "
-            + info["month"]
-            + " "
-            + info["day"]
-            + " "
-            + info["year"]
+        date_str = f"{info['weekday']}, {info['month']} {info['day']} {info['year']}"
+        self._update_label(self.date_main, date_str)
+        self._update_label(self.time_main, info["time"])
+        self._update_label(self.alarm1_main, f"{info['alarm1']} {info['alarm1wdays']}")
+        self._update_label(self.alarm2_main, f"{info['alarm2']} {info['alarm2wdays']}")
+        self._update_label(self.probe0_main, "P0: " + info["probe_0_temp"])
+        self._update_label(self.probe1_main, "P1: " + info["probe_1_temp"])
+        self._update_label(self.temp_main, "B: " + info["temp"])
+        self._update_label(self.hum_main, info["humidity"] + " %")
+        self._update_label(
+            self.light_timerange_main, "Time Range: " + info["light_timerange"]
         )
-        self.time_main.text = info["time"]
-        self.alarm1_main.text = info["alarm1"] + " " + info["alarm1wdays"]
-        self.alarm2_main.text = info["alarm2"] + " " + info["alarm2wdays"]
-        self.probe0_main.text = "P0: " + info["probe_0_temp"]
-        self.probe1_main.text = "P1: " + info["probe_1_temp"]
-        self.temp_main.text = "B: " + info["temp"]
-        self.hum_main.text = info["humidity"] + " %"
-        self.light_timerange_main.text = "Time Range: " + info["light_timerange"]
-        self.light_main.text = "Brightness: " + info["light_brightness"]
-        self.light_brightrange_main.text = (
-            "Brightness Range: " + info["light_brightrange"]
+        self._update_label(self.light_main, "Brightness: " + info["light_brightness"])
+        self._update_label(
+            self.light_brightrange_main,
+            "Brightness Range: " + info["light_brightrange"],
         )
 
     def update_layer_options(self, option_idx: int) -> None:
