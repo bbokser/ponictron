@@ -27,4 +27,5 @@
   (lib (name "78614015360")(type "KiCad")(uri "${KIPRJMOD}/libraries/78614015360")(options "")(descr ""))
   (lib (name "WA-SMSI_9774100151")(type "KiCad")(uri "${KIPRJMOD}/libraries/WA-SMSI_9774100151")(options "")(descr ""))
   (lib (name "SN74LVC2G240DCUR")(type "KiCad")(uri "${KIPRJMOD}/libraries/SN74LVC2G240DCUR")(options "")(descr ""))
+  (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/libraries/DS3502U_T_R/footprints.pretty")(options "")(descr ""))
 )
