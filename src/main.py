@@ -9,8 +9,7 @@ from buzzer import Buzzer
 from clock import Clock
 from dac import DAC
 
-# hardware
-# from led import LED
+# from digipot import DigiPot
 from disp import Disp
 from encoder import SeesawEncoder
 from fan import Fan
@@ -20,7 +19,7 @@ from micro_sd import MicroSD
 from probe import Probe
 from sense_ht import HTSensor
 
-# time.sleep(5)  # to ensure serial connection does not fail
+# from utils import translate
 
 
 class OS(FSM):
@@ -41,6 +40,7 @@ class OS(FSM):
         self.buzzer = Buzzer(board.GP21)
         self.sensor = HTSensor(i2c, address=0x45, units=0)
         self.dac = DAC(i2c)
+        # self.digipot = DigiPot(i2c)
         self.probe_0 = Probe(ow_bus, 0)
         self.probe_1 = Probe(ow_bus, 1)
         self.micro_sd = MicroSD(spi, cs=board.GP20)
@@ -101,7 +101,9 @@ class OS(FSM):
                 self.execute()
                 # self.disp.update()
                 if j > refresh_counter:
-                    self.dac.set_value(self.light.get_brightness())
+                    brightness_ref = self.light.get_brightness()
+                    self.dac.set_value(brightness_ref)
+                    # self.digipot.set_value(translate(brightness_ref, 8300.0, 0.0))
                     if z == 0:
                         self.sensor.set_mode_read()
                     j = 0

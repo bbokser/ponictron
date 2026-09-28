@@ -9,7 +9,7 @@ class Light:
         start_time: float = 7.5,
         end_time: float = 19.5,
         siesta: int = 16,
-        brightness_min: float = 0.15,
+        brightness_min: float = 0.0,
         brightness_max: float = 1.0,
     ):
         """
@@ -44,6 +44,7 @@ class Light:
         self.timespan = self.end_time - self.start_time
 
     def get_brightness(self) -> float:
+        """Get scheduled brightness, output between 0 and 1"""
         if int(self.clock.get_hour()) == self.siesta:
             # 4 o'clock siesta
             return 0.0
@@ -58,8 +59,8 @@ class Light:
                 brightness, self.brightness_min, self.brightness_max
             )
             # prevent high-pitched whine
-            if 0.0 < brightness < self.brightness_min + 0.01:
-                brightness = 0.0
+            # if 0.0 < brightness < self.brightness_min + 0.01:
+            #     brightness = 0.0
             return brightness
 
     def get_timerange_str(self) -> str:
